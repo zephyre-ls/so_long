@@ -1,14 +1,14 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    README.md                                          :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/03/15 16:00:11 by lduflot           #+#    #+#              #
-#    Updated: 2025/03/15 16:38:47 by lduflot          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+PLAN DU JEU =
+
+
+Si possible : récupération de différents collectibles dans un ordre précis (ordre affiché sur le côté).
+Environ 4 collectible à récupérer.
+Lancement du jeu = 4 collectibles, 4 ennemies
+Quand on récupére le premier collectible 1 ennemie meurent etc etc. A la fin de la récupération la porte s'ouvre.
+Ennemie = troue noir;
+Collectible =
+Porte = ordinateur eteint qui s'allume quand c'est ouvert;
+
 
 Arguments : carte au format *.ber 
 Fonctions autorisé :
