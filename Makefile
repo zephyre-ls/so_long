@@ -6,7 +6,7 @@
 #    By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/30 15:34:26 by lduflot           #+#    #+#              #
-#    Updated: 2025/03/15 16:51:34 by lduflot          ###   ########.fr        #
+#    Updated: 2025/03/15 18:27:28 by lduflot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ OBJS = $(FILES:.c=.o)
 
 MLX_PLACE = minilibx-linux
 MLXFLAGS = -I$(MLX_PLACE) -L$(MLX_PLACE) -lmlx_Linux -L/usr/lib -lXext -lX11 -lm
-##.B -lmlx -lXext -lX11
+## -lm = lie la bibliotheque libm qui contient toute les fonctions mathematique
 
 ###############################
 ##RULES
