@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/15 18:32:36 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/15 19:35:06 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 # define SO_LONG_H
 
 # include "minilibx-linux/mlx.h"
-# include <stdbool.h> 
+# include <stdbool.h> //ais-je le droit ? hmhm
+# include <stdio.h>
+# include <stdlib.h>
 
 //struct fenêtre 
 typedef struct	s_window
