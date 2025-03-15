@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/15 17:29:33 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/15 17:53:53 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,43 +27,61 @@ typedef struct s_game
 }		t_game;
 
 
-}		t_game;
-
 //struct fenêtre 
 typedef struct	s_window
 {
-
 }		t_window;
 
 typedef struct	s_map
 {
-
 }		t_map;
 
 typedef struct s_player
 {
+}		t_player;
 
-
-}		t_player
-
-typedef struct	s_collectible
+// Etant donné qu'ils y aura plusieurs collectibles à récupérer dans un seul ordre :
+typedef struct	s_collectible1
 {
+}		t_collectibles1;
 
-}		t_collectibles
+typedef struct	s_collectible2
+{
+}		t_collectibles2;
+
+typedef struct	s_collectible3
+{
+}		t_collectibles3;
+
+typedef struct	s_collectible4
+{
+}		t_collectibles4;
+
+//Les ennemies se décrémente. Un collectible pris = 1 ennemie en moins
+typedef struc	s_monster1
+{
+} t_monster1;
+typedef struc	s_monster2
+{
+} t_monster2;
+typedef struc	s_monster3
+{
+} t_monster3;
+typedef struc	s_monster4
+{
+} t_monster4;
+
 
 typedef struct	s_exit
 {
-
 }		t_exit
 
 typedef struct	s_control
 {
-
 }		t_control
 
 typedef struct	s_counter
 {
-
 }		t_counter
 
 typedef	struct	s_assets
