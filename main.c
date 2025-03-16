@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 16:03:45 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/15 19:35:22 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/16 11:13:26 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,72 @@ int	key_hook(int keycode)
 			exit (0);
 	return(0);
 }
-//fonction pour trouver le keycode de la souris
-/*int	mouse_hook(int button)
+
+//load image asset, struct des assets, pe add structure du game avec mlx ? 
+void	create_asset(t_assets *assets)
 {
-	?
+	int	img_longeur;
+	int	img_hauteur;
+
+	assets->wall_img = mlx_xpm_file_to_image(mlx, &img_longueur, &img_hauteur);
+
+}
+
+void	map(t_game *game)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while(game->map[y]);
+	{
+		x=0;
+		while(game->map[y][x])
+		{
+			if(game->map[y][x] == '1')
+				mlx_put_image_to_window( );
+			else if(game->map[y][x] == '0')
+				mlx_put_image_to_window( );
+			else if(game->map[y][x] == 'P')
+				mlx_put_image_to_window();
+			else if(game->map[y][x] == 'E')
+				mlx_put_image_to_window();
+			else if(game->map[y][x] == 'C')
+				mlx_put_image_to_window();
+			x++;
+		}
+		y++;
+	}
+}
+
+//fonction pour trouver le keycode de la souris
+/*int	mouse_hook(int mousecode)
+{
+	if (mousecode == )
+		 if (mousecode // rajouter cliquer croix )
+				exit (0);
+	return (0);
 }*/
 int	main(void)
 {
 	void	*mlx;
 	void	*win;
-	//void	*img;
+	void	*img;
+	int	img_width =32;
+	int	img_height = 32;
 
 	mlx = mlx_init();
-	win = mlx_new_window(mlx, 800, 800, "test");
-	mlx_pixel_put(mlx, win, 1, 1, 0xFF0000); //je le vois pas
+	win = mlx_new_window(mlx, 800, 400, "test");
+//	mlx_pixel_put(mlx, win, 1, 1, 0xFF0000); //je le vois pas
 	//img = mlx_new_image(mlx, 1920, 1080);
 	mlx_string_put(mlx, win, 200, 200, 0xFF0000, "salut ma chips");
+	img = mlx_xpm_file_to_image(mlx, "asset/background/Space_Stars1.xpm", &img_width, &img_height);
+	if(!img)
+		printf("erreur image");
+	mlx_put_image_to_window(mlx, win, img, 0, 0);
 	mlx_key_hook(win, key_hook, NULL);
-
+	//mlx_mouse_hook(win, mouse_hook, NULL);
+	//mlx_mouse_get_pos(mlx, win, x, y);
 	mlx_loop(mlx);
 	
 	return(0);
