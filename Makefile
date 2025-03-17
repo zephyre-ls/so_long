@@ -6,7 +6,7 @@
 #    By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/30 15:34:26 by lduflot           #+#    #+#              #
-#    Updated: 2025/03/15 18:27:28 by lduflot          ###   ########.fr        #
+#    Updated: 2025/03/17 11:06:53 by lduflot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,10 @@ NAME = so_long
 ###############################
 ##SOURCES
 
+GNL_FILES = GNL/get_next_line.c \
+						GNL/get_next_line_utils.c
 FILES = main.c
-OBJS = $(FILES:.c=.o)
+OBJS = $(FILES:.c=.o) $(GNL_FILES:.c=.o)
 
 ###############################
 ##LIBRAIRIES_MINILIBX
@@ -40,7 +42,7 @@ $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(MLXFLAGS) -o $(NAME)
 
 %.o: %.c
-	@$(CC) $(CFLAGS) -I$(MLX_PLACE) -c $< -o $@
+	@$(CC) $(CFLAGS) -I$(MLX_PLACE) -I GNL -c $< -o $@
 
 clean:
 	@echo "Mr.Larbin nettoie..."

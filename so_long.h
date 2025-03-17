@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/16 11:01:35 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/17 11:03:33 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 # include <stdbool.h> //ais-je le droit ? hmhm
 # include <stdio.h>
 # include <stdlib.h>
+# include "GNL/get_next_line.h"
+
+# define MAX_COLLECTIBLES 4
+# define MAX_MONSTERS 4
 
 //struct fenêtre 
 typedef struct	s_window
@@ -31,6 +35,7 @@ typedef struct	s_map
 {
 	int	largeur;
 	int	longeur;
+	char	**map;
 }		t_map;
 
 typedef struct s_player
@@ -111,11 +116,20 @@ typedef struct s_game
 	t_window	window;
 	t_map	map;
 	t_player	player;
-	t_collectibles	collectibles;
+	t_collectibles	collectibles[MAX_COLLECTIBLES];
+	t_monsters monsters[MAX_MONSTERS];
 	t_exit	exit;
 	t_control	control;
 	t_assets	assets;
 	t_counter	counter;
 }		t_game;
+
+
+//Fonctions
+int	key_hook(int keycode, t_game *game);
+void	create_asset(t_assets *assets, t_window *mlx);
+void	map(t_game *game);
+//int	mouse_hook(int mousecode);
+
 
 #endif

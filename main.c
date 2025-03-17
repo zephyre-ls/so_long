@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 16:03:45 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/16 11:13:26 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/17 11:20:10 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,50 +15,77 @@
 
 //fonction pour trouver le keycode des touches
 //Echap = 65307, Z=122, Q=113, S = 115, D=100, Space = 32
-int	key_hook(int keycode)
+int	key_hook(int keycode, t_game *game)
 {
 	printf("le keycode est: %d\n", keycode);
 	if (keycode == 65307) //press echap la fenetre se ferme
-			exit (0);
+	{
+		mlx_destroy_window(game->window.mlx, game->window.win); //fonction de nettoyage
+		exit (0);
+
+	}
 	return(0);
 }
 
+
 //load image asset, struct des assets, pe add structure du game avec mlx ? 
-void	create_asset(t_assets *assets)
+void	create_asset(t_assets *assets, t_window *mlx)
 {
-	int	img_longeur;
-	int	img_hauteur;
+	int	img_l;
+	int	img_h;
 
-	assets->wall_img = mlx_xpm_file_to_image(mlx, &img_longueur, &img_hauteur);
-
+	assets->wall_img = mlx_xpm_file_to_image(mlx->mlx, "asset/background/Space_Stars1.xpm", &img_l, &img_h);
+	assets->background_img = mlx_xpm_file_to_image(mlx->mlx, "asset/background/Space_Stars1.xpm", &img_l, &img_h);
+/*	assets->exit_img = mlx_xpm_file_to_image(mlx->mlx, "asset/background/Space_Stars1.xpm", &img_l, &img_h);
+	assets->player_img = mlx_xpm_file_to_image(mlx->mlx, "asset/background/Space_Stars1.xpm", &img_l, &img_h);
+	assets->collectible_img = mlx_xpm_file_to_image(mlx->mlx, "asset/background/Space_Stars1.xpm", &img_l, &img_h);
+	assets->monster_img = mlx_xpm_file_to_image(mlx->mlx, "asset/background/Space_Stars1.xpm", &img_l, &img_h);*/
 }
 
 void	map(t_game *game)
 {
-	int	x;
-	int	y;
 
+	int	y;
+	int	x;
+	int	pxl = 32;
+	int	fd;
+	char	*line;
+	
+	fd = open ("map/map1.ber", O_RDONLY);
+	if (fd == -1)
+		exit(EXIT_FAILURE);
 	y = 0;
-	while(game->map[y]);
+	while((line = get_next_line(fd)))
+	{
+		game->map.map[y] = NULL;
+		y++;
+	}
+	game->map.map[y] = NULL;
+	close (fd);
+	
+	y = 0;
+	while(game->map.map[y])
 	{
 		x=0;
-		while(game->map[y][x])
+		while(game->map.map[y][x])
 		{
-			if(game->map[y][x] == '1')
-				mlx_put_image_to_window( );
-			else if(game->map[y][x] == '0')
-				mlx_put_image_to_window( );
-			else if(game->map[y][x] == 'P')
-				mlx_put_image_to_window();
-			else if(game->map[y][x] == 'E')
-				mlx_put_image_to_window();
-			else if(game->map[y][x] == 'C')
-				mlx_put_image_to_window();
+			if(game->map.map[y][x] == '1')
+				mlx_put_image_to_window(game->window.mlx, game->window.win, game->assets.wall_img, x * pxl, y* pxl);
+			else if(game->map.map[y][x] == '0')
+				mlx_put_image_to_window(game->window.mlx, game->window.win, game->assets.background_img, x * pxl, y * pxl);
+			else if(game->map.map[y][x] == 'P')
+				mlx_put_image_to_window(game->window.mlx, game->window.win, game->assets.player_img, x * pxl, y * pxl);
+			else if(game->map.map[y][x] == 'E')
+				mlx_put_image_to_window(game->window.mlx, game->window.win, game->assets.monster_img, x * pxl, y * pxl);
+			else if(game->map.map[y][x] == 'C')
+				mlx_put_image_to_window(game->window.mlx, game->window.win, game->assets.collectibles_img, x * pxl, y * pxl);
 			x++;
 		}
 		y++;
 	}
 }
+
+
 
 //fonction pour trouver le keycode de la souris
 /*int	mouse_hook(int mousecode)
@@ -68,27 +95,24 @@ void	map(t_game *game)
 				exit (0);
 	return (0);
 }*/
+
 int	main(void)
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	int	img_width =32;
-	int	img_height = 32;
+	t_game	game;
+//	int	img_width = 32;
+//	int	img_height = 32;
 
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 800, 400, "test");
-//	mlx_pixel_put(mlx, win, 1, 1, 0xFF0000); //je le vois pas
-	//img = mlx_new_image(mlx, 1920, 1080);
-	mlx_string_put(mlx, win, 200, 200, 0xFF0000, "salut ma chips");
-	img = mlx_xpm_file_to_image(mlx, "asset/background/Space_Stars1.xpm", &img_width, &img_height);
-	if(!img)
-		printf("erreur image");
-	mlx_put_image_to_window(mlx, win, img, 0, 0);
-	mlx_key_hook(win, key_hook, NULL);
-	//mlx_mouse_hook(win, mouse_hook, NULL);
-	//mlx_mouse_get_pos(mlx, win, x, y);
-	mlx_loop(mlx);
-	
-	return(0);
+	game.window.mlx = mlx_init();
+	game.window.win = mlx_new_window(game.window.mlx, 800, 600, "test");
+
+
+	mlx_string_put(game.window.mlx, game.window.win, 200, 200, 0xFF0000, "grosse chips");
+	create_asset(&game.assets, &game.window);
+	mlx_key_hook(game.window.win, key_hook, &game);
+
+	map(&game);
+
+	mlx_loop(game.window.mlx);
+	return (0);
 }
+
