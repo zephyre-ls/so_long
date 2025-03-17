@@ -1,5 +1,17 @@
 PLAN DU JEU =
 
+
+*** ERREUR
+Error of failed request:  BadDrawable (invalid Pixmap or Window parameter) 
+- = j'essaies d'afficher une image qui n'existe pas
+Major opcode of failed request:  62 (X_CopyArea)
+- = image que j'essaie de copier dans win est invalide ou non charge 
+Resource id in failed request:  0x0
+Serial number of failed request:  33
+Current serial number in output stream:  54
+
+
+
 (Si time : faire MENU du jeu = SO_LONG et selection d'une carte(3); ajout meilleur score si pas compliqué et ajout d'un QR code pour écouter une musique quand on joue) 
 
 But du jeu : récupération de différents collectibles dans un ordre précis (ordre affiché sur le côté, ou dans le background caché, ou sur le menu  ).

@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 16:03:45 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/17 11:20:10 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/17 12:33:59 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ void	create_asset(t_assets *assets, t_window *mlx)
 	int	img_l;
 	int	img_h;
 
-	assets->wall_img = mlx_xpm_file_to_image(mlx->mlx, "asset/background/Space_Stars1.xpm", &img_l, &img_h);
-	assets->background_img = mlx_xpm_file_to_image(mlx->mlx, "asset/background/Space_Stars1.xpm", &img_l, &img_h);
-/*	assets->exit_img = mlx_xpm_file_to_image(mlx->mlx, "asset/background/Space_Stars1.xpm", &img_l, &img_h);
-	assets->player_img = mlx_xpm_file_to_image(mlx->mlx, "asset/background/Space_Stars1.xpm", &img_l, &img_h);
+	assets->wall_img = mlx_xpm_file_to_image(mlx->mlx, "asset/wall/Space_Stars1.xpm", &img_l, &img_h);
+	assets->background_img = mlx_xpm_file_to_image(mlx->mlx, "asset/background/Space_Stars2.xpm", &img_l, &img_h);
+	assets->exit_img = mlx_xpm_file_to_image(mlx->mlx, "asset/exit/ibm5150.xpm", &img_l, &img_h);
+/*	assets->player_img = mlx_xpm_file_to_image(mlx->mlx, "asset/background/Space_Stars1.xpm", &img_l, &img_h);
 	assets->collectible_img = mlx_xpm_file_to_image(mlx->mlx, "asset/background/Space_Stars1.xpm", &img_l, &img_h);
 	assets->monster_img = mlx_xpm_file_to_image(mlx->mlx, "asset/background/Space_Stars1.xpm", &img_l, &img_h);*/
 }
@@ -51,18 +51,27 @@ void	map(t_game *game)
 	int	fd;
 	char	*line;
 	
-	fd = open ("map/map1.ber", O_RDONLY);
+	fd = open ("maps/map1.ber", O_RDONLY);
 	if (fd == -1)
+	{
+		perror("erreur ouverture fichier");
 		exit(EXIT_FAILURE);
+	}
+	game->map.map = malloc(sizeof(char *) * 10000000);
+	if (!game->map.map)
+	{
+		perror("error");
+		exit(EXIT_FAILURE);
+	}
 	y = 0;
 	while((line = get_next_line(fd)))
 	{
-		game->map.map[y] = NULL;
+		printf("Ligne %d: %s", y, line);
+		game->map.map[y] = line;
 		y++;
 	}
 	game->map.map[y] = NULL;
 	close (fd);
-	
 	y = 0;
 	while(game->map.map[y])
 	{
@@ -73,12 +82,12 @@ void	map(t_game *game)
 				mlx_put_image_to_window(game->window.mlx, game->window.win, game->assets.wall_img, x * pxl, y* pxl);
 			else if(game->map.map[y][x] == '0')
 				mlx_put_image_to_window(game->window.mlx, game->window.win, game->assets.background_img, x * pxl, y * pxl);
-			else if(game->map.map[y][x] == 'P')
-				mlx_put_image_to_window(game->window.mlx, game->window.win, game->assets.player_img, x * pxl, y * pxl);
+		//	else if(game->map.map[y][x] == 'P')
+		//		mlx_put_image_to_window(game->window.mlx, game->window.win, game->assets.player_img, x * pxl, y * pxl);
 			else if(game->map.map[y][x] == 'E')
-				mlx_put_image_to_window(game->window.mlx, game->window.win, game->assets.monster_img, x * pxl, y * pxl);
-			else if(game->map.map[y][x] == 'C')
-				mlx_put_image_to_window(game->window.mlx, game->window.win, game->assets.collectibles_img, x * pxl, y * pxl);
+				mlx_put_image_to_window(game->window.mlx, game->window.win, game->assets.exit_img, x * pxl, y * pxl);
+		//	else if(game->map.map[y][x] == 'C')
+			//	mlx_put_image_to_window(game->window.mlx, game->window.win, game->assets.collectibles_img, x * pxl, y * pxl);
 			x++;
 		}
 		y++;
@@ -106,7 +115,7 @@ int	main(void)
 	game.window.win = mlx_new_window(game.window.mlx, 800, 600, "test");
 
 
-	mlx_string_put(game.window.mlx, game.window.win, 200, 200, 0xFF0000, "grosse chips");
+	//mlx_string_put(game.window.mlx, game.window.win, 200, 200, 0xFF0000, "grosse chips");
 	create_asset(&game.assets, &game.window);
 	mlx_key_hook(game.window.win, key_hook, &game);
 
