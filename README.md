@@ -1,9 +1,8 @@
 PLAN DU JEU =
 
-MENU du jeu = SO_LONG et selection d'une carte
-Faire un truc succes si temps
+(Si time : faire MENU du jeu = SO_LONG et selection d'une carte(3); ajout meilleur score si pas compliqué et ajout d'un QR code pour écouter une musique quand on joue) 
 
-But du jeu : récupération de différents collectibles dans un ordre précis (ordre affiché sur le côté ou dans le background caché ).
+But du jeu : récupération de différents collectibles dans un ordre précis (ordre affiché sur le côté, ou dans le background caché, ou sur le menu  ).
 Environ 4 collectible à récupérer.
 Lancement du jeu = 4 collectibles, 4 ennemies
 Quand on récupére le premier collectible 1 ennemie meurent etc etc. A la fin de la récupération la porte s'ouvre.
