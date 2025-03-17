@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/17 11:03:33 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/17 13:16:54 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ typedef struct s_game
 	t_map	map;
 	t_player	player;
 	t_collectibles	collectibles[MAX_COLLECTIBLES];
-	t_monsters monsters[MAX_MONSTERS];
+	t_monsters	monsters[MAX_MONSTERS];
 	t_exit	exit;
 	t_control	control;
 	t_assets	assets;
