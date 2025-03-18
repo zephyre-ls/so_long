@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 16:03:45 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/18 10:11:19 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/18 11:15:07 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,7 @@
 
 //fonction pour trouver le keycode des touches
 //Echap = 65307, Z=122, Q=113, S = 115, D=100, Space = 32
-int	key_hook(int keycode, t_game *game)
-{
-	move_player(keycode, game);
-	return(0);
-}
+
 //fonction pour trouver le keycode de la souris
 /*int	mouse_hook(int mousecode)
 {
