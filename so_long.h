@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/17 13:16:54 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/18 10:08:54 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define SO_LONG_H
 
 # include "minilibx-linux/mlx.h"
-# include <stdbool.h> //ais-je le droit ? hmhm
 # include <stdio.h>
 # include <stdlib.h>
 # include "GNL/get_next_line.h"
@@ -51,7 +50,7 @@ typedef struct	s_collectibles
 {
 	int	x;
 	int	y;
-	bool	is_collected;
+	int	is_collected; //(0 = false, 1 = true)
 }		t_collectibles;
 
 typedef struct	s_collectibles_type
@@ -68,7 +67,7 @@ typedef struct	s_monsters
 {
 	int	x;
 	int	y;
-	bool is_dead;
+	int	is_dead;
 } t_monsters;
 
 typedef struct	s_monsters_type
@@ -84,15 +83,16 @@ typedef struct	s_exit
 {
 	int	x;
 	int	y;
-	bool	is_open;
+	int	is_open;
 }		t_exit;
 
 typedef struct	s_control
 {
-	int	up;
-	int	down;
-	int	left;
-	int	right;
+	int	up; //Z
+	int	down; //S
+	int	left; //Q
+	int	right; //D
+	int	quit; //ESC
 }		t_control;
 
 typedef struct	s_counter
@@ -126,10 +126,18 @@ typedef struct s_game
 
 
 //Fonctions
-int	key_hook(int keycode, t_game *game);
-void	create_asset(t_assets *assets, t_window *mlx);
-void	map(t_game *game);
-//int	mouse_hook(int mousecode);
 
+// Map
+void	draw_map(t_game *game);
+void	dl_map(t_game *game/*, char *map*/);
+void	create_asset(t_assets *assets, t_window *mlx);
+
+// PLayers
+int	cant_move_wall(int new_x, int new_y, t_game *game);
+int	move_player(int keycode, t_game *game);
+
+// control
+void	init_controls(t_game *game);
+int	key_hook(int keycode, t_game *game);
 
 #endif

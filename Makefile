@@ -6,7 +6,7 @@
 #    By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/30 15:34:26 by lduflot           #+#    #+#              #
-#    Updated: 2025/03/17 11:06:53 by lduflot          ###   ########.fr        #
+#    Updated: 2025/03/18 09:58:09 by lduflot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,10 @@ NAME = so_long
 ##SOURCES
 
 GNL_FILES = GNL/get_next_line.c \
-						GNL/get_next_line_utils.c
-FILES = main.c
+						GNL/get_next_line_utils.c 
+FILES = main.c \
+				create_map.c \
+				control_player.c
 OBJS = $(FILES:.c=.o) $(GNL_FILES:.c=.o)
 
 ###############################

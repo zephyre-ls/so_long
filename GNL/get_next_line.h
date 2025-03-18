@@ -6,7 +6,7 @@
 /*   By: lduflot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 11:10:24 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/17 12:33:51 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/17 13:50:14 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 100000
+#  define BUFFER_SIZE 100
 # endif
 
 char	*get_next_line(int fd);
