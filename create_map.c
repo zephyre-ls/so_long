@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:00:06 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/20 17:09:57 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/20 21:49:36 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	create_asset(t_assets *assets, t_window *mlx)
 	assets->wall_img = mlx_xpm_file_to_image(mlx->mlx,
 			"asset/wall/server.xpm", &img_l, &img_h);
 	assets->background_img = mlx_xpm_file_to_image(mlx->mlx,
-			"asset/background/Space_Stars6.xpm", &img_l, &img_h);
+			"asset/background/ciel.xpm", &img_l, &img_h);
 	assets->exit_img = mlx_xpm_file_to_image(mlx->mlx,
 			"asset/exit/ibm5150.xpm", &img_l, &img_h);
 	assets->player_img = mlx_xpm_file_to_image(mlx->mlx,
@@ -38,6 +38,8 @@ void	create_asset(t_assets *assets, t_window *mlx)
 			"asset/collectibles/collect4.xpm", &img_l, &img_h);
 	assets->collectibles_img[4] = mlx_xpm_file_to_image(mlx->mlx,
 			"asset/collectibles/collect5.xpm", &img_l, &img_h);
+	assets->code_img = mlx_xpm_file_to_image(mlx->mlx,
+			"asset/code/code.xpm", &img_l, &img_h);
 }
 
 void	dl_map(t_game *game)
@@ -112,7 +114,7 @@ void	draw_map(t_game *game)
 	int	i;
 
 	y = 0;
-	pxl = 32;
+	pxl = 64;
 	while (game->map.map[y])
 	{
 		x = 0;
@@ -148,6 +150,9 @@ void	draw_map(t_game *game)
 			else if (game->map.map[y][x] == 'M')
 				mlx_put_image_to_window(game->window.mlx, game->window.win,
 					game->assets.monster_img, x * pxl, y * pxl);
+			else if (game->map.map[y][x] == 'T')
+				mlx_put_image_to_window(game->window.mlx, game->window.win,
+					game->assets.code_img, x * pxl, y * pxl);
 			x++;
 		}
 		y++;
