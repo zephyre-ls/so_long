@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:01:10 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/18 10:13:14 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/20 14:35:49 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,14 @@ int	move_player(int keycode, t_game *game)
 		mlx_destroy_window(game->window.mlx, game->window.win);
 		exit (0);
 	}
-	if (!cant_move_wall(new_x, new_y, game))
+	if (game->map.map[new_y][new_x] != '1')
 	{
 		game->map.map[game->player.y][game->player.x] = '0';
 		game->player.x = new_x;
 		game->player.y = new_y;
+		check_collision_ennemies(game);
 		game->map.map[new_y][new_x] = 'P';
+		collect_collectibles(game);
 		draw_map(game);
 	}
 	return (0);

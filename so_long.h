@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/18 10:08:54 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/20 14:44:04 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ typedef struct s_game
 	t_player	player;
 	t_collectibles	collectibles[MAX_COLLECTIBLES];
 	t_monsters	monsters[MAX_MONSTERS];
+	int	monster_count;
 	t_exit	exit;
 	t_control	control;
 	t_assets	assets;
@@ -139,5 +140,11 @@ int	move_player(int keycode, t_game *game);
 // control
 void	init_controls(t_game *game);
 int	key_hook(int keycode, t_game *game);
+
+//Collectibles
+void	collect_collectibles(t_game *game);
+
+//Ennemies
+void	check_collision_ennemies(t_game *game);
 
 #endif

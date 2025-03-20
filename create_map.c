@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:00:06 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/18 11:14:25 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/20 14:46:58 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	create_asset(t_assets *assets, t_window *mlx)
 	int	img_l;
 	int	img_h;
 
-	assets->wall_img = mlx_xpm_file_to_image(mlx->mlx, "asset/wall/Space_Stars1.xpm", &img_l, &img_h);
+	assets->wall_img = mlx_xpm_file_to_image(mlx->mlx, "asset/wall/server.xpm", &img_l, &img_h);
 	assets->background_img = mlx_xpm_file_to_image(mlx->mlx, "asset/background/Space_Stars6.xpm", &img_l, &img_h);
 	assets->exit_img = mlx_xpm_file_to_image(mlx->mlx, "asset/exit/ibm5150.xpm", &img_l, &img_h);
 	assets->player_img = mlx_xpm_file_to_image(mlx->mlx, "asset/player/player.xpm", &img_l, &img_h);
@@ -30,6 +30,7 @@ void	dl_map(t_game *game/*, char *map*/)
 {
 	int	fd;
 	int	y;
+	int	x;
 	char	*line;
 	
 	fd = open ("maps/map1.ber", O_RDONLY);
@@ -39,6 +40,7 @@ void	dl_map(t_game *game/*, char *map*/)
 		exit(EXIT_FAILURE);
 	}
 	game->map.map = malloc(sizeof(char *) * 100);
+	game->monster_count = 0;
 	if (!game->map.map)
 	{
 		perror("error");
@@ -47,8 +49,28 @@ void	dl_map(t_game *game/*, char *map*/)
 	y = 0;
 	while((line = get_next_line(fd)))
 	{
-		printf("Ligne %d: %s", y, line);
 		game->map.map[y] = line;
+		x = 0;
+		while(line[x])
+		{
+			if (line[x] == 'P')
+			{
+				game->player.x = x;
+				game->player.y = y;
+			}
+			else if (line[x] == 'M')
+			{
+				if(game->monster_count < MAX_MONSTERS)
+				{
+					game->monsters[game->monster_count].x = x;
+					game->monsters[game->monster_count].y = y;
+					game->monster_count++;
+				}
+				else
+					exit(EXIT_FAILURE);
+			}
+			x++;
+		}
 		y++;
 	}
 	game->map.map[y] = NULL;
@@ -59,7 +81,7 @@ void	draw_map(t_game *game)
 {
 	int	y;
 	int	x;
-	int	pxl = 32;
+	int	pxl =32;
 
 	y = 0;
 	while(game->map.map[y])

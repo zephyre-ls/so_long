@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 16:03:45 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/18 11:15:07 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/20 11:02:23 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(void)
 {
 	t_game	game;
 	game.window.mlx = mlx_init();
-	game.window.win = mlx_new_window(game.window.mlx, 800, 600, "test");
+	game.window.win = mlx_new_window(game.window.mlx, 800, 200, "test");
 	create_asset(&game.assets, &game.window);
 
 	init_controls(&game);
