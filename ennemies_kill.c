@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 10:01:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/20 14:49:59 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/20 15:26:07 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,18 @@
 
 void	check_collision_ennemies(t_game *game)
 {
-	int	i = 0;
+	int	i;
 
-	while(i < MAX_MONSTERS)
+	i = 0;
+	while (i < MAX_MONSTERS)
 	{
-		if(game->player.x == game->monsters[i].x && game->player.y == game->monsters[i].y)
+		if (game->player.x == game->monsters[i].x
+			&& game->player.y == game->monsters[i].y)
 		{
-				printf("GAME OVER");
-				mlx_destroy_window(game->window.mlx, game->window.win);
-				exit(0);
+			printf("GAME OVER");
+			mlx_destroy_window(game->window.mlx, game->window.win);
+			exit(0);
 		}
-	i++;
+		i++;
 	}
 }

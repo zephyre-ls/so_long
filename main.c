@@ -6,13 +6,11 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 16:03:45 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/20 11:02:23 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/20 15:26:49 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-
 //fonction pour trouver le keycode des touches
 //Echap = 65307, Z=122, Q=113, S = 115, D=100, Space = 32
 
@@ -24,20 +22,17 @@
 				exit (0);
 	return (0);
 }*/
-
 int	main(void)
 {
 	t_game	game;
+
 	game.window.mlx = mlx_init();
 	game.window.win = mlx_new_window(game.window.mlx, 800, 200, "test");
 	create_asset(&game.assets, &game.window);
-
 	init_controls(&game);
 	dl_map(&game);
 	draw_map(&game);
-
 	mlx_key_hook(game.window.win, key_hook, &game);
 	mlx_loop(game.window.mlx);
 	return (0);
 }
-

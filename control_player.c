@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:01:10 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/20 14:35:49 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/20 15:23:24 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	key_hook(int keycode, t_game *game)
 {
 	move_player(keycode, game);
-	return(0);
+	return (0);
 }
 
 void	init_controls(t_game *game)
@@ -29,9 +29,11 @@ void	init_controls(t_game *game)
 
 int	move_player(int keycode, t_game *game)
 {
-	int	new_x = game->player.x;
-	int	new_y = game->player.y;
+	int	new_x;
+	int	new_y;
 
+	new_x = game->player.x;
+	new_y = game->player.y;
 	if (keycode == game->control.up)
 		new_y--;
 	else if (keycode == game->control.down)
