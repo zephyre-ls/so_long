@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/20 15:36:00 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/20 17:03:24 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdlib.h>
 # include "GNL/get_next_line.h"
 
-# define MAX_COLLECTIBLES 4
+# define MAX_COLLECTIBLES 5
 # define MAX_MONSTERS 4
 
 //struct fenêtre
@@ -103,7 +103,7 @@ typedef struct s_assets
 {
 	void	*player_img;
 	void	*wall_img;
-	void	*collectibles_img;
+	void	*collectibles_img[5];
 	void	*exit_img;
 	void	*background_img;
 	void	*monster_img;
