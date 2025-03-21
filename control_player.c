@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:01:10 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/20 21:50:37 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/21 01:14:05 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	move_player(int keycode, t_game *game)
 		game->player.x = new_x;
 		game->player.y = new_y;
 		check_collision_ennemies(game);
+		game->monster_count++;
 		game->map.map[new_y][new_x] = 'P';
 		collect_collectibles(game);
 		draw_map(game);

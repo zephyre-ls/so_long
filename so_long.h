@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/20 21:48:20 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/21 00:47:55 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ typedef struct s_game
 	t_player	player;
 	t_collectibles	collectibles[MAX_COLLECTIBLES];
 	int			collectible_count;
+	int			next_collectible;
 	t_monsters	monsters[MAX_MONSTERS];
 	int			monster_count;
 	t_exit		exit;
@@ -145,5 +146,6 @@ void	collect_collectibles(t_game *game);
 
 //Ennemies
 void	check_collision_ennemies(t_game *game);
+void	moove_ennemies(t_game *game);
 
 #endif
