@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/21 00:47:55 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/21 11:34:36 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct s_assets
 	void	*wall_img;
 	void	*collectibles_img[5];
 	void	*exit_img;
+	void	*exit_open_img;
 	void	*background_img;
 	void	*monster_img;
 	void	*code_img;
@@ -147,5 +148,8 @@ void	collect_collectibles(t_game *game);
 //Ennemies
 void	check_collision_ennemies(t_game *game);
 void	moove_ennemies(t_game *game);
+
+// victoire
+void	player_win(t_game *game);
 
 #endif

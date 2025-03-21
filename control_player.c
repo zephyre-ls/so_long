@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:01:10 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/21 01:14:05 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/21 12:01:59 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,24 @@ int	move_player(int keycode, t_game *game)
 	}
 	if (game->map.map[new_y][new_x] != '1')
 	{
-		game->map.map[game->player.y][game->player.x] = '0'; // rajouter || 'T' = background du code
+		if (game->map.map[new_y][new_x] == 'C')
+			collect_collectibles(game);
+		game->map.map[game->player.y][game->player.x] = '0';
 		game->player.x = new_x;
 		game->player.y = new_y;
 		check_collision_ennemies(game);
-		game->monster_count++;
 		game->map.map[new_y][new_x] = 'P';
-		collect_collectibles(game);
+		player_win(game);
 		draw_map(game);
+	/*	game->map.map[game->player.y][game->player.x] = '0'; // rajouter || 'T' = background du code
+		game->player.x = new_x;
+		game->player.y = new_y;
+		check_collision_ennemies(game);
+		game->map.map[new_y][new_x] = 'P';
+		if (game->collectible_count > 0)
+			collect_collectibles(game);
+		player_win(game);
+		draw_map(game);*/
 	}
 	return (0);
 }

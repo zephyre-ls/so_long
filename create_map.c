@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:00:06 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/20 21:49:36 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/21 11:57:43 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	create_asset(t_assets *assets, t_window *mlx)
 			"asset/background/ciel.xpm", &img_l, &img_h);
 	assets->exit_img = mlx_xpm_file_to_image(mlx->mlx,
 			"asset/exit/ibm5150.xpm", &img_l, &img_h);
+	assets->exit_open_img = mlx_xpm_file_to_image(mlx->mlx,
+			"asset/exit/open.xpm", &img_l, &img_h);
 	assets->player_img = mlx_xpm_file_to_image(mlx->mlx,
 			"asset/player/player.xpm", &img_l, &img_h);
 	assets->monster_img = mlx_xpm_file_to_image(mlx->mlx,
@@ -74,6 +76,11 @@ void	dl_map(t_game *game)
 			{
 				game->player.x = x;
 				game->player.y = y;
+			}
+			else if (line[x] == 'E')
+			{
+				game->exit.x = x;
+				game->exit.y = y;
 			}
 			else if (line[x] == 'M')
 			{
@@ -130,8 +137,14 @@ void	draw_map(t_game *game)
 				mlx_put_image_to_window(game->window.mlx, game->window.win,
 					game->assets.player_img, x * pxl, y * pxl);
 			else if (game->map.map[y][x] == 'E')
+			{
+				if (game->exit.is_open)
+				mlx_put_image_to_window(game->window.mlx, game->window.win,
+						game->assets.exit_open_img, x * pxl, y * pxl);
+			else
 				mlx_put_image_to_window(game->window.mlx, game->window.win,
 					game->assets.exit_img, x * pxl, y * pxl);
+			}
 			else if (game->map.map[y][x] == 'C')
 			{
 				i = 0;
