@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/21 11:34:36 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/22 01:22:51 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ typedef struct s_game
 	t_player	player;
 	t_collectibles	collectibles[MAX_COLLECTIBLES];
 	int			collectible_count;
+	int collectible_recup;
 	int			next_collectible;
 	t_monsters	monsters[MAX_MONSTERS];
 	int			monster_count;

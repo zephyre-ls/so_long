@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:01:10 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/21 12:01:59 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/21 19:22:46 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	key_hook(int keycode, t_game *game)
 
 void	init_controls(t_game *game)
 {
-	game->control.up = 122;
+	game->control.up = 119; //122
 	game->control.down = 115;
-	game->control.left = 113;
+	game->control.left = 97; //113;
 	game->control.right = 100;
 	game->control.quit = 65307;
 }
