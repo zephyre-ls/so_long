@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/22 13:45:43 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/22 14:37:18 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ void	collect_collectibles(t_game *game);
 //Ennemies
 void	check_collision_ennemies(t_game *game);
 void	move_ennemies(t_game *game);
+int	genere_move_ennemies(t_game *game, int i);
 
 // victoire
 void	player_win(t_game *game);
