@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:01:10 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/22 13:17:53 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/22 13:45:23 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int move_player(int keycode, t_game *game)
 		player_win(game);
 		draw_map(game);
 	}
+	move_ennemies(game);
+	check_collision_ennemies(game);
 	return 0;
 }
 
