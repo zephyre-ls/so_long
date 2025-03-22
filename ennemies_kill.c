@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 10:01:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/22 14:51:01 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/22 21:00:24 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	move_ennemies(t_game *game)
 		new_x--;
 
 	if (game->map.map[new_y][new_x] != '1' && game->map.map[new_y][new_x] != 'T'&&
-		game->map.map[new_y][new_x] != 'C' && game->map.map[new_y][new_x] != 'E')
+		game->map.map[new_y][new_x] != 'C' && game->map.map[new_y][new_x] != 'E' && game->map.map[new_y][new_x] != 'M')
 	{
 		game->map.map[game->monsters[i].y][game->monsters[i].x] = '0';
 		game->monsters[i].x = new_x;

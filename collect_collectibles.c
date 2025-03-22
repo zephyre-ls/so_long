@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 09:48:38 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/22 13:25:47 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/22 21:42:12 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,25 @@ void collect_collectibles(t_game *game)
 	{
 		game->map.map[new_y][new_x] = '0';
 		game->collectible_count--;
+		int	x = 0;
+		int	y = 0;
+		printf("%d, %d\n", game->map.largeur, game->map.longeur);
+	while (y < game->map.largeur)
+		{
+  	while (x < game->map.longeur)
+			{
+				if (game->map.map[y][x] == 'M')
+				{
+					game->map.map[y][x] = '0';
+					game->monster_count--;
+					printf("Monstre supprimé ! Nbr restant de monstres : %d\n", game->monster_count);
+					return; 
+				}
+ 				x++;
+			}
+			y++; 
+			x = 0;
+		}
 		printf("collectible collecté ! Nbr restant: %d\n", game->collectible_count);
 		if (game->collectible_count == 0)
 		{

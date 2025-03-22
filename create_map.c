@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:00:06 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/22 13:11:19 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/22 21:52:37 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	dl_map(t_game *game)
 		perror("erreur ouverture fichier");
 		exit(EXIT_FAILURE);
 	}
-	game->map.map = malloc(sizeof(char *) * 100);
+	game->map.map = malloc(sizeof(char *) * 20);
 	game->monster_count = 0;
 	game->collectible_count = 0;
 	if (!game->map.map)
@@ -109,8 +109,11 @@ void	dl_map(t_game *game)
 			}
 			x++;
 		}
+
 		y++;
 	}
+	game->map.largeur = x;
+	game->map.longeur = y;
 	game->map.map[y] = NULL;
 	close (fd);
 }

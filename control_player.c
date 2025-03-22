@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:01:10 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/22 13:45:23 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/22 21:01:42 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	key_hook(int keycode, t_game *game)
 
 void	init_controls(t_game *game)
 {
-	game->control.up = 122; //119;
+	game->control.up = 119;//122; //119;
 	game->control.down = 115;
-	game->control.left = 113; //97;
+	game->control.left = 97; //113; //97;
 	game->control.right = 100;
 	game->control.quit = 65307;
 	game->control.reset = 114;
@@ -48,7 +48,18 @@ int move_player(int keycode, t_game *game)
 		mlx_destroy_window(game->window.mlx, game->window.win);
 		exit (0);
 	}
-  if (game->map.map[new_y][new_x] != '1')
+  if (game->map.map[new_y][new_x] != '1' && game->map.map[new_y][new_x] != 'E' && game->map.map[new_y][new_x] != 'T')
+	{
+		game->map.map[game->player.y][game->player.x] = '0';
+		game->player.x = new_x;
+		game->player.y = new_y;
+		collect_collectibles(game);
+		check_collision_ennemies(game);
+		game->map.map[new_y][new_x] = 'P';
+		player_win(game);
+		draw_map(game);
+	}
+	else if (game->map.map[new_y][new_x] != '1' && game->exit.is_open)
 	{
 		game->map.map[game->player.y][game->player.x] = '0';
 		game->player.x = new_x;
