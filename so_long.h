@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/22 01:22:51 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/22 13:26:01 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,6 @@ typedef struct s_collectibles
 	int	is_collected; //(0 = false, 1 = true)
 }		t_collectibles;
 
-typedef struct s_collectibles_type
-{
-	t_collectibles	c1;
-	t_collectibles	c2;
-	t_collectibles	c3;
-	t_collectibles	c4;
-}		t_collectibles_type;
-
 //Les ennemies se décrémente. Un collectible pris = 1 ennemie en moins
 typedef struct s_monsters
 {
@@ -69,14 +61,6 @@ typedef struct s_monsters
 	int	y;
 	int	is_dead;
 }		t_monsters;
-
-typedef struct s_monsters_type
-{
-	t_monsters	m1;
-	t_monsters	m2;
-	t_monsters	m3;
-	t_monsters	m4;
-}		t_monster_type;
 
 typedef struct s_exit
 {
@@ -92,6 +76,7 @@ typedef struct s_control
 	int	left; //Q
 	int	right; //D
 	int	quit; //ESC
+	int	reset; //R
 }		t_control;
 
 typedef struct s_counter
@@ -116,6 +101,7 @@ typedef struct s_game
 	t_window	window;
 	t_map		map;
 	t_player	player;
+	t_player	start_position;
 	t_collectibles	collectibles[MAX_COLLECTIBLES];
 	int			collectible_count;
 	int collectible_recup;
@@ -152,5 +138,9 @@ void	moove_ennemies(t_game *game);
 
 // victoire
 void	player_win(t_game *game);
+
+// Reset map
+void	reset_game(t_game *game);
+
 
 #endif

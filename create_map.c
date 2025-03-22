@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:00:06 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/22 00:19:51 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/22 13:11:19 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void	dl_map(t_game *game)
 			{
 				game->player.x = x;
 				game->player.y = y;
+				game->start_position.x = game->player.x;
+				game->start_position.y = game->player.y;
 			}
 			else if (line[x] == 'E')
 			{
@@ -138,10 +140,10 @@ void	draw_map(t_game *game)
 					game->assets.player_img, x * pxl, y * pxl);
 			else if (game->map.map[y][x] == 'E')
 			{
-				//if (game->exit.is_open )
-				//mlx_put_image_to_window(game->window.mlx, game->window.win,
-					//	game->assets.exit_open_img, x * pxl, y * pxl);
-		////	else
+				if (game->exit.is_open)
+					mlx_put_image_to_window(game->window.mlx, game->window.win,
+						game->assets.exit_open_img, x * pxl, y * pxl);
+				else
 				mlx_put_image_to_window(game->window.mlx, game->window.win,
 					game->assets.exit_img, x * pxl, y * pxl);
 			}
@@ -155,7 +157,7 @@ void	draw_map(t_game *game)
 					{
 						mlx_put_image_to_window(game->window.mlx, game->window.win,
 						game->assets.collectibles_img[i], x * pxl, y * pxl);
-						break ;
+						//break ;
 					}
 					i++;
 				}
