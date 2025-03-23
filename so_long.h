@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/23 14:23:57 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/23 15:19:18 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ typedef struct s_player
 {
 	int		x;
 	int		y;
-	int		score;
 	void	*player_img;
 }		t_player;
 
@@ -88,7 +87,7 @@ typedef struct s_control
 
 typedef struct s_counter
 {
-	int	moves;
+	int	move;
 }		t_counter;
 
 typedef struct s_assets
@@ -109,6 +108,7 @@ typedef struct s_game
 	t_map		map;
 	t_player	player;
 	t_player	start_position;
+	int	moves_count;
 	t_collectibles	collectibles[MAX_COLLECTIBLES];
 	int			collectible_count;
 	int collectible_recup;
@@ -118,7 +118,6 @@ typedef struct s_game
 	t_exit		exit;
 	t_control	control;
 	t_assets	assets;
-	t_counter	counter;
 }		t_game;
 
 //Fonctions
@@ -129,6 +128,7 @@ void	dl_map(t_game *game);
 void	create_asset(t_assets *assets, t_window *mlx);
 int	check_map_wall(t_game *game);
 int	check_map_rectangle(t_game *game);
+int	check_way_valid(t_game *game);
 // PLayers
 int	cant_move_wall(int new_x, int new_y, t_game *game);
 int	move_player(int keycode, t_game *game);

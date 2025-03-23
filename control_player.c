@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:01:10 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/23 11:41:10 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/23 15:24:05 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,11 @@ void	free_map(char **map)
 void	control_player(int keycode, int *new_x, int *new_y, t_game *game)
 {
 	if (keycode == game->control.up_w || keycode == game->control.up_z || keycode == game->control.arrow_up)
+	{
 		(*new_y)--;
+		game->moves_count++;
+		printf("Pas n°%d\n", game->moves_count);
+	}
 	else if (keycode == game->control.down || keycode == game->control.arrow_down)
 		(*new_y)++;
 	else if (keycode == game->control.right || keycode == game->control.arrow_right)
