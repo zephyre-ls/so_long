@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/22 14:37:18 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/23 11:06:22 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_collectibles
 {
 	int	x;
 	int	y;
+	int	id; //pour l'ordre de récup des collectibles
 	int	is_collected; //(0 = false, 1 = true)
 }		t_collectibles;
 
@@ -71,9 +72,15 @@ typedef struct s_exit
 
 typedef struct s_control
 {
-	int	up; //Z
+	int	up_z; //Z
+	int	up_w; //w
 	int	down; //S
-	int	left; //Q
+	int	left_a; //A
+	int	left_q; //Q
+	int	arrow_up;
+	int	arrow_down;
+	int	arrow_right;
+	int	arrow_left;
 	int	right; //D
 	int	quit; //ESC
 	int	reset; //R
@@ -126,6 +133,7 @@ int	cant_move_wall(int new_x, int new_y, t_game *game);
 int	move_player(int keycode, t_game *game);
 
 // control
+void	control_player(int keycode, int *new_x, int *new_y, t_game *game);
 void	init_controls(t_game *game);
 int	key_hook(int keycode, t_game *game);
 
@@ -143,5 +151,8 @@ void	player_win(t_game *game);
 // Reset map
 void	reset_game(t_game *game);
 
+// FREE
+void	free_exit(t_game *game);
+void	free_map(char **map);
 
 #endif

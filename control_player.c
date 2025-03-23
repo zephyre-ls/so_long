@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:01:10 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/22 21:01:42 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/23 11:10:44 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,54 @@ int	key_hook(int keycode, t_game *game)
 
 void	init_controls(t_game *game)
 {
-	game->control.up = 119;//122; //119;
+	game->control.up_w = 119;
+	game->control.up_z = 122;
 	game->control.down = 115;
-	game->control.left = 97; //113; //97;
+	game->control.left_a = 97;
+	game->control.left_q = 113;
 	game->control.right = 100;
+	game->control.arrow_up = 65362;
+	game->control.arrow_down = 65364;
+	game->control.arrow_right = 65363;
+	game->control.arrow_left = 65361;
 	game->control.quit = 65307;
 	game->control.reset = 114;
+}
+
+void	free_exit(t_game *game)
+{
+	if (game->window.win)
+		mlx_destroy_window(game->window.mlx, game->window.win);
+	if (game ->map.map)
+		free_map(game->map.map);
+	exit (0);
+}
+
+void	free_map(char **map)
+{
+	int	i = 0;
+	if (!map)
+		return ;
+	while(map[i])
+		free(map[i]);
+	i++;
+	free(map);
+}
+
+void	control_player(int keycode, int *new_x, int *new_y, t_game *game)
+{
+	if (keycode == game->control.up_w || keycode == game->control.up_z || keycode == game->control.arrow_up)
+		(*new_y)--;
+	else if (keycode == game->control.down || keycode == game->control.arrow_down)
+		(*new_y)++;
+	else if (keycode == game->control.right || keycode == game->control.arrow_right)
+		(*new_x)++;
+	else if (keycode == game->control.left_a || keycode == game->control.left_q || keycode == game->control.arrow_left)
+		(*new_x)--;
+	else if (keycode == game->control.reset)
+		reset_game(game);
+	else if (keycode == game->control.quit)
+		free_exit(game);
 }
 
 int move_player(int keycode, t_game *game)
@@ -33,21 +75,8 @@ int move_player(int keycode, t_game *game)
 	int new_x = game->player.x;
 	int new_y = game->player.y;
 	
-	if (keycode == game->control.up)
-		new_y--;
-	else if (keycode == game->control.down)
-		new_y++;
-	else if (keycode == game->control.right)
-		new_x++;
-	else if (keycode == game->control.left)
-		new_x--;
-	else if (keycode == game->control.reset)
-		reset_game(game);
-	else if (keycode == game->control.quit)
-	{
-		mlx_destroy_window(game->window.mlx, game->window.win);
-		exit (0);
-	}
+	control_player(keycode, &new_x, &new_y, game);
+
   if (game->map.map[new_y][new_x] != '1' && game->map.map[new_y][new_x] != 'E' && game->map.map[new_y][new_x] != 'T')
 	{
 		game->map.map[game->player.y][game->player.x] = '0';
@@ -81,56 +110,6 @@ void	reset_game(t_game *game)
 	create_asset(&game->assets, &game->window);
 	draw_map(game);
 }
-/*int	move_player(int keycode, t_game *game)
-{
-	int	new_x;
-	int	new_y;
-
-	new_x = game->player.x;
-	new_y = game->player.y;
-	if (keycode == game->control.up)
-		new_y--;
-	else if (keycode == game->control.down)
-		new_y++;
-	else if (keycode == game->control.right)
-		new_x++;
-	else if (keycode == game->control.left)
-		new_x--;
-	else if (keycode == game->control.quit)
-	{
-		mlx_destroy_window(game->window.mlx, game->window.win);
-		exit (0);
-	}
-	if (game->map.map[new_y][new_x] != '1')
-	{
-		printf("Avant déplacement - Joueur: (%d, %d)\n", game->player.x, game->player.y);
-printf("Case visée: %c\n", game->map.map[new_y][new_x]);
-		if (game->map.map[new_y][new_x] == 'C')
-		{
-			printf("Avant déplacement - Joueur: (%d, %d)\n", game->player.x, game->player.y);
-			printf("Case visée: %c\n", game->map.map[new_y][new_x]);
-		//	game->map.map[new_y][new_x] = '0';	
-			collect_collectibles(game);
-		}
-		game->map.map[game->player.y][game->player.x] = '0';
-		game->player.x = new_x;
-		game->player.y = new_y;
-		check_collision_ennemies(game);
-		game->map.map[new_y][new_x] = 'P';
-		player_win(game);
-		draw_map(game);
-		game->map.map[game->player.y][game->player.x] = '0'; // rajouter || 'T' = background du code
-		game->player.x = new_x;
-		game->player.y = new_y;
-		check_collision_ennemies(game);
-		game->map.map[new_y][new_x] = 'P';
-		if (game->collectible_count > 0)
-			collect_collectibles(game);
-		player_win(game);
-		draw_map(game);
-	}
-	return (0);
-}*/
 
 int	cant_move_wall(int new_x, int new_y, t_game *game)
 {

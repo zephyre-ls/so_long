@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 11:15:27 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/21 11:27:41 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/23 09:48:13 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	player_win(t_game *game)
 		&& game->player.y == game->exit.y)
 	{
 		printf("YOU WIN BATARD");
+		free_exit(game);
 		exit (0);
 	}
 }

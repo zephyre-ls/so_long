@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:00:06 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/22 21:52:37 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/23 10:26:24 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	dl_map(t_game *game)
 			{
 				game->exit.x = x;
 				game->exit.y = y;
+				game->exit.is_open = 0;
 			}
 			else if (line[x] == 'M')
 			{
@@ -101,11 +102,17 @@ void	dl_map(t_game *game)
 				{
 					game->collectibles[game->collectible_count].x = x;
 					game->collectibles[game->collectible_count].y = y;
+					game->collectibles[game->collectible_count].id = game->collectible_count;
 					game->collectibles[game->collectible_count].is_collected = 0;
+					game->next_collectible = 0;
+					printf("Collectible chargé: collect_count = %d, ID = %d, X = %d, Y = %d\n",game->collectible_count, game->collectibles[game->collectible_count].id, x, y);
 					game->collectible_count++;
 				}
 				else
+				{
+					    printf("Erreur : collectible_count dépasse MAX_COLLECTIBLES (%d)\n", MAX_COLLECTIBLES);  // Debug
 					exit(EXIT_FAILURE);
+				}
 			}
 			x++;
 		}

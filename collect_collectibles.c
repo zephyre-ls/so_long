@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 09:48:38 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/22 21:42:12 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/23 11:13:18 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,50 @@
 		i++;
 	}
 }*/ 
-
 void collect_collectibles(t_game *game)
+{
+	int i = 0;
+
+	while (i < game->collectible_count)
+  {
+		printf("collectible_count : %d, id; %d \n", game->collectible_count, game->collectibles[i].id);
+		if (game->collectibles[i].x == game->player.x && game->collectibles[i].y == game->player.y 
+			&& !game->collectibles[i].is_collected)
+		{
+			printf("Le joueur est sur le collectible: %d\n", game->collectibles[i].id);
+			if (game->collectibles[i].id == game->next_collectible)
+			{
+				game->collectibles[i].is_collected = 1;
+				game->next_collectible++;
+				printf("Collectible %d récupéré !\n", game->collectibles[i].id);
+				if (game->next_collectible == game->collectible_count)
+				{
+						printf("Tous les collectibles collectés, ouverture de la porte\n");
+						game->exit.is_open = 1;
+						printf("Porte avant ouverture: x = %d, y = %d, is_open = %d\n", 
+  					game->exit.x, game->exit.y, game->exit.is_open);
+						game->map.map[game->exit.y][game->exit.x] = 'E';
+				}
+			}
+			else
+			{
+				printf("Ce n'est pas le bon collectible. Redessine-le à la position (%d, %d)\n", game->collectibles[i].x, game->collectibles[i].y);
+				if (game->collectibles[i].x >= 0 && game->collectibles[i].y >= 0 && game->collectibles[i].x < game->map.largeur 
+					&& game->collectibles[i].y < game->map.longeur)
+				{
+					printf("ce nest pas le bon je le redessine");
+					game->map.map[game->collectibles[i].y][game->collectibles[i].x] = 'C';
+				}
+				else
+					printf("Erreur: Coordonnée invalide pour le collectible %d\n", game->collectibles[i].id);
+			}
+		}
+		i++;
+  }
+	draw_map(game);
+}
+
+/*void collect_collectibles(t_game *game)
 {
 	int new_x = game->player.x;
 	int new_y = game->player.y;
@@ -71,7 +113,7 @@ void collect_collectibles(t_game *game)
 	{
 		game->map.map[new_y][new_x] = '0';
 		game->collectible_count--;
-		int	x = 0;
+int	x = 0;
 		int	y = 0;
 		printf("%d, %d\n", game->map.largeur, game->map.longeur);
 	while (y < game->map.largeur)
@@ -89,8 +131,9 @@ void collect_collectibles(t_game *game)
 			}
 			y++; 
 			x = 0;
-		}
-		printf("collectible collecté ! Nbr restant: %d\n", game->collectible_count);
+		}*/
+/*		printf("collectible collecté ! Nbr restant: %d\n", game->collectible_count);
+		printf("etat de la sortie : %d\n", game->exit.is_open);
 		if (game->collectible_count == 0)
 		{
 			printf("tous les collectibles collectés, ouverture de la porte\n");
@@ -103,5 +146,5 @@ void collect_collectibles(t_game *game)
 			//draw_map(game);
 		}
 	}
-}
+}*/
 
