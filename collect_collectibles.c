@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 09:48:38 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/23 11:13:18 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/23 16:06:27 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,15 +88,10 @@ void collect_collectibles(t_game *game)
 			}
 			else
 			{
-				printf("Ce n'est pas le bon collectible. Redessine-le à la position (%d, %d)\n", game->collectibles[i].x, game->collectibles[i].y);
-				if (game->collectibles[i].x >= 0 && game->collectibles[i].y >= 0 && game->collectibles[i].x < game->map.largeur 
-					&& game->collectibles[i].y < game->map.longeur)
-				{
 					printf("ce nest pas le bon je le redessine");
+					perror("mauvais collectible");
+					exit(EXIT_FAILURE);
 					game->map.map[game->collectibles[i].y][game->collectibles[i].x] = 'C';
-				}
-				else
-					printf("Erreur: Coordonnée invalide pour le collectible %d\n", game->collectibles[i].id);
 			}
 		}
 		i++;

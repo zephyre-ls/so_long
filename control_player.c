@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:01:10 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/23 15:24:05 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/23 16:08:36 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,23 @@ void	control_player(int keycode, int *new_x, int *new_y, t_game *game)
 		printf("Pas n°%d\n", game->moves_count);
 	}
 	else if (keycode == game->control.down || keycode == game->control.arrow_down)
+	{
 		(*new_y)++;
-	else if (keycode == game->control.right || keycode == game->control.arrow_right)
+		game->moves_count++;
+		printf("Pas n°%d\n", game->moves_count);
+	}
+else if (keycode == game->control.right || keycode == game->control.arrow_right)
+	{
 		(*new_x)++;
+		game->moves_count++;
+		printf("Pas n°%d\n", game->moves_count);
+	}
 	else if (keycode == game->control.left_a || keycode == game->control.left_q || keycode == game->control.arrow_left)
+	{
 		(*new_x)--;
+		game->moves_count++;
+		printf("Pas n°%d\n", game->moves_count);
+	}
 	else if (keycode == game->control.reset)
 		reset_game(game);
 	else if (keycode == game->control.quit)
