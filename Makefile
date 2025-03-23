@@ -6,7 +6,7 @@
 #    By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/30 15:34:26 by lduflot           #+#    #+#              #
-#    Updated: 2025/03/22 00:55:44 by lduflot          ###   ########.fr        #
+#    Updated: 2025/03/23 14:34:43 by lduflot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ FILES = main.c \
 				control_player.c \
 				ennemies_kill.c \
 				collect_collectibles.c \
+				check_map.c \
 				win.c
 OBJS = $(FILES:.c=.o) $(GNL_FILES:.c=.o)
 

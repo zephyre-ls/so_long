@@ -6,52 +6,11 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:00:06 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/23 12:12:01 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/23 15:03:01 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int	check_map_rectangle(t_game *game)
-{
-	int	y = 0;
-	int	x = 0;
-	int	line_size = 0;
-
-	while(game->map.map[0][line_size])
-		line_size++;
-	while(y < game->map.longeur -1)
-	{
-		x = 0;
-
-
-}
-
-int	check_map_wall(t_game *game)
-{
-	int	y = 0;
-	int	x = 0;
-
-	while(x < game->map.largeur)
-	{
-		if(game->map.map[0][x] != '1' || game->map.map[game->map.longeur - 1][x] !=  '1')
-		{
-			printf("la carte doit être entouré de 1/murs");
-			return (0);
-		}
-		x++;
-	}
-	while(y < game->map.longeur)
-	{
-		if (game->map.map[y][0] != '1' || game->map.map[y][game->map.largeur - 1] != '1')
-		{
-			printf("la carte doit être entouré de 1/murs");
-			return (0);
-		}
-		y++;
-	}
-	return (1);
-}
 
 //load image asset, struct des assets, pe add structure du game avec mlx ? 
 void	create_asset(t_assets *assets, t_window *mlx)
@@ -90,9 +49,11 @@ void	dl_map(t_game *game)
 	int		fd;
 	int		y;
 	int		x;
+	int		count_p = 0;
+	int		count_e = 0;
 	char	*line;
 
-	fd = open ("maps/map1.ber", O_RDONLY);
+	fd = open ("maps/map2.ber", O_RDONLY);
 	if (fd == -1)
 	{
 		perror("erreur ouverture fichier");
@@ -115,16 +76,28 @@ void	dl_map(t_game *game)
 		{
 			if (line[x] == 'P')
 			{
+				if (count_p > 0)
+				{
+					perror("Mode multi non pris en charge\n");
+					exit (EXIT_FAILURE);
+				}
 				game->player.x = x;
 				game->player.y = y;
 				game->start_position.x = game->player.x;
 				game->start_position.y = game->player.y;
+				count_p++;
 			}
 			else if (line[x] == 'E')
 			{
+				if (count_e > 0)
+				{
+					perror("Une seule sortie autorisé\n");
+					exit (EXIT_FAILURE);
+				}
 				game->exit.x = x;
 				game->exit.y = y;
 				game->exit.is_open = 0;
+				count_e++;
 			}
 			else if (line[x] == 'M')
 			{
