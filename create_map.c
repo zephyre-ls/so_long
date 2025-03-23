@@ -6,11 +6,52 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:00:06 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/23 10:26:24 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/23 12:12:01 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	check_map_rectangle(t_game *game)
+{
+	int	y = 0;
+	int	x = 0;
+	int	line_size = 0;
+
+	while(game->map.map[0][line_size])
+		line_size++;
+	while(y < game->map.longeur -1)
+	{
+		x = 0;
+
+
+}
+
+int	check_map_wall(t_game *game)
+{
+	int	y = 0;
+	int	x = 0;
+
+	while(x < game->map.largeur)
+	{
+		if(game->map.map[0][x] != '1' || game->map.map[game->map.longeur - 1][x] !=  '1')
+		{
+			printf("la carte doit être entouré de 1/murs");
+			return (0);
+		}
+		x++;
+	}
+	while(y < game->map.longeur)
+	{
+		if (game->map.map[y][0] != '1' || game->map.map[y][game->map.largeur - 1] != '1')
+		{
+			printf("la carte doit être entouré de 1/murs");
+			return (0);
+		}
+		y++;
+	}
+	return (1);
+}
 
 //load image asset, struct des assets, pe add structure du game avec mlx ? 
 void	create_asset(t_assets *assets, t_window *mlx)
@@ -109,19 +150,17 @@ void	dl_map(t_game *game)
 					game->collectible_count++;
 				}
 				else
-				{
-					    printf("Erreur : collectible_count dépasse MAX_COLLECTIBLES (%d)\n", MAX_COLLECTIBLES);  // Debug
 					exit(EXIT_FAILURE);
-				}
 			}
 			x++;
 		}
-
 		y++;
 	}
 	game->map.largeur = x;
 	game->map.longeur = y;
 	game->map.map[y] = NULL;
+	if (!check_map_wall(game))
+		exit (EXIT_FAILURE);
 	close (fd);
 }
 
@@ -167,7 +206,6 @@ void	draw_map(t_game *game)
 					{
 						mlx_put_image_to_window(game->window.mlx, game->window.win,
 						game->assets.collectibles_img[i], x * pxl, y * pxl);
-						//break ;
 					}
 					i++;
 				}

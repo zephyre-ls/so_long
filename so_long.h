@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/23 11:06:22 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/23 11:59:02 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,8 @@ typedef struct s_game
 void	draw_map(t_game *game);
 void	dl_map(t_game *game);
 void	create_asset(t_assets *assets, t_window *mlx);
-
+int	check_map_wall(t_game *game);
+int	check_map_rectangle(t_game *game);
 // PLayers
 int	cant_move_wall(int new_x, int new_y, t_game *game);
 int	move_player(int keycode, t_game *game);

@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 16:03:45 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/20 21:44:19 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/23 11:39:08 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ int	main(void)
 	draw_map(&game);
 	mlx_key_hook(game.window.win, key_hook, &game);
 	mlx_loop(game.window.mlx);
+	free_exit(&game);
 	return (0);
 }

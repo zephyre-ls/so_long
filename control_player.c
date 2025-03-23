@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:01:10 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/23 11:10:44 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/23 11:41:10 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ void	free_map(char **map)
 	if (!map)
 		return ;
 	while(map[i])
+	{
 		free(map[i]);
-	i++;
+		i++;
+	}
 	free(map);
 }
 
