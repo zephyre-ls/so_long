@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:00:06 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/23 19:51:52 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/23 22:49:29 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	dl_map(t_game *game)
 	int		count_e = 0;
 	char	*line;
 
-	fd = open ("maps/map2.ber", O_RDONLY);
+	fd = open (game->map.name, O_RDONLY);
 	if (fd == -1)
 	{
 		perror("erreur ouverture fichier");

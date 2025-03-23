@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/23 20:32:04 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/23 22:50:05 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_map
 	int		largeur;
 	int		longeur;
 	char	**map;
+	char	*name;
 }		t_map;
 
 typedef struct s_player

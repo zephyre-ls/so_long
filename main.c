@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 16:03:45 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/23 20:32:22 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/23 23:01:40 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,24 @@
 				exit (0);
 	return (0);
 }*/
-int	main(void)
+int	main(int	argc, char **argv)
 {
 	t_game	game;
 
-	game.window.mlx = mlx_init();
-	game.window.win = mlx_new_window(game.window.mlx, 1800, 800, "test");
-	create_asset(&game.assets, &game.window);
-	init_controls(&game);
-	dl_map(&game);
-	draw_map(&game);
-	mlx_key_hook(game.window.win, key_hook, &game);
-	mlx_loop(game.window.mlx);
-	exit_free(&game);
+	if (argc == 2)
+	{
+		game.map.name = argv[1];
+		game.window.mlx = mlx_init();
+		game.window.win = mlx_new_window(game.window.mlx, 1800, 800, "test");
+		create_asset(&game.assets, &game.window);
+		init_controls(&game);
+		dl_map(&game);
+		draw_map(&game);
+		mlx_key_hook(game.window.win, key_hook, &game);
+		mlx_loop(game.window.mlx);
+		exit_free(&game);
+	}
+	else
+		perror("Error/ Programme + Nom de fichier valide");
 	return (0);
 }
