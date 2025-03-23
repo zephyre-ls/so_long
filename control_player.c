@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:01:10 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/23 16:08:36 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/23 20:34:41 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,6 @@ void	init_controls(t_game *game)
 	game->control.arrow_left = 65361;
 	game->control.quit = 65307;
 	game->control.reset = 114;
-}
-
-void	free_exit(t_game *game)
-{
-	if (game->window.win)
-		mlx_destroy_window(game->window.mlx, game->window.win);
-	if (game ->map.map)
-		free_map(game->map.map);
-	exit (0);
-}
-
-void	free_map(char **map)
-{
-	int	i = 0;
-	if (!map)
-		return ;
-	while(map[i])
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
 }
 
 void	control_player(int keycode, int *new_x, int *new_y, t_game *game)
@@ -85,7 +63,7 @@ else if (keycode == game->control.right || keycode == game->control.arrow_right)
 	else if (keycode == game->control.reset)
 		reset_game(game);
 	else if (keycode == game->control.quit)
-		free_exit(game);
+		exit_free(game);
 }
 
 int move_player(int keycode, t_game *game)
@@ -104,6 +82,7 @@ int move_player(int keycode, t_game *game)
 		check_collision_ennemies(game);
 		game->map.map[new_y][new_x] = 'P';
 		player_win(game);
+		//mlx_clear_window(game->window.mlx, game->window.win);
 		draw_map(game);
 	}
 	else if (game->map.map[new_y][new_x] != '1' && game->exit.is_open)

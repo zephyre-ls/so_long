@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 10:01:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/23 15:59:02 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/23 20:51:24 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ void	check_collision_ennemies(t_game *game)
 			&& game->player.y == game->monsters[i].y)
 		{
 			printf("GAME OVER");
-			mlx_destroy_window(game->window.mlx, game->window.win);
-			exit(0);
+			exit_free(game);
 		}
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:00:06 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/23 15:03:01 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/23 19:51:52 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,16 @@ void	dl_map(t_game *game)
 	if (fd == -1)
 	{
 		perror("erreur ouverture fichier");
-		exit(EXIT_FAILURE);
+		exit_free_failure(game);
 	}
 	game->map.map = malloc(sizeof(char *) * 20);
 	game->monster_count = 0;
 	game->collectible_count = 0;
+	game->moves_count = 0;
 	if (!game->map.map)
 	{
 		perror("error");
-		exit(EXIT_FAILURE);
+		exit_free_failure(game);
 	}
 	y = 0;
 	while ((line = get_next_line(fd)))
@@ -79,7 +80,7 @@ void	dl_map(t_game *game)
 				if (count_p > 0)
 				{
 					perror("Mode multi non pris en charge\n");
-					exit (EXIT_FAILURE);
+					exit_free_failure(game);
 				}
 				game->player.x = x;
 				game->player.y = y;
@@ -92,7 +93,7 @@ void	dl_map(t_game *game)
 				if (count_e > 0)
 				{
 					perror("Une seule sortie autorisé\n");
-					exit (EXIT_FAILURE);
+					exit_free_failure(game);
 				}
 				game->exit.x = x;
 				game->exit.y = y;
@@ -108,7 +109,7 @@ void	dl_map(t_game *game)
 					game->monster_count++;
 				}
 				else
-					exit(EXIT_FAILURE);
+					exit_free_failure(game);
 			}
 			else if (line[x] == 'C')
 			{
@@ -119,11 +120,11 @@ void	dl_map(t_game *game)
 					game->collectibles[game->collectible_count].id = game->collectible_count;
 					game->collectibles[game->collectible_count].is_collected = 0;
 					game->next_collectible = 0;
-					printf("Collectible chargé: collect_count = %d, ID = %d, X = %d, Y = %d\n",game->collectible_count, game->collectibles[game->collectible_count].id, x, y);
+				//	printf("Collectible chargé: collect_count = %d, ID = %d, X = %d, Y = %d\n",game->collectible_count, game->collectibles[game->collectible_count].id, x, y);
 					game->collectible_count++;
 				}
 				else
-					exit(EXIT_FAILURE);
+					exit_free_failure(game);
 			}
 			x++;
 		}
@@ -133,7 +134,7 @@ void	dl_map(t_game *game)
 	game->map.longeur = y;
 	game->map.map[y] = NULL;
 	if (!check_map_wall(game))
-		exit (EXIT_FAILURE);
+		exit_free_failure(game);
 	close (fd);
 }
 

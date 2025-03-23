@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 09:48:38 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/23 16:06:27 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/23 20:56:21 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,36 +61,37 @@
 		i++;
 	}
 }*/ 
+
 void collect_collectibles(t_game *game)
 {
 	int i = 0;
 
 	while (i < game->collectible_count)
   {
-		printf("collectible_count : %d, id; %d \n", game->collectible_count, game->collectibles[i].id);
+	//	printf("collectible_count : %d, id; %d \n", game->collectible_count, game->collectibles[i].id);
 		if (game->collectibles[i].x == game->player.x && game->collectibles[i].y == game->player.y 
 			&& !game->collectibles[i].is_collected)
 		{
-			printf("Le joueur est sur le collectible: %d\n", game->collectibles[i].id);
+		//	printf("Le joueur est sur le collectible: %d\n", game->collectibles[i].id);
 			if (game->collectibles[i].id == game->next_collectible)
 			{
 				game->collectibles[i].is_collected = 1;
 				game->next_collectible++;
-				printf("Collectible %d récupéré !\n", game->collectibles[i].id);
+			//	printf("Collectible %d récupéré !\n", game->collectibles[i].id);
 				if (game->next_collectible == game->collectible_count)
 				{
-						printf("Tous les collectibles collectés, ouverture de la porte\n");
+				//		printf("Tous les collectibles collectés, ouverture de la porte\n");
 						game->exit.is_open = 1;
-						printf("Porte avant ouverture: x = %d, y = %d, is_open = %d\n", 
-  					game->exit.x, game->exit.y, game->exit.is_open);
+					//	printf("Porte avant ouverture: x = %d, y = %d, is_open = %d\n", 
+  				//	game->exit.x, game->exit.y, game->exit.is_open);
 						game->map.map[game->exit.y][game->exit.x] = 'E';
+
 				}
 			}
 			else
 			{
-					printf("ce nest pas le bon je le redessine");
-					perror("mauvais collectible");
-					exit(EXIT_FAILURE);
+					printf("Mauvais collectible collecte, rejouez.");
+					exit_free(game);
 					game->map.map[game->collectibles[i].y][game->collectibles[i].x] = 'C';
 			}
 		}

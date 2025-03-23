@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 14:34:49 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/23 14:45:33 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/23 17:25:20 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ int	check_map_wall(t_game *game)
 
 	while(x < game->map.largeur)
 	{
-		printf("Première ligne : '%s'\n", game->map.map[0]);
+	//	printf("Première ligne : '%s'\n", game->map.map[0]);
 		if(game->map.map[0][x] != '1' || game->map.map[game->map.longeur-1][x] !=  '1')
 		{
-			printf("la carte doit être entouré de 1/murs\n");
-			printf("Problème détecté à y = %d, x = %d, valeur : %c\n", y, x, game->map.map[y][x]);
+		//	printf("la carte doit être entouré de 1/murs\n");
+		//	printf("Problème détecté à y = %d, x = %d, valeur : %c\n", y, x, game->map.map[y][x]);
 			return (0);
 		}
 		x++;
@@ -62,8 +62,8 @@ int	check_map_wall(t_game *game)
 	{
 		if (game->map.map[y][0] != '1' || game->map.map[y][game->map.largeur-1] != '1')
 		{
-			printf("la carte doit être entouré de 1/murs\n");
-			printf("Problème détecté à y = %d, x = %d, valeur : %c\n", y, x, game->map.map[y][x]);
+			//printf("la carte doit être entouré de 1/murs\n");
+			//printf("Problème détecté à y = %d, x = %d, valeur : %c\n", y, x, game->map.map[y][x]);
 			return (0);
 		}
 		y++;
