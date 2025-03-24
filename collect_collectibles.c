@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 09:48:38 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/23 20:56:21 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/24 11:08:30 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void collect_collectibles(t_game *game)
 			}
 			else
 			{
-					printf("Mauvais collectible collecte, rejouez.");
+					write(1, "Mauvais collectible collecte, rejouez.\n", 39);
 					exit_free(game);
 					game->map.map[game->collectibles[i].y][game->collectibles[i].x] = 'C';
 			}

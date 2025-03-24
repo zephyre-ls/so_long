@@ -6,7 +6,7 @@
 /*   By: lduflot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 19:03:49 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/23 21:15:26 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/24 11:10:19 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,13 @@ void	free_map(char **map)
 	int	i = 0;
 	if (!map)
 		return ;
-	while(map[i])
+	while (map[i])
 	{
 		free(map[i]);
 		i++;
 	}
 	free(map);
 }
-
 
 void	free_image(t_game *game)
 {

@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 10:01:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/23 20:51:24 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/24 11:09:28 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	check_collision_ennemies(t_game *game)
 		if (game->player.x == game->monsters[i].x
 			&& game->player.y == game->monsters[i].y)
 		{
-			printf("GAME OVER");
+			write(1, "GAME OVER\n", 10);
 			exit_free(game);
 		}
 		i++;
@@ -35,7 +35,7 @@ int	genere_move_ennemies(t_game *game, int i)
 	int	y = game->player.y;
 	int	somme = x + y + game->monsters[i].x + game->monsters[i].y;
 	
-	return(somme%4)+1;
+	return (somme % 4) + 1;
 }
 
 void	move_ennemies(t_game *game)
