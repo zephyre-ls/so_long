@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/24 11:47:02 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/24 23:19:46 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,11 @@ typedef struct s_exit
 	int	is_open;
 }		t_exit;
 
+typedef struct s_floodfill
+{
+	int	x;
+	int	y;
+}		t_floodfill;
 typedef struct s_control
 {
 	int	up_z; //Z
@@ -133,10 +138,17 @@ int	check_way_valid(t_game *game);
 void	check_name(char *name);
 int	ft_strcmp(char *s1, char *s2);
 void	check_chars(char **map, t_game *game);
+int	flood_fill(char **map, int current_row, int current_col, int map_longeur, int map_largeur);
+char **map_copy(t_game *game);
+void	*ft_memcopy(char *dest, char *src, size_t n);
+
 
 // PLayers
 int	cant_move_wall(int new_x, int new_y, t_game *game);
 int	move_player(int keycode, t_game *game);
+void	display_move_count(t_game *game);
+char	*ft_itoa(int n);
+int	ft_len(int n);
 
 // control
 void	control_player(int keycode, int *new_x, int *new_y, t_game *game);

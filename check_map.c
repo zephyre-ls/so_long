@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 14:34:49 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/24 10:56:18 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/24 23:21:51 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,73 @@
 
 //Manque à check : si player débute entouré de mur; si collectible sont entouré de mur, si exit est entouré de mur == si un des cas si dessus est détecté = error
 
-/*int	check_way_valid(t_game *game)
+
+void	*ft_memcopy(char *dest, char *src, size_t n)
 {
+	size_t		i;
+
+	i = 0;
+	if (src == NULL || dest == NULL)
+		return (NULL);
+	while (i < n)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	return (dest);
+}
+//copie la carte du jeu
+// Copie la carte du jeu
+char **map_copy(t_game *game)
+{
+    char **copy;
+    int line;
+
+  copy = malloc((game->map.largeur + 1) * sizeof(char *));
+  if (!copy)
+    return (NULL);
+
+  line = -1;
+  while (line < game->map.largeur)
+  {
+    copy[line] = malloc(game->map.longeur * sizeof(char));
+    if (!copy[line])
+    {
+      while (line >= 0)
+        free(copy[line]);
+			line--;
+    free(copy);
+    return (NULL);
+    }
+		if (game->map.map[line] != NULL)
+    	ft_memcopy(copy[line], game->map.map[line], game->map.longeur);
+    }
+		line++;
+    copy[line] = NULL;
+    return copy;
+}
 
 
+int	flood_fill(char **map, int current_row, int current_col, int map_longeur, int map_largeur)
+{
+	int	elem_collected;
 
-	
-}*/
+	if (current_row < 0 || current_row >= map_longeur || current_col < 0 || current_col >= map_largeur)
+    return 0;
+	if (map[current_row][current_col] == '1')
+		return (0);
+	elem_collected = 0;
+	if (map[current_row][current_col] == 'C' || map[current_row][current_col] == 'E')
+		elem_collected += 1;
+	map[current_row][current_col] = '1';
+	elem_collected += flood_fill(map, current_row, current_col - 1, map_longeur, map_largeur); //gauche
+	elem_collected += flood_fill(map, current_row, current_col + 1, map_longeur, map_largeur); //droite
+	elem_collected += flood_fill(map, current_row - 1, current_col, map_longeur, map_largeur); //haut
+	elem_collected += flood_fill(map, current_row + 1, current_col, map_longeur, map_largeur); //bas
+	return (elem_collected);
+}
+
+
 //usuless parce que check map s'occupe déjà de verifier cela si il y a du vide ce n'est pas considéré comme un 1 donc carte invalide 
 /*int	check_map_rectangle(t_game *game)
 {

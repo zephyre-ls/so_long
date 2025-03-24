@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:01:10 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/24 11:48:31 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/24 19:00:12 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,51 +34,87 @@ void	init_controls(t_game *game)
 	game->control.reset = 114;
 }
 
-/*void	display_move_count(t_game *game)
+int	ft_len(int n)
 {
-	char *move_string;
+	int	size;
 
-	move_string = ft_putnbr(game->move_count);
-	mlx_string_put(game->mlx, game->win, 10, 10, 0xFFFFF, "Pas: ");
-	mlx_string_put(game->mlx, game->win, 60, 10, 0xFFFFF, move_string);
-	free(move_string);
-}*/
-/*
-void	ft_putnbr(int nb)
+	size = 0;
+	if (n <= 0)
+	{
+		size++;
+	}
+	while (n)
+	{
+		size++;
+		n = n / 10;
+	}
+	return (size);
+}
+
+char	*ft_itoa(int n)
 {
-	char	nbr;
+	char		*dest;
+	int			len;
 
-	if (n >= 10)
-		ft_putnbr( nb / 10);
-	nbr = (nb % 10) + '0';
-	write(1, &c, 1);
-}*/
+	len = ft_len(n);
+	dest = malloc(sizeof(char) * (len + 1));
+	if (dest == NULL)
+		return (NULL);
+	dest[len] = '\0';
+	if (n == 0)
+		dest[0] = '0';
+	while (n != 0)
+	{
+		dest[len - 1] = (n % 10) + '0';
+		n = n / 10;
+		len--;
+	}
+	return (dest);
+}
+
+void	display_move_count(t_game *game)
+{
+	char *move_str = ft_itoa(game->moves_count);
+
+	mlx_string_put(game->window.mlx, game->window.win, 80, 800, 0xFFFFFF, "Pas: ");
+	mlx_string_put(game->window.mlx, game->window.win, 80, 600, 0xFFFFFF, move_str);
+	free(move_str);
+}
+
 void	control_player(int keycode, int *new_x, int *new_y, t_game *game)
 {
+	//if (game->map.map[*new_x][*new_y] != '1')
 	//rajouter un if mouvement valide (si ne va pas dans le mur compte sinon ne compte pas)
 	if (keycode == game->control.up_w || keycode == game->control.up_z || keycode == game->control.arrow_up)
 	{
-		(*new_y)--;
-		game->moves_count++;
-		printf("Pas n°%d\n", game->moves_count);
+		//if (game->map.map[*new_x][*new_y - 1] != '1')
+		//{
+			(*new_y)--;
+			game->moves_count++;
+			printf("Pas n°%d\n", game->moves_count);
+			display_move_count(game);
+		//}
 	}
 	else if (keycode == game->control.down || keycode == game->control.arrow_down)
 	{
 		(*new_y)++;
 		game->moves_count++;
 		printf("Pas n°%d\n", game->moves_count);
+		display_move_count(game);
 	}
 else if (keycode == game->control.right || keycode == game->control.arrow_right)
 	{
 		(*new_x)++;
 		game->moves_count++;
 		printf("Pas n°%d\n", game->moves_count);
+		display_move_count(game);
 	}
 	else if (keycode == game->control.left_a || keycode == game->control.left_q || keycode == game->control.arrow_left)
 	{
 		(*new_x)--;
 		game->moves_count++;
 		printf("Pas n°%d\n", game->moves_count);
+		display_move_count(game);
 	}
 	else if (keycode == game->control.reset)
 		reset_game(game);
@@ -94,7 +130,8 @@ int move_player(int keycode, t_game *game)
 	control_player(keycode, &new_x, &new_y, game);
 
   if (game->map.map[new_y][new_x] != '1' && game->map.map[new_y][new_x] != 'E' && game->map.map[new_y][new_x] != 'T')
-	{
+	{	
+		mlx_clear_window(game->window.mlx, game->window.win);
 		game->map.map[game->player.y][game->player.x] = '0';
 		game->player.x = new_x;
 		game->player.y = new_y;
@@ -102,7 +139,6 @@ int move_player(int keycode, t_game *game)
 		check_collision_ennemies(game);
 		game->map.map[new_y][new_x] = 'P';
 		player_win(game);
-		//mlx_clear_window(game->window.mlx, game->window.win);
 		draw_map(game);
 	}
 	else if (game->map.map[new_y][new_x] != '1' && game->exit.is_open)
