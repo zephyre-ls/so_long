@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 16:03:45 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/24 10:44:21 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/24 11:47:48 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 				exit (0);
 	return (0);
 }*/
-int	main(int	argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_game	game;
 
@@ -44,4 +44,3 @@ int	main(int	argc, char **argv)
 		perror("Error/ Programme + Nom de fichier valide");
 	return (0);
 }
-

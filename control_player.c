@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:01:10 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/24 11:05:01 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/24 11:48:31 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	ft_putnbr(int nb)
 }*/
 void	control_player(int keycode, int *new_x, int *new_y, t_game *game)
 {
-
 	//rajouter un if mouvement valide (si ne va pas dans le mur compte sinon ne compte pas)
 	if (keycode == game->control.up_w || keycode == game->control.up_z || keycode == game->control.arrow_up)
 	{

@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/24 10:41:14 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/24 11:47:02 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,7 @@ void	reset_game(t_game *game);
 void	free_exit(t_game *game);
 void	free_map(char **map);
 void	free_image(t_game *game);
+void	free_image2(t_game *game);
 void	exit_free_failure(t_game *game);
 void	exit_free(t_game *game);
 #endif

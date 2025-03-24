@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:00:06 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/24 10:51:48 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/24 11:35:07 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,12 @@ void	dl_map(t_game *game)
 	int		fd;
 	int		y;
 	int		x;
-	int		count_p = 0;
-	int		count_e = 0;
+	int		count_p;
+	int		count_e;
 	char	*line;
 
+	count_p = 0;
+	count_e = 0;
 	fd = open (game->map.name, O_RDONLY);
 	if (fd == -1)
 	{
@@ -117,10 +119,11 @@ void	dl_map(t_game *game)
 				{
 					game->collectibles[game->collectible_count].x = x;
 					game->collectibles[game->collectible_count].y = y;
-					game->collectibles[game->collectible_count].id = game->collectible_count;
-					game->collectibles[game->collectible_count].is_collected = 0;
+					game->collectibles[game->collectible_count].id
+						= game->collectible_count;
+					game->collectibles[game->collectible_count].is_collected
+						= 0;
 					game->next_collectible = 0;
-				//	printf("Collectible chargé: collect_count = %d, ID = %d, X = %d, Y = %d\n",game->collectible_count, game->collectibles[game->collectible_count].id, x, y);
 					game->collectible_count++;
 				}
 				else
@@ -171,19 +174,21 @@ void	draw_map(t_game *game)
 					mlx_put_image_to_window(game->window.mlx, game->window.win,
 						game->assets.exit_open_img, x * pxl, y * pxl);
 				else
-				mlx_put_image_to_window(game->window.mlx, game->window.win,
-					game->assets.exit_img, x * pxl, y * pxl);
+					mlx_put_image_to_window(game->window.mlx, game->window.win,
+						game->assets.exit_img, x * pxl, y * pxl);
 			}
 			else if (game->map.map[y][x] == 'C')
 			{
 				i = 0;
 				while (i < MAX_COLLECTIBLES)
 				{
-					if (game->collectibles[i].x == x && game->collectibles[i].y == y
+					if (game->collectibles[i].x == x
+						&& game->collectibles[i].y == y
 						&& game->collectibles[i].is_collected == 0)
 					{
-						mlx_put_image_to_window(game->window.mlx, game->window.win,
-						game->assets.collectibles_img[i], x * pxl, y * pxl);
+						mlx_put_image_to_window(game->window.mlx,
+							game->window.win, game->assets.collectibles_img[i],
+							x * pxl, y * pxl);
 					}
 					i++;
 				}
