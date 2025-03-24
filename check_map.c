@@ -6,15 +6,14 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 14:34:49 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/24 23:21:51 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/24 23:24:13 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 //Manque à check : si player débute entouré de mur; si collectible sont entouré de mur, si exit est entouré de mur == si un des cas si dessus est détecté = error
-
-
+//t_game = (t_game){0}; --> met tout a zero avec 1 ligne
 void	*ft_memcopy(char *dest, char *src, size_t n)
 {
 	size_t		i;
