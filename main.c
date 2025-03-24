@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 16:03:45 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/23 23:27:22 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/24 10:44:21 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int	argc, char **argv)
 	if (argc == 2)
 	{
 		game.map.name = argv[1];
-	//	check_name(&argv[1]);
+		check_name(argv[1]);
 		game.window.mlx = mlx_init();
 		game.window.win = mlx_new_window(game.window.mlx, 1800, 800, "test");
 		create_asset(&game.assets, &game.window);
@@ -45,19 +45,3 @@ int	main(int	argc, char **argv)
 	return (0);
 }
 
-void	check_name(char **argv)
-{
-	int	i = 0;
-	while(argv[1][i] != '\0')
-		i++;
-	while(i > 0)
-	{
-		if (argv[1][i] == 'r' && argv[1][i - 1] == 'e' && argv[1][i - 2] == 'b' && argv[1][i -3] == '.')
-			return ;
-		else
-		{
-			perror("Type de fichier accepte .ber");
-			exit (0);
-		}
-	}
-}

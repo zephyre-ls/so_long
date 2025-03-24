@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:00:06 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/23 22:49:29 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/24 10:51:48 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,12 @@ void	dl_map(t_game *game)
 	game->map.largeur = x;
 	game->map.longeur = y;
 	game->map.map[y] = NULL;
+	check_chars(game->map.map, game);
 	if (!check_map_wall(game))
+	{
+		perror("Erreur, la carte n'est pas entourée de mur\n");
 		exit_free_failure(game);
+	}
 	close (fd);
 }
 

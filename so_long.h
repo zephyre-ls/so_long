@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/23 23:25:48 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/24 10:41:14 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,9 @@ void	create_asset(t_assets *assets, t_window *mlx);
 int	check_map_wall(t_game *game);
 int	check_map_rectangle(t_game *game);
 int	check_way_valid(t_game *game);
-void	check_name(char **argv);
+void	check_name(char *name);
+int	ft_strcmp(char *s1, char *s2);
+void	check_chars(char **map, t_game *game);
 
 // PLayers
 int	cant_move_wall(int new_x, int new_y, t_game *game);

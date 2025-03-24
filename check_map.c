@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 14:34:49 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/23 17:25:20 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/24 10:56:18 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,34 @@
 	return (1);
 }*/
 
+//Flood_fill pour voir si tous les chemins sont accessibles par le P
+
+
+void	check_chars(char **map, t_game *game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] != '0' && map [i][j] != '1'
+			&& map[i][j] != 'P' && map[i][j] != 'E'
+			&& map[i][j] != 'C' && map[i][j] != 'T'
+			&& map[i][j] != 'M')
+			{
+				perror("Erreur: caractere inconnu dans la carte.");
+				exit_free_failure(game);
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 int	check_map_wall(t_game *game)
 {
 	int	y = 0;
@@ -49,25 +77,46 @@ int	check_map_wall(t_game *game)
 
 	while(x < game->map.largeur)
 	{
-	//	printf("Première ligne : '%s'\n", game->map.map[0]);
 		if(game->map.map[0][x] != '1' || game->map.map[game->map.longeur-1][x] !=  '1')
-		{
-		//	printf("la carte doit être entouré de 1/murs\n");
-		//	printf("Problème détecté à y = %d, x = %d, valeur : %c\n", y, x, game->map.map[y][x]);
 			return (0);
-		}
 		x++;
 	}
 	while(y < game->map.longeur)
 	{
 		if (game->map.map[y][0] != '1' || game->map.map[y][game->map.largeur-1] != '1')
-		{
-			//printf("la carte doit être entouré de 1/murs\n");
-			//printf("Problème détecté à y = %d, x = %d, valeur : %c\n", y, x, game->map.map[y][x]);
 			return (0);
-		}
 		y++;
 	}
 	return (1);
 }
 
+void	check_name(char *name)
+{
+	int	len;
+	int	compar;
+
+	len = 0;
+	while(name[len])
+		len++;
+	if (len < 4)
+	{
+		perror("Type de fichier accepte : .ber\n");
+		exit (EXIT_FAILURE);
+	}
+	compar = ft_strcmp(name + (len - 4), ".ber");
+	if (compar != 0)
+	{
+		perror("Type de fichier accepte : .ber\n");
+		exit (EXIT_FAILURE);
+	}
+}
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	int		i;
+
+	i = 0;
+	while ((s1[i] != '\0' && s2[i] != '\0') && (s1[i] == s2[i]))
+		i++;
+	return (s1[i] - s2[i]);
+}
