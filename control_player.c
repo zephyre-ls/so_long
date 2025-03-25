@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:01:10 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/25 11:04:49 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/25 11:39:35 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,8 @@ else if (keycode == game->control.right || keycode == game->control.arrow_right)
 		reset_game(game);
 	else if (keycode == game->control.quit)
 		exit_free(game);
+    
+//	game->assets.player_img = game->assets.player_start_img;
 }
 
 int move_player(int keycode, t_game *game)
@@ -132,10 +134,10 @@ int move_player(int keycode, t_game *game)
 	int new_y = game->player.y;
 	
 	control_player(keycode, &new_x, &new_y, game);
+//	mlx_clear_window(game->window.mlx, game->window.win);
 
   if (game->map.map[new_y][new_x] != '1' && game->map.map[new_y][new_x] != 'E' && game->map.map[new_y][new_x] != 'T')
 	{	
-		//mlx_clear_window(game->window.mlx, game->window.win);
 		game->map.map[game->player.y][game->player.x] = '0';
 		game->player.x = new_x;
 		game->player.y = new_y;
@@ -160,6 +162,7 @@ int move_player(int keycode, t_game *game)
 	check_collision_ennemies(game);
 	return 0;
 }
+
 
 void	reset_game(t_game *game)
 {

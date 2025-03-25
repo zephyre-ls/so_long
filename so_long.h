@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/25 10:52:08 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/25 11:27:08 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ typedef struct s_assets
 	void	*player_down_img;
 	void	*player_left_img;
 	void	*player_right_img;
+	void	*player_start_img;
 }		t_assets;
 //Structure globale du jeu qui fait appel aux autres struct
 typedef struct s_game
