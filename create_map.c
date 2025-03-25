@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:00:06 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/24 23:11:57 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/25 09:52:06 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,16 +140,20 @@ void	dl_map(t_game *game)
 	if (!check_map_wall(game))
 	{
 		perror("Erreur, la carte n'est pas entourée de mur\n");
+		close(fd);
 		exit_free_failure(game);
 	}
 	char **map_copied = map_copy(game);
+	if(!map_copied)
 	{
      perror("Erreur lors de la création de la copie de la carte\n");
-    exit_free_failure(game);
+			close(fd);
+    	exit_free_failure(game);
   }
 	if (flood_fill(map_copied, game->player.y, game->player.x, game->map.longeur, game->map.largeur) != game->collectible_count + 1)
 	{
 		perror("Erreur, collectible ou exit non accessible par le player \n");
+			close(fd);
 		exit_free_failure(game);
 	}
 	close (fd);

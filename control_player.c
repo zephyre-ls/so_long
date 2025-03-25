@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:01:10 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/24 19:00:12 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/25 09:54:15 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ int move_player(int keycode, t_game *game)
 
   if (game->map.map[new_y][new_x] != '1' && game->map.map[new_y][new_x] != 'E' && game->map.map[new_y][new_x] != 'T')
 	{	
-		mlx_clear_window(game->window.mlx, game->window.win);
+		//mlx_clear_window(game->window.mlx, game->window.win);
 		game->map.map[game->player.y][game->player.x] = '0';
 		game->player.x = new_x;
 		game->player.y = new_y;

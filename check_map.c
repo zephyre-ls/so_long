@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 14:34:49 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/24 23:24:13 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/25 09:46:25 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ char **map_copy(t_game *game)
     char **copy;
     int line;
 
-  copy = malloc((game->map.largeur + 1) * sizeof(char *));
+  copy = malloc((game->map.longeur + 1) * sizeof(char *));
   if (!copy)
     return (NULL);
 
-  line = -1;
-  while (line < game->map.largeur)
+  line = 0;
+  while (line < game->map.longeur)
   {
-    copy[line] = malloc(game->map.longeur * sizeof(char));
+    copy[line] = malloc((game->map.largeur + 1) * sizeof(char));
     if (!copy[line])
     {
       while (line >= 0)
@@ -51,12 +51,11 @@ char **map_copy(t_game *game)
     free(copy);
     return (NULL);
     }
-		if (game->map.map[line] != NULL)
-    	ft_memcopy(copy[line], game->map.map[line], game->map.longeur);
-    }
+    ft_memcopy(copy[line], game->map.map[line], game->map.largeur + 1);
 		line++;
-    copy[line] = NULL;
-    return copy;
+	}
+  copy[game->map.longeur] = NULL;
+  return copy;
 }
 
 
