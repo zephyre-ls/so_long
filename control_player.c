@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:01:10 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/25 09:54:15 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/25 11:04:49 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void	control_player(int keycode, int *new_x, int *new_y, t_game *game)
 		//if (game->map.map[*new_x][*new_y - 1] != '1')
 		//{
 			(*new_y)--;
+			game->assets.player_img = game->assets.player_up_img;
 			game->moves_count++;
 			printf("Pas n°%d\n", game->moves_count);
 			display_move_count(game);
@@ -98,6 +99,7 @@ void	control_player(int keycode, int *new_x, int *new_y, t_game *game)
 	else if (keycode == game->control.down || keycode == game->control.arrow_down)
 	{
 		(*new_y)++;
+		game->assets.player_img = game->assets.player_down_img;
 		game->moves_count++;
 		printf("Pas n°%d\n", game->moves_count);
 		display_move_count(game);
@@ -105,6 +107,7 @@ void	control_player(int keycode, int *new_x, int *new_y, t_game *game)
 else if (keycode == game->control.right || keycode == game->control.arrow_right)
 	{
 		(*new_x)++;
+		game->assets.player_img = game->assets.player_right_img;
 		game->moves_count++;
 		printf("Pas n°%d\n", game->moves_count);
 		display_move_count(game);
@@ -112,6 +115,7 @@ else if (keycode == game->control.right || keycode == game->control.arrow_right)
 	else if (keycode == game->control.left_a || keycode == game->control.left_q || keycode == game->control.arrow_left)
 	{
 		(*new_x)--;
+		game->assets.player_img = game->assets.player_left_img;
 		game->moves_count++;
 		printf("Pas n°%d\n", game->moves_count);
 		display_move_count(game);

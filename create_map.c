@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:00:06 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/25 09:52:06 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/25 10:53:54 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,14 @@ void	create_asset(t_assets *assets, t_window *mlx)
 			"asset/collectibles/collect5.xpm", &img_l, &img_h);
 	assets->code_img = mlx_xpm_file_to_image(mlx->mlx,
 			"asset/code/code.xpm", &img_l, &img_h);
+	assets->player_up_img = mlx_xpm_file_to_image(mlx->mlx,
+			"asset/player/player_up.xpm", &img_l, &img_h);
+	assets->player_down_img = mlx_xpm_file_to_image(mlx->mlx,
+			"asset/player/player_down.xpm", &img_l, &img_h);
+	assets->player_left_img = mlx_xpm_file_to_image(mlx->mlx,
+			"asset/player/payer_left.xpm", &img_l, &img_h);
+	assets->player_right_img = mlx_xpm_file_to_image(mlx->mlx,
+			"asset/player/player_right.xpm", &img_l, &img_h);
 }
 
 void	dl_map(t_game *game)

@@ -6,7 +6,7 @@
 /*   By: lduflot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 19:03:49 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/24 11:46:44 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/25 10:54:25 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	free_image2(t_game *game)
 		mlx_destroy_image(game->window.mlx, game->assets.code_img);
 		game->assets.code_img = NULL;
 	}
+	//RAJOUTER PLAYER UP DOWN LEFT RIGH !!!! 
 }
 
 void	exit_free(t_game *game)
