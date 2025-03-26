@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:00:06 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/26 01:54:30 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/26 12:44:42 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	create_asset(t_assets *assets, t_window *mlx)
 	assets->score_img[8] = mlx_xpm_file_to_image(mlx->mlx,
 			"asset/wall/score_8.xpm", &img_l, &img_h);
 	assets->score_img[9] = mlx_xpm_file_to_image(mlx->mlx,
-			"asset/wall/score_-.xpm", &img_l, &img_h);
+			"asset/wall/score_9.xpm", &img_l, &img_h);
 }
 
 void	dl_map(t_game *game)
@@ -95,6 +95,7 @@ void	dl_map(t_game *game)
 	game->monster_count = 0;
 	game->collectible_count = 0;
 	game->moves_count = 0;
+	game->score.s_count = 0;
 	if (!game->map.map)
 	{
 		perror("error");
@@ -160,7 +161,7 @@ void	dl_map(t_game *game)
 					exit_free_failure(game);
 			}
 			x++;
-		}
+			}
 		y++;
 	}
 	game->map.largeur = x;
@@ -195,6 +196,7 @@ void	draw_map(t_game *game)
 	int	x;
 	int	pxl;
 	int	i;
+	int s_count = 0;
 
 	y = 0;
 	pxl = 64;
@@ -243,6 +245,13 @@ void	draw_map(t_game *game)
 			else if (game->map.map[y][x] == 'T')
 				mlx_put_image_to_window(game->window.mlx, game->window.win,
 					game->assets.code_img, x * pxl, y * pxl);
+			else if (game->map.map[y][x] == 'S' && s_count < 3)
+			{
+				game->score.x[s_count] = x;
+				game->score.y = y;
+				s_count++;
+				display_move_count(game, x * 64, y * 64);
+			}
 			x++;
 		}
 		y++;

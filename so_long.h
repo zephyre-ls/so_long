@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/25 21:42:10 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/26 12:40:05 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,10 @@ typedef struct s_control
 
 typedef struct s_score
 {
-	int	x;
+	int	x[3];
 	int	y;
-	int	move;
+	int	s_count;
+//	int	move;
 }		t_score;
 
 typedef struct s_assets
@@ -156,7 +157,7 @@ void	*ft_memcopy(char *dest, char *src, size_t n);
 // PLayers
 int	cant_move_wall(int new_x, int new_y, t_game *game);
 int	move_player(int keycode, t_game *game);
-void	display_move_count(t_game *game);
+void	display_move_count(t_game *game, int x, int y);
 char	*ft_itoa(int n);
 int	ft_len(int n);
 

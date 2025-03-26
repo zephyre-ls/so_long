@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 16:03:45 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/24 11:47:48 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/26 12:47:34 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	main(int argc, char **argv)
 		dl_map(&game);
 		draw_map(&game);
 		mlx_key_hook(game.window.win, key_hook, &game);
+		mlx_hook(game.window.win, 17, 0, ft qui destroy window, &game);
 		mlx_loop(game.window.mlx);
 		exit_free(&game);
 	}
