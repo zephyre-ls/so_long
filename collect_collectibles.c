@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 09:48:38 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/24 11:08:30 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/26 01:28:31 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void collect_collectibles(t_game *game)
 
 	while (i < game->collectible_count)
   {
-	//	printf("collectible_count : %d, id; %d \n", game->collectible_count, game->collectibles[i].id);
+	//	pr eintf("collectible_count : %d, id; %d \n", game->collectible_count, game->collectibles[i].id);
 		if (game->collectibles[i].x == game->player.x && game->collectibles[i].y == game->player.y 
 			&& !game->collectibles[i].is_collected)
 		{
@@ -92,7 +92,7 @@ void collect_collectibles(t_game *game)
 			{
 					write(1, "Mauvais collectible collecte, rejouez.\n", 39);
 					exit_free(game);
-					game->map.map[game->collectibles[i].y][game->collectibles[i].x] = 'C';
+			//		game->map.map[game->collectibles[i].y][game->collectibles[i].x] = 'C';
 			}
 		}
 		i++;

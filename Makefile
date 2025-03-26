@@ -6,7 +6,7 @@
 #    By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/30 15:34:26 by lduflot           #+#    #+#              #
-#    Updated: 2025/03/23 19:04:12 by lduflot          ###   ########.fr        #
+#    Updated: 2025/03/25 22:22:11 by lduflot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,10 +24,13 @@ GNL_FILES = GNL/get_next_line.c \
 						GNL/get_next_line_utils.c 
 FILES = main.c \
 				create_map.c \
+				create_map_utils.c \
 				control_player.c \
+				control_player_utils.c \
 				ennemies_kill.c \
 				collect_collectibles.c \
 				check_map.c \
+				check_map_utils.c \
 				free.c \
 				win.c
 OBJS = $(FILES:.c=.o) $(GNL_FILES:.c=.o)

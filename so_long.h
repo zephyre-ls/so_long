@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/25 11:27:08 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/25 21:42:10 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_player
 	int		x;
 	int		y;
 	void	*player_img;
+
 }		t_player;
 
 // Etant donné qu'ils y aura plusieurs collectibles à récupérer
@@ -91,10 +92,12 @@ typedef struct s_control
 	int	reset; //R
 }		t_control;
 
-typedef struct s_counter
+typedef struct s_score
 {
+	int	x;
+	int	y;
 	int	move;
-}		t_counter;
+}		t_score;
 
 typedef struct s_assets
 {
@@ -111,6 +114,7 @@ typedef struct s_assets
 	void	*player_left_img;
 	void	*player_right_img;
 	void	*player_start_img;
+	void	*score_img[10];
 }		t_assets;
 //Structure globale du jeu qui fait appel aux autres struct
 typedef struct s_game
@@ -129,6 +133,7 @@ typedef struct s_game
 	t_exit		exit;
 	t_control	control;
 	t_assets	assets;
+	t_score	score;
 }		t_game;
 
 //Fonctions

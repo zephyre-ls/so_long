@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:00:06 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/25 11:27:47 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/26 01:54:30 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,26 @@ void	create_asset(t_assets *assets, t_window *mlx)
 			"asset/player/player_right.xpm", &img_l, &img_h);
 	assets->player_start_img = mlx_xpm_file_to_image(mlx->mlx,
 			"asset/player/player.xpm", &img_l, &img_h);
+	assets->score_img[0] = mlx_xpm_file_to_image(mlx->mlx,
+			"asset/wall/score_0.xpm", &img_l, &img_h);
+	assets->score_img[1] = mlx_xpm_file_to_image(mlx->mlx,
+			"asset/wall/score_1.xpm", &img_l, &img_h);
+	assets->score_img[2] = mlx_xpm_file_to_image(mlx->mlx,
+			"asset/wall/score_2.xpm", &img_l, &img_h);
+	assets->score_img[3] = mlx_xpm_file_to_image(mlx->mlx,
+			"asset/wall/score_3.xpm", &img_l, &img_h);
+	assets->score_img[4] = mlx_xpm_file_to_image(mlx->mlx,
+			"asset/wall/score_4.xpm", &img_l, &img_h);
+	assets->score_img[5] = mlx_xpm_file_to_image(mlx->mlx,
+			"asset/wall/score_5.xpm", &img_l, &img_h);
+	assets->score_img[6] = mlx_xpm_file_to_image(mlx->mlx,
+			"asset/wall/score_6.xpm", &img_l, &img_h);
+	assets->score_img[7] = mlx_xpm_file_to_image(mlx->mlx,
+			"asset/wall/score_7.xpm", &img_l, &img_h);
+	assets->score_img[8] = mlx_xpm_file_to_image(mlx->mlx,
+			"asset/wall/score_8.xpm", &img_l, &img_h);
+	assets->score_img[9] = mlx_xpm_file_to_image(mlx->mlx,
+			"asset/wall/score_-.xpm", &img_l, &img_h);
 }
 
 void	dl_map(t_game *game)
