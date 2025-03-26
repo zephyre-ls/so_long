@@ -6,17 +6,12 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:01:10 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/26 12:41:40 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/26 18:33:46 by lduflot          ###   ########.fr       */
 /*              e                                                               */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	key_hook(int keycode, t_game *game)
-{
-	move_player(keycode, game);
-	return (0);
-}
 void	display_move_count(t_game *game, int x, int y)
 {
 	char	*move_str;
@@ -29,7 +24,7 @@ void	display_move_count(t_game *game, int x, int y)
 	i = 0;
 	if (!move_str)
 		return;
-	    printf("Moves count as string: %s\n", move_str);  // Debug
+	  //  printf("Moves count as string: %s\n", move_str);
 	if (game->moves_count < 100)
 	{
 		mlx_put_image_to_window(game->window.mlx, game->window.win,
@@ -39,13 +34,16 @@ void	display_move_count(t_game *game, int x, int y)
 	while (move_str[i] && i < 3)
 	{
 		id = move_str[i] -'0';
-		printf("id : %d\n", id);
-		if (move_str[i] >= '0' && move_str[i] <= '9')
-		{
-			mlx_put_image_to_window(game->window.mlx, game->window.win, 
-				game->assets.score_img[id],
-				x + position_count, y);
-			position_count += 64;
+	//	printf("id : %d\n", id);
+		if (id >= 0 && id <= 9)
+		{	
+			if (move_str[i] >= '0' && move_str[i] <= '9')
+			{
+				mlx_put_image_to_window(game->window.mlx, game->window.win, 
+					game->assets.score_img[id],
+					x + position_count, y);
+				position_count += 64;
+			}
 		}
 		i++;
 	}
@@ -117,7 +115,7 @@ int move_player(int keycode, t_game *game)
 	int new_y = game->player.y;
 	
 	control_player(keycode, &new_x, &new_y, game);
-	mlx_clear_window(game->window.mlx, game->window.win);
+	//mlx_clear_window(game->window.mlx, game->window.win);
 
   if (game->map.map[new_y][new_x] != '1' && game->map.map[new_y][new_x] != 'E' && game->map.map[new_y][new_x] != 'T' && game->map.map[new_y][new_x] != 'S')
 	{	
@@ -131,7 +129,7 @@ int move_player(int keycode, t_game *game)
 		draw_map(game);
 		display_move_count(game, game->score.x[game->score.s_count], game->score.y);
 	}
-	else if (game->map.map[new_y][new_x] != '1' && game->exit.is_open && game->map.map[new_x][new_y] != 'S')
+	else if (game->map.map[new_y][new_x] != '1' && game->exit.is_open && game->map.map[new_y][new_x] != 'S')
 	{
 		game->map.map[game->player.y][game->player.x] = '0';
 		game->player.x = new_x;
@@ -146,13 +144,6 @@ int move_player(int keycode, t_game *game)
 	move_ennemies(game);
 	check_collision_ennemies(game);
 	return 0;
-}
-
-void	reset_game(t_game *game)
-{
-	dl_map(game);
-	create_asset(&game->assets, &game->window);
-	draw_map(game);
 }
 
 int	cant_move_wall(int new_x, int new_y, t_game *game)

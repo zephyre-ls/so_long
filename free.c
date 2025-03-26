@@ -6,7 +6,7 @@
 /*   By: lduflot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 19:03:49 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/25 10:54:25 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/26 18:55:42 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,35 @@ void	free_image2(t_game *game)
 		mlx_destroy_image(game->window.mlx, game->assets.code_img);
 		game->assets.code_img = NULL;
 	}
-	//RAJOUTER PLAYER UP DOWN LEFT RIGH !!!! 
+	/*if (game->assets.player_up_img != NULL)
+	{
+		mlx_destroy_image(game->window.mlx, game->assets.player_up_img);
+		game->assets.player_up_img = NULL;
+	}
+	if (game->assets.player_down_img != NULL)
+	{
+		mlx_destroy_image(game->window.mlx, game->assets.player_up_img);
+		game->assets.player_down_img = NULL;
+	}
+	if (game->assets.player_left_img != NULL)
+	{
+		mlx_destroy_image(game->window.mlx, game->assets.player_up_img);
+		game->assets.player_left_img = NULL;
+	}
+	if (game->assets.player_right_img != NULL)
+	{
+		mlx_destroy_image(game->window.mlx, game->assets.player_up_img);
+		game->assets.player_right_img = NULL;
+	}
+	int	j = 0;
+	while (game->assets.score_img[j] != NULL && j < 10)
+	{
+		mlx_destroy_image(game->window.mlx, game->assets.score_img[j]);
+		game->assets.score_img[j] = NULL;
+		j++;
+	}*/
+
+	//SCORE  
 }
 
 void	exit_free(t_game *game)

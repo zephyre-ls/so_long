@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/26 12:40:05 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/26 18:12:05 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ typedef struct s_control
 	int	arrow_left;
 	int	right; //D
 	int	quit; //ESC
-	int	reset; //R
 }		t_control;
 
 typedef struct s_score
@@ -165,6 +164,9 @@ int	ft_len(int n);
 void	control_player(int keycode, int *new_x, int *new_y, t_game *game);
 void	init_controls(t_game *game);
 int	key_hook(int keycode, t_game *game);
+int	mouse_click_left (int mousecode, t_game *game);
+int	close_window(t_game *game);
+
 
 //Collectibles
 void	collect_collectibles(t_game *game);

@@ -6,7 +6,7 @@
 /*   By: lduflot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 21:41:50 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/25 21:49:11 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/26 17:41:09 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,12 @@ char	*ft_itoa(int n)
 	return (dest);
 }
 
+int	key_hook(int keycode, t_game *game)
+{
+	move_player(keycode, game);
+	return (0);
+}
+
 void	init_controls(t_game *game)
 {
 	game->control.up_w = 119;
@@ -61,5 +67,4 @@ void	init_controls(t_game *game)
 	game->control.arrow_right = 65363;
 	game->control.arrow_left = 65361;
 	game->control.quit = 65307;
-	game->control.reset = 114;
 }
