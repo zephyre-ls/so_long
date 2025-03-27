@@ -6,11 +6,32 @@
 /*   By: lduflot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 11:13:36 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/23 19:27:47 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/27 23:03:19 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char	*extract_line_from_stash(char *stash)
+{
+	char	*new_line;
+	int		len_line;
+	char	*line;
+
+	new_line = ft_find_newline(stash);
+	if (new_line == NULL)
+	{
+		stash = ft_strdup(stash);
+		return (stash);
+	}
+	len_line = (new_line - stash) + 1;
+	line = malloc(sizeof(char) * (len_line + 1));
+	if (line == NULL)
+		return (NULL);
+	ft_memcpy(line, stash, len_line);
+	line[len_line] = '\0';
+	return (line);
+}
 
 int	ft_strlen(const char *str)
 {

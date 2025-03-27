@@ -6,7 +6,7 @@
 /*   By: lduflot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 22:22:32 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/27 14:28:39 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/27 23:40:21 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,14 @@ int	ft_strcmp(char *s1, char *s2)
 	while ((s1[i] != '\0' && s2[i] != '\0') && (s1[i] == s2[i]))
 		i++;
 	return (s1[i] - s2[i]);
+}
+
+void	ft_putnbr_fd(int n, int fd)
+{
+	char	c;
+
+	if (n >= 10)
+		ft_putnbr_fd(n / 10, fd);
+	c = (n % 10) + '0';
+	write(fd, &c, 1);
 }

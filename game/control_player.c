@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:01:10 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/27 17:18:16 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/27 23:41:31 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,53 +34,47 @@ void	control_player(int keycode, int *new_x, int *new_y, t_game *game)
 
 	x = *new_x;
 	y = *new_y;
+	gestion_mouvement(keycode, new_x, new_y, game);
+	if (keycode == game->control.quit)
+		exit_free(game);
+	if (*new_x != x || *new_y != y)
+	{
+		game->moves_count++;
+		game->score.s_count++;
+		write(1, "Pas : ", 6);
+		ft_putnbr_fd(game->moves_count, 1);
+		write(1, "\n", 1);
+		display_move_count(game, 10, 780);
+	}
+}
+
+void	gestion_mouvement(int keycode, int *new_x, int *new_y, t_game *game)
+{
 	if (keycode == game->control.up_w || keycode == game->control.up_z
 		|| keycode == game->control.arrow_up)
 	{
 		if (game->map.map[*new_y - 1][*new_x] != '1')
-		{
 			(*new_y)--;
-			game->assets.player_img = game->assets.player_up_img;
-		}
 	}
 	else if (keycode == game->control.down
 		|| keycode == game->control.arrow_down)
 	{
 		if (game->map.map[*new_y + 1][*new_x] != '1')
-		{
 			(*new_y)++;
-			game->assets.player_img = game->assets.player_down_img;
-		}
 	}
 	else if (keycode == game->control.right
 		|| keycode == game->control.arrow_right)
 	{
 		if (game->map.map[*new_y][*new_x + 1] != '1')
-		{
 			(*new_x)++;
-			game->assets.player_img = game->assets.player_right_img;
-		}
 	}
 	else if (keycode == game->control.left_a || keycode == game->control.left_q
 		|| keycode == game->control.arrow_left)
 	{
 		if (game->map.map[*new_y][*new_x - 1] != '1')
-		{
 			(*new_x)--;
-			game->assets.player_img = game->assets.player_left_img;
-		}
-	}
-	else if (keycode == game->control.quit)
-		exit_free(game);
-	if (*new_x != x || *new_y != y)
-	{
-		game->moves_count++;
-		game->score.s_count ++;
-		printf("Pas : %d\n", game->moves_count);
-		display_move_count(game, 10, 780);
 	}
 }
-//	game->assets.player_img = game->assets.player_start_img;
 
 int	move_player(int keycode, t_game *game)
 {
@@ -105,13 +99,8 @@ void	update_player_position(t_game *game, int new_x, int new_y)
 	game->map.map[game->player.y][game->player.x] = '0';
 	game->player.x = new_x;
 	game->player.y = new_y;
-	//collect_collectibles(game);
-//	check_collision_ennemies(game);
 	game->map.map[new_y][new_x] = 'P';
-	//player_win(game);
 	draw_map(game);
-	mlx_put_image_to_window(game->window.mlx, game->window.win,
-		game->assets.player_img, new_x * 64, new_y * 64);
 	collect_collectibles(game);
 	check_collision_ennemies(game);
 	player_win(game);

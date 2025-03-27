@@ -6,7 +6,7 @@
 /*   By: lduflot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 11:10:24 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/23 17:09:48 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/27 23:02:51 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ int		ft_strlen(const char *str);
 char	*ft_strdup(char *str);
 char	*ft_memcpy(char *line, char *stash, size_t len_line);
 char	*ft_extract_line(char **stash);
+char	*extract_line_from_stash(char *stash);
 
 #endif

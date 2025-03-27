@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 04:40:03 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/27 15:08:13 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/27 22:18:09 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,15 @@ void	read_map_line(t_game *game, int fd)
 	char	*line;
 
 	y = 0;
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
 		if (y == 0)
 			game->map.largeur = ft_strlen(line);
 		game->map.map[y] = line;
 		assignation_line(game, line, y);
 		y++;
+		line = get_next_line(fd);
 	}
 	game->map.longeur = y;
 	game->map.map[y] = NULL;

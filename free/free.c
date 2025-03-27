@@ -6,7 +6,7 @@
 /*   By: lduflot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 19:03:49 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/27 17:11:12 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/27 22:02:47 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	free_image(t_game *game)
 {
 	if (game->assets.player_img != NULL)
 	{
-		        printf("Libération de player_img\n");
 		mlx_destroy_image(game->window.mlx, game->assets.player_img);
 		game->assets.player_img = NULL;
 	}
@@ -77,10 +76,14 @@ void	free_image2(t_game *game)
 	int	i;
 
 	i = 0;
-	while (i <= MAX_COLLECTIBLES && game->assets.collectibles_img[i] != NULL)
+	while (i <= MAX_COLLECTIBLES)
 	{
-		mlx_destroy_image(game->window.mlx, game->assets.collectibles_img[i]);
-		game->assets.collectibles_img[i] = NULL;
+		if (game->assets.collectibles_img[i])
+		{
+			mlx_destroy_image(game->window.mlx,
+				game->assets.collectibles_img[i]);
+			game->assets.collectibles_img[i] = NULL;
+		}
 		i++;
 	}
 	if (game->assets.monster_img != NULL)
@@ -97,27 +100,23 @@ void	free_image2(t_game *game)
 
 void	free_image3(t_game *game)
 {
-	if (game->assets.player_up_img != NULL)
+	if (game->assets.player_up_img)
 	{
-		printf("Libération de player_up_img\n");
 		mlx_destroy_image(game->window.mlx, game->assets.player_up_img);
 		game->assets.player_up_img = NULL;
 	}
-	if (game->assets.player_down_img != NULL)
+	if (game->assets.player_down_img)
 	{
-		printf("Libération de player_down_img\n");
 		mlx_destroy_image(game->window.mlx, game->assets.player_down_img);
 		game->assets.player_down_img = NULL;
 	}
-	if (game->assets.player_right_img != NULL)
+	if (game->assets.player_right_img)
 	{
-		printf("Libération de player_right_img\n");
 		mlx_destroy_image(game->window.mlx, game->assets.player_right_img);
 		game->assets.player_right_img = NULL;
 	}
-	if (game->assets.player_left_img != NULL)
+	if (game->assets.player_left_img)
 	{
-		printf("Libération de player_left_img\n");
 		mlx_destroy_image(game->window.mlx, game->assets.player_left_img);
 		game->assets.player_left_img = NULL;
 	}

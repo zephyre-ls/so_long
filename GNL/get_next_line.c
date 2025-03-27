@@ -6,7 +6,7 @@
 /*   By: lduflot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 11:13:25 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/27 11:40:35 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/27 23:03:30 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,25 +78,15 @@ char	*ft_readline(char *stash, int fd)
 char	*ft_extract_line(char **stash)
 {
 	char	*line;
-	char	*new_line;
-	char	*tmp_stash;
 	int		len_line;
+	char	*tmp_stash;
 
 	if (*stash == NULL || **stash == '\0')
 		return (NULL);
-	new_line = ft_find_newline(*stash);
-	if (new_line == NULL)
-	{
-		line = *stash;
-		*stash = NULL;
-		return (line);
-	}
-	len_line = (new_line - *stash) + 1;
-	line = malloc(sizeof(char) * (len_line + 1));
+	line = extract_line_from_stash(*stash);
 	if (line == NULL)
 		return (NULL);
-	ft_memcpy(line, *stash, len_line);
-	line[len_line] = '\0';
+	len_line = ft_strlen(line);
 	if (len_line > 0 && line[len_line - 1] == '\n')
 		line[len_line - 1] = '\0';
 	tmp_stash = ft_strdup(*stash + len_line);
