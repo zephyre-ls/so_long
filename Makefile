@@ -6,7 +6,7 @@
 #    By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/30 15:34:26 by lduflot           #+#    #+#              #
-#    Updated: 2025/03/27 04:39:53 by lduflot          ###   ########.fr        #
+#    Updated: 2025/03/27 16:26:34 by lduflot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,26 +14,28 @@
 ##ARGUMENTS/MACRO
 
 CC = cc
-CFLAGS = -ggdb -Wall -Wextra -Werror
+CFLAGS = -ggdb -g3 -Wall -Wextra -Werror
 NAME = so_long
 
 ###############################
 ##SOURCES
 
 GNL_FILES = GNL/get_next_line.c \
-						GNL/get_next_line_utils.c 
+						GNL/get_next_line_utils.c
 FILES = main.c \
-				dl_map.c \
-				create_map.c \
-				create_map_utils.c \
-				control_player.c \
-				control_player_utils.c \
-				ennemies_kill.c \
-				collect_collectibles.c \
-				check_map.c \
-				check_map_utils.c \
-				free.c \
-				win.c
+				map_gestion/dl_map.c \
+				map_gestion/create_map.c \
+				map_gestion/create_map_utils.c \
+				game/control_player.c \
+				game/control_player_utils.c \
+				game/ennemies_kill.c \
+				game/collect_collectibles.c \
+				map_gestion/check_map.c \
+				map_gestion/gestion_tuile.c \
+				map_gestion/check_map_utils.c \
+				free/free.c \
+				free/free_2.c \
+				game/win.c
 OBJS = $(FILES:.c=.o) $(GNL_FILES:.c=.o)
 
 ###############################
@@ -56,10 +58,10 @@ $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) -I$(MLX_PLACE) -I GNL -c $< -o $@
 
 clean:
-	@echo "Mr.Larbin nettoie..."
+	@echo "Nettoyage en cours..."
 	@rm -f $(OBJS)
 fclean: clean
-	@echo "Mr.Larbin nettoie encore plus..."
+	@echo "Nettoyage plus approndis en cours..."
 	@rm -f $(NAME)
 
 re: fclean all

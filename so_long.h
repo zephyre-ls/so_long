@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/27 11:31:14 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/27 16:30:23 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,8 @@ typedef struct s_assets
 	void	*player_down_img;
 	void	*player_left_img;
 	void	*player_right_img;
-	void	*player_start_img;
-	void	*score_img[10];
+	//void	*player_start_img;
+//	void	*score_img[10];
 }		t_assets;
 //Structure globale du jeu qui fait appel aux autres struct
 typedef struct s_game
@@ -154,6 +154,7 @@ void	draw_collectibles(t_game *game, int x, int y);
 void	draw_score(t_game *game, int x, int y, int *s_count);
 void	dl_map(t_game *game);
 void	create_asset(t_assets *assets, t_window *mlx);
+void	create_asset2(t_assets *assets, t_window *mlx);
 int	check_map_wall(t_game *game);
 int	check_map_rectangle(t_game *game);
 int	check_way_valid(t_game *game);
@@ -166,7 +167,6 @@ void	*ft_memcopy(char *dest, char *src, size_t n);
 
 
 // PLayers
-int	cant_move_wall(int new_x, int new_y, t_game *game);
 int	move_player(int keycode, t_game *game);
 void	display_move_count(t_game *game, int x, int y);
 char	*ft_itoa(int n);
@@ -178,6 +178,7 @@ void update_player_position(t_game *game, int new_x, int new_y);
 void	control_player(int keycode, int *new_x, int *new_y, t_game *game);
 void	init_controls(t_game *game);
 int	key_hook(int keycode, t_game *game);
+int	mouse_hook(int mousecode, t_game *game);
 int	mouse_click_left (int mousecode, t_game *game);
 int	close_window(t_game *game);
 
@@ -190,6 +191,8 @@ void	error_collectible(t_game *game);
 void	check_collision_ennemies(t_game *game);
 void	move_ennemies(t_game *game);
 int	genere_move_ennemies(t_game *game, int i);
+void	update_ennemies_position(t_game *game, int new_x, int new_y, int i);
+
 
 // victoire
 void	player_win(t_game *game);
@@ -202,6 +205,7 @@ void	free_exit(t_game *game);
 void	free_map(char **map);
 void	free_image(t_game *game);
 void	free_image2(t_game *game);
+void	free_image3(t_game *game);
 void	exit_free_failure(t_game *game);
 void	exit_free(t_game *game);
 #endif

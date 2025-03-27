@@ -6,11 +6,11 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 09:48:38 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/27 11:27:26 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/27 16:24:07 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 void	collect_collectibles(t_game *game)
 {
@@ -43,6 +43,6 @@ void	collect_collectibles(t_game *game)
 
 void	error_collectible(t_game *game)
 {
-	write(2, "Mauvais collectible collecte, rejouez.\n", 39);
+	write(2, "Mauvais collectible collecte, restart.\n", 39);
 	exit_free(game);
 }

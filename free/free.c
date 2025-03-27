@@ -6,11 +6,11 @@
 /*   By: lduflot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 19:03:49 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/27 11:59:14 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/27 17:03:04 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 void	free_exit(t_game *game)
 {
@@ -18,6 +18,7 @@ void	free_exit(t_game *game)
 	{
 		free_image(game);
 		free_image2(game);
+		free_image3(game);
 		mlx_destroy_window(game->window.mlx, game->window.win);
 		mlx_destroy_display(game->window.mlx);
 		free(game->window.mlx);
@@ -45,6 +46,7 @@ void	free_image(t_game *game)
 {
 	if (game->assets.player_img != NULL)
 	{
+		        printf("Libération de player_img\n");
 		mlx_destroy_image(game->window.mlx, game->assets.player_img);
 		game->assets.player_img = NULL;
 	}
@@ -75,7 +77,7 @@ void	free_image2(t_game *game)
 	int	i;
 
 	i = 0;
-	while (i < MAX_COLLECTIBLES && game->assets.collectibles_img[i] != NULL)
+	while (i <= MAX_COLLECTIBLES && game->assets.collectibles_img[i] != NULL)
 	{
 		mlx_destroy_image(game->window.mlx, game->assets.collectibles_img[i]);
 		game->assets.collectibles_img[i] = NULL;
@@ -85,50 +87,38 @@ void	free_image2(t_game *game)
 	{
 		mlx_destroy_image(game->window.mlx, game->assets.monster_img);
 		game->assets.monster_img = NULL;
-	} 
+	}
 	if (game->assets.code_img != NULL)
 	{
 		mlx_destroy_image(game->window.mlx, game->assets.code_img);
 		game->assets.code_img = NULL;
 	}
-/*	if (game->assets.player_up_img != NULL)
+}
+
+void	free_image3(t_game *game)
+{
+	if (game->assets.player_up_img != NULL)
 	{
+		printf("Libération de player_up_img\n");
 		mlx_destroy_image(game->window.mlx, game->assets.player_up_img);
 		game->assets.player_up_img = NULL;
 	}
 	if (game->assets.player_down_img != NULL)
 	{
+		printf("Libération de player_down_img\n");
 		mlx_destroy_image(game->window.mlx, game->assets.player_down_img);
 		game->assets.player_down_img = NULL;
 	}
-	if (game->assets.player_left_img != NULL)
-	{
-		mlx_destroy_image(game->window.mlx, game->assets.player_left_img);
-		game->assets.player_left_img = NULL;
-	}
 	if (game->assets.player_right_img != NULL)
 	{
+		printf("Libération de player_right_img\n");
 		mlx_destroy_image(game->window.mlx, game->assets.player_right_img);
 		game->assets.player_right_img = NULL;
 	}
-	int	j = 0;
-	while (game->assets.score_img[j] != NULL && j < 10)
+	if (game->assets.player_left_img != NULL)
 	{
-		mlx_destroy_image(game->window.mlx, game->assets.score_img[j]);
-		game->assets.score_img[j] = NULL;
-		j++;
-	}*/
-	//SCORE  
-}
-
-void	exit_free(t_game *game)
-{
-	free_exit(game);
-	exit (0);
-}
-
-void	exit_free_failure(t_game *game)
-{
-	free_exit(game);
-	exit (EXIT_FAILURE);
+		printf("Libération de player_left_img\n");
+		mlx_destroy_image(game->window.mlx, game->assets.player_left_img);
+		game->assets.player_left_img = NULL;
+	}
 }

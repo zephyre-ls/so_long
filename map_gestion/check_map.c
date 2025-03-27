@@ -6,11 +6,11 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 14:34:49 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/27 11:17:41 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/27 14:22:57 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 int	flood_fill(t_map *map, int current_row, int current_col)
 {
@@ -47,7 +47,7 @@ void	check_chars(char **map, t_game *game)
 			if (map[i][j] != '0' && map [i][j] != '1'
 			&& map[i][j] != 'P' && map[i][j] != 'E'
 			&& map[i][j] != 'C' && map[i][j] != 'T'
-			&& map[i][j] != 'M' && map[i][j] != 'S')
+			&& map[i][j] != 'M')
 			{
 				perror("Erreur: caractere inconnu dans la carte.");
 				exit_free_failure(game);

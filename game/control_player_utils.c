@@ -6,11 +6,11 @@
 /*   By: lduflot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 21:41:50 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/26 17:41:09 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/27 15:31:05 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 int	ft_len(int n)
 {
@@ -51,6 +51,13 @@ char	*ft_itoa(int n)
 int	key_hook(int keycode, t_game *game)
 {
 	move_player(keycode, game);
+	return (0);
+}
+
+int	mouse_hook(int mousecode, t_game *game)
+{
+	if (mousecode == 1)
+		exit_free(game);
 	return (0);
 }
 
