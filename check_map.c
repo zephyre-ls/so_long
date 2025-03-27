@@ -6,36 +6,35 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 14:34:49 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/26 11:41:25 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/26 19:21:31 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-//Manque à check : si player débute entouré de mur; si collectible sont entouré de mur, si exit est entouré de mur == si un des cas si dessus est détecté = error
-//t_game = (t_game){0}; --> met tout a zero avec 1 ligne
-
-// BONNE PRATIAUE . faire fonction carre rectable/ 
-int	flood_fill(char **map, int current_row, int current_col, int map_longeur, int map_largeur)
+int	flood_fill(char **map, int current_row, int current_col,
+	int map_longeur, int map_largeur)
 {
 	int	elem_collected;
 
-	if (current_row < 0 || current_row >= map_longeur || current_col < 0 || current_col >= map_largeur)
-    return 0;
+	if (current_row < 0 || current_row >= map_longeur || current_col < 0
+		|| current_col >= map_largeur)
+		return (0);
 	if (map[current_row][current_col] == '1')
 		return (0);
 	elem_collected = 0;
-	if (map[current_row][current_col] == 'C' || map[current_row][current_col] == 'E')
+	if (map[current_row][current_col] == 'C'
+		|| map[current_row][current_col] == 'E')
 		elem_collected += 1;
 	map[current_row][current_col] = '1';
 	elem_collected += flood_fill(map, current_row, current_col - 1,
-		map_longeur, map_largeur); //gauche
+			map_longeur, map_largeur);
 	elem_collected += flood_fill(map, current_row, current_col + 1,
-		map_longeur, map_largeur); //droite
+			map_longeur, map_largeur);
 	elem_collected += flood_fill(map, current_row - 1, current_col,
-		map_longeur, map_largeur); //haut
+			map_longeur, map_largeur);
 	elem_collected += flood_fill(map, current_row + 1, current_col,
-		map_longeur, map_largeur); //bas
+			map_longeur, map_largeur);
 	return (elem_collected);
 }
 
@@ -66,18 +65,22 @@ void	check_chars(char **map, t_game *game)
 
 int	check_map_wall(t_game *game)
 {
-	int	y = 0;
-	int	x = 0;
+	int	y;
+	int	x;
 
-	while(x < game->map.largeur)
+	x = 0;
+	y = 0;
+	while (x < game->map.largeur)
 	{
-		if(game->map.map[0][x] != '1' || game->map.map[game->map.longeur-1][x] !=  '1')
+		if (game->map.map[0][x] != '1'
+			|| game->map.map[game->map.longeur - 1][x] != '1')
 			return (0);
 		x++;
 	}
-	while(y < game->map.longeur)
+	while (y < game->map.longeur)
 	{
-		if (game->map.map[y][0] != '1' || game->map.map[y][game->map.largeur-1] != '1')
+		if (game->map.map[y][0] != '1'
+			|| game->map.map[y][game->map.largeur - 1] != '1')
 			return (0);
 		y++;
 	}
@@ -90,7 +93,7 @@ void	check_name(char *name)
 	int	compar;
 
 	len = 0;
-	while(name[len])
+	while (name[len])
 		len++;
 	if (len < 4)
 	{
@@ -104,8 +107,6 @@ void	check_name(char *name)
 		exit (EXIT_FAILURE);
 	}
 }
-
-//usuless parce que check map s'occupe déjà de verifier cela si il y a du vide ce n'est pas considéré comme un 1 donc carte invalide 
 /*int	check_map_rectangle(t_game *game)
 {
 	int	y = 0;
@@ -125,4 +126,3 @@ void	check_name(char *name)
 	}
 	return (1);
 }*/
-

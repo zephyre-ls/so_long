@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:01:10 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/26 18:33:46 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/27 00:44:30 by lduflot          ###   ########.fr       */
 /*              e                                                               */
 /* ************************************************************************** */
 
@@ -25,20 +25,22 @@ void	display_move_count(t_game *game, int x, int y)
 	if (!move_str)
 		return;
 	  //  printf("Moves count as string: %s\n", move_str);
-	if (game->moves_count < 100)
+	if (game->moves_count)
 	{
 		mlx_put_image_to_window(game->window.mlx, game->window.win,
 			game->assets.score_img[0], x + position_count, y);
+	//	printf("x : %d, y : %d", x+position_count, y);
 	}
 	position_count += 64;
 	while (move_str[i] && i < 3)
 	{
 		id = move_str[i] -'0';
-	//	printf("id : %d\n", id);
+		//printf("id : %d\n", id);
 		if (id >= 0 && id <= 9)
 		{	
 			if (move_str[i] >= '0' && move_str[i] <= '9')
 			{
+			//	printf("entre dans la condition id 0 /9");
 				mlx_put_image_to_window(game->window.mlx, game->window.win, 
 					game->assets.score_img[id],
 					x + position_count, y);
