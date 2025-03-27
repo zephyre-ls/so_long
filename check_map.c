@@ -6,35 +6,30 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 14:34:49 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/26 19:21:31 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/27 11:17:41 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	flood_fill(char **map, int current_row, int current_col,
-	int map_longeur, int map_largeur)
+int	flood_fill(t_map *map, int current_row, int current_col)
 {
 	int	elem_collected;
 
-	if (current_row < 0 || current_row >= map_longeur || current_col < 0
-		|| current_col >= map_largeur)
+	if (current_row < 0 || current_row >= map->longeur || current_col < 0
+		|| current_col >= map->largeur)
 		return (0);
-	if (map[current_row][current_col] == '1')
+	if (map->map[current_row][current_col] == '1')
 		return (0);
 	elem_collected = 0;
-	if (map[current_row][current_col] == 'C'
-		|| map[current_row][current_col] == 'E')
+	if (map->map[current_row][current_col] == 'C'
+		|| map->map[current_row][current_col] == 'E')
 		elem_collected += 1;
-	map[current_row][current_col] = '1';
-	elem_collected += flood_fill(map, current_row, current_col - 1,
-			map_longeur, map_largeur);
-	elem_collected += flood_fill(map, current_row, current_col + 1,
-			map_longeur, map_largeur);
-	elem_collected += flood_fill(map, current_row - 1, current_col,
-			map_longeur, map_largeur);
-	elem_collected += flood_fill(map, current_row + 1, current_col,
-			map_longeur, map_largeur);
+	map->map[current_row][current_col] = '1';
+	elem_collected += flood_fill(map, current_row, current_col - 1);
+	elem_collected += flood_fill(map, current_row, current_col + 1);
+	elem_collected += flood_fill(map, current_row - 1, current_col);
+	elem_collected += flood_fill(map, current_row + 1, current_col);
 	return (elem_collected);
 }
 

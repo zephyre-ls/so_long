@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/26 18:12:05 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/27 11:31:14 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,19 @@ typedef struct s_game
 //Fonctions
 
 // Map
+void	init_variable_game(t_game *game);
+void	assignation_line(t_game *game, char *line, int y);
+void	gestion_player(t_game *game, int x, int y);
+void	gestion_exit(t_game *game, int x, int y);
+void	gestion_monster(t_game *game, int x, int y);
+void	gestion_collectible(t_game *game, int x, int y);
+void	read_map_line(t_game *game, int fd);
+void	check_map_validity(t_game *game, int fd);
+void	check_map_accessibility(t_game *game, int fd);
 void	draw_map(t_game *game);
+void	draw_other(t_game *game, int x, int y, char other);
+void	draw_collectibles(t_game *game, int x, int y);
+void	draw_score(t_game *game, int x, int y, int *s_count);
 void	dl_map(t_game *game);
 void	create_asset(t_assets *assets, t_window *mlx);
 int	check_map_wall(t_game *game);
@@ -148,7 +160,7 @@ int	check_way_valid(t_game *game);
 void	check_name(char *name);
 int	ft_strcmp(char *s1, char *s2);
 void	check_chars(char **map, t_game *game);
-int	flood_fill(char **map, int current_row, int current_col, int map_longeur, int map_largeur);
+int	flood_fill(t_map *map, int current_row, int current_col);
 char **map_copy(t_game *game);
 void	*ft_memcopy(char *dest, char *src, size_t n);
 
@@ -159,6 +171,8 @@ int	move_player(int keycode, t_game *game);
 void	display_move_count(t_game *game, int x, int y);
 char	*ft_itoa(int n);
 int	ft_len(int n);
+void update_player_position(t_game *game, int new_x, int new_y);
+
 
 // control
 void	control_player(int keycode, int *new_x, int *new_y, t_game *game);
@@ -170,6 +184,7 @@ int	close_window(t_game *game);
 
 //Collectibles
 void	collect_collectibles(t_game *game);
+void	error_collectible(t_game *game);
 
 //Ennemies
 void	check_collision_ennemies(t_game *game);

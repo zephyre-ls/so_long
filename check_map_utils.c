@@ -6,7 +6,7 @@
 /*   By: lduflot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 22:22:32 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/25 22:26:42 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/27 04:16:17 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ char **map_copy(t_game *game)
   copy = malloc((game->map.longeur + 1) * sizeof(char *));
   if (!copy)
     return (NULL);
-
   line = 0;
   while (line < game->map.longeur)
   {

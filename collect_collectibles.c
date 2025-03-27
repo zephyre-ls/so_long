@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 09:48:38 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/26 19:24:24 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/27 11:27:26 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,15 @@ void	collect_collectibles(t_game *game)
 				}
 			}
 			else
-			{
-				write(2, "Mauvais collectible collecte, rejouez.\n", 39);
-				exit_free(game);
-			}
+				error_collectible(game);
 		}
 		i++;
 	}
 	draw_map(game);
+}
+
+void	error_collectible(t_game *game)
+{
+	write(2, "Mauvais collectible collecte, rejouez.\n", 39);
+	exit_free(game);
 }

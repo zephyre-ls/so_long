@@ -6,13 +6,13 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:00:06 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/26 18:08:28 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/27 12:05:04 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	dl_map(t_game *game)
+/*void	dl_map(t_game *game)
 {
 	int		fd;
 	int		y;
@@ -112,23 +112,116 @@ void	dl_map(t_game *game)
 		close(fd);
 		exit_free_failure(game);
 	}
-	char **map_copied = map_copy(game);
-	if(!map_copied)
+	t_map	temp_map;
+	temp_map.map = map_copy(game);
+	if(!temp_map.map)
 	{
      perror("Erreur lors de la création de la copie de la carte\n");
 			close(fd);
     	exit_free_failure(game);
   }
-	if (flood_fill(map_copied, game->player.y, game->player.x, game->map.longeur, game->map.largeur) != game->collectible_count + 1)
+	temp_map.longeur = game->map.longeur;
+	temp_map.largeur = game->map.largeur;
+	if (flood_fill(&temp_map, game->player.y, game->player.x) != game->collectible_count + 1)
 	{
 		perror("Erreur, collectible ou exit non accessible par le player \n");
 			close(fd);
 		exit_free_failure(game);
 	}
+	free_map(temp_map.map);
 	close (fd);
+}*/
+
+void	draw_other (t_game *game, int x, int y, char other)
+{
+	int	pxl;
+
+	pxl = 64;
+	if (other == '1')
+		mlx_put_image_to_window(game->window.mlx, game->window.win,
+			game->assets.wall_img, x * pxl, y * pxl);
+	else if (other == '0')
+		mlx_put_image_to_window(game->window.mlx, game->window.win,
+			game->assets.background_img, x * pxl, y * pxl);
+	else if (other == 'P')
+		mlx_put_image_to_window(game->window.mlx, game->window.win,
+			game->assets.player_img, x * pxl, y * pxl);
+	else if (other == 'E')
+	{
+		if (game->exit.is_open)
+			mlx_put_image_to_window(game->window.mlx, game->window.win,
+				game->assets.exit_open_img, x * pxl, y * pxl);
+		else
+			mlx_put_image_to_window(game->window.mlx, game->window.win,
+				game->assets.exit_img, x * pxl, y * pxl);
+	}
+	else if (other == 'M')
+		mlx_put_image_to_window(game->window.mlx, game->window.win,
+			game->assets.monster_img, x * pxl, y * pxl);
 }
 
+void	draw_collectibles(t_game *game, int x, int y)
+{
+	int	i;
+	int	pxl;
+
+	pxl = 64;
+	i = 0;
+	while (i < MAX_COLLECTIBLES)
+	{
+		if (game->collectibles[i].x == x && game->collectibles[i].y == y
+			&& game->collectibles[i].is_collected == 0)
+		{
+			mlx_put_image_to_window(game->window.mlx, game->window.win,
+				game->assets.collectibles_img[i], x * pxl, y * pxl);
+		}
+		i++;
+	}
+	if (game->map.map[y][x] == 'T')
+		mlx_put_image_to_window(game->window.mlx, game->window.win,
+			game->assets.code_img, x * pxl, y * pxl);
+}
+
+/*void	draw_score(t_game *game, int x, int y, int *s_count)
+{
+	if (*s_count < 3)
+	{
+		game->score.x[*s_count] = x;
+		game->score.y = y;
+		(*s_count)++;
+		display_move_count(game, x * 64, y * 64);
+	}
+}*/
+
 void	draw_map(t_game *game)
+{
+	int	y;
+	int	x;
+//	int	s_count;
+
+	y = 0;
+//	s_count = 0;
+	while (game->map.map[y])
+	{
+		x = 0;
+		while (game->map.map[y][x])
+		{
+			draw_other(game, x, y, game->map.map[y][x]);
+			if (game->map.map[y][x] == 'C' || game->map.map[y][x] == 'T')
+				draw_collectibles(game, x, y);
+		//	else if (game->map.map[y][x] == 'S')
+			//	draw_score(game, x, y, &s_count);
+			x++;
+		}
+		y++;
+	}
+}
+
+
+
+
+
+/*void	draw_map(t_game *game)
 {
 	int	y;
 	int	x;
@@ -185,8 +278,6 @@ void	draw_map(t_game *game)
 					game->assets.code_img, x * pxl, y * pxl);
 			else if (game->map.map[y][x] == 'S' && s_count < 3)
 			{
-			//	printf("position x %d\n", game->score.x[s_count]);
-			//	printf("position y %d\n", game->score.y);
 				game->score.x[s_count] = x;
 				game->score.y = y;
 				s_count++;
@@ -196,4 +287,4 @@ void	draw_map(t_game *game)
 		}
 		y++;
 	}
-}
+}*/

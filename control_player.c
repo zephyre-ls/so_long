@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:01:10 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/27 00:44:30 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/27 13:50:27 by lduflot          ###   ########.fr       */
 /*              e                                                               */
 /* ************************************************************************** */
 
@@ -15,52 +15,18 @@
 void	display_move_count(t_game *game, int x, int y)
 {
 	char	*move_str;
-	int		i;
-	int		position_count;
-	int	id;
 
 	move_str = ft_itoa(game->moves_count);
-	position_count = 0;
-	i = 0;
 	if (!move_str)
-		return;
-	  //  printf("Moves count as string: %s\n", move_str);
-	if (game->moves_count)
-	{
-		mlx_put_image_to_window(game->window.mlx, game->window.win,
-			game->assets.score_img[0], x + position_count, y);
-	//	printf("x : %d, y : %d", x+position_count, y);
-	}
-	position_count += 64;
-	while (move_str[i] && i < 3)
-	{
-		id = move_str[i] -'0';
-		//printf("id : %d\n", id);
-		if (id >= 0 && id <= 9)
-		{	
-			if (move_str[i] >= '0' && move_str[i] <= '9')
-			{
-			//	printf("entre dans la condition id 0 /9");
-				mlx_put_image_to_window(game->window.mlx, game->window.win, 
-					game->assets.score_img[id],
-					x + position_count, y);
-				position_count += 64;
-			}
-		}
-		i++;
-	}
+		return ;
+  mlx_clear_window(game->window.mlx, game->window.win);
+	mlx_string_put(game->window.mlx, game->window.win, x, y, 0xFFFFFF, "Score:");
+	mlx_string_put(game->window.mlx, game->window.win, x + 50, y, 0xFFFFFF, move_str);
 	free(move_str);
 }
-	/*mlx_string_put(game->window.mlx, game->window.win, 80, 800, 0xFFFFFF, "Pas:");
-	mlx_string_put(game->window.mlx, game->window.win, 80, 600, 0xFFFFFF, move_str);
-	free(move_str);
-}*/
 
-//METTRE EN PLACE UN DISPLAY SUR LES WALL AVEC MES ASSETS SCORE 
 void	control_player(int keycode, int *new_x, int *new_y, t_game *game)
 {
-	//if (game->map.map[*new_x][*new_y] != '1')
-	//rajouter un if mouvement valide (si ne va pas dans le mur compte sinon ne compte pas)
 	int	x;
 	int	y;
 
@@ -106,7 +72,7 @@ else if (keycode == game->control.right || keycode == game->control.arrow_right)
 		game->moves_count++;
 		game->score.s_count ++;
 		printf("Pas : %d\n", game->moves_count);
-		display_move_count(game, game->score.x[game->score.s_count], game->score.y);
+		display_move_count(game, 10, 780);
 	//	game->assets.player_img = game->assets.player_start_img;
 	}
 }
@@ -117,35 +83,27 @@ int move_player(int keycode, t_game *game)
 	int new_y = game->player.y;
 	
 	control_player(keycode, &new_x, &new_y, game);
-	//mlx_clear_window(game->window.mlx, game->window.win);
-
-  if (game->map.map[new_y][new_x] != '1' && game->map.map[new_y][new_x] != 'E' && game->map.map[new_y][new_x] != 'T' && game->map.map[new_y][new_x] != 'S')
-	{	
-		game->map.map[game->player.y][game->player.x] = '0';
-		game->player.x = new_x;
-		game->player.y = new_y;
-		collect_collectibles(game);
-		check_collision_ennemies(game);
-		game->map.map[new_y][new_x] = 'P';
-		player_win(game);
-		draw_map(game);
-		display_move_count(game, game->score.x[game->score.s_count], game->score.y);
-	}
-	else if (game->map.map[new_y][new_x] != '1' && game->exit.is_open && game->map.map[new_y][new_x] != 'S')
-	{
-		game->map.map[game->player.y][game->player.x] = '0';
-		game->player.x = new_x;
-		game->player.y = new_y;
-		collect_collectibles(game);
-		check_collision_ennemies(game);
-		game->map.map[new_y][new_x] = 'P';
-		player_win(game);
-		draw_map(game);
-		display_move_count(game, game->score.x[game->score.s_count], game->score.y);
-	}
+  if (game->map.map[new_y][new_x] != '1' && game->map.map[new_y][new_x] != 'E'
+		&& game->map.map[new_y][new_x] != 'T' && game->map.map[new_y][new_x] != 'S')
+		update_player_position(game, new_x, new_y);
+	else if (game->map.map[new_y][new_x] != '1' && game->exit.is_open
+			&& game->map.map[new_y][new_x] != 'S')
+		update_player_position(game, new_x, new_y);
 	move_ennemies(game);
 	check_collision_ennemies(game);
 	return 0;
+}
+
+void update_player_position(t_game *game, int new_x, int new_y)
+{
+	game->map.map[game->player.y][game->player.x] = '0';
+	game->player.x = new_x;
+	game->player.y = new_y;
+	collect_collectibles(game);
+	check_collision_ennemies(game);
+	game->map.map[new_y][new_x] = 'P';
+	player_win(game);
+	draw_map(game);
 }
 
 int	cant_move_wall(int new_x, int new_y, t_game *game)
@@ -154,3 +112,42 @@ int	cant_move_wall(int new_x, int new_y, t_game *game)
 		return (1);
 	return (0);
 }
+
+//Ft pour mes assets score, a retravailler.
+/*void	display_move_count(t_game *game, int x, int y)
+{
+	char	*move_str;
+	int		i;
+	int		position_count;
+	int	id;
+
+	move_str = ft_itoa(game->moves_count);
+	position_count = 0;
+	i = 0;
+	if (!move_str)
+		return;
+	if (game->moves_count)
+	{
+		mlx_put_image_to_window(game->window.mlx, game->window.win,
+			game->assets.score_img[0], x + position_count, y);
+	}
+	position_count += 64;
+	while (move_str[i] && i < 3)
+	{
+		id = move_str[i] -'0';
+		if (id >= 0 && id <= 9)
+		{	
+			if (move_str[i] >= '0' && move_str[i] <= '9')
+			{
+				mlx_put_image_to_window(game->window.mlx, game->window.win, 
+					game->assets.score_img[id],
+					x + position_count, y);
+				position_count += 64;
+			}
+		}
+		i++;
+	}
+	free(move_str);
+}*/
+
+
