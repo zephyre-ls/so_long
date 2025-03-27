@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:01:10 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/27 16:58:37 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/27 17:18:16 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,16 @@ void	update_player_position(t_game *game, int new_x, int new_y)
 	game->map.map[game->player.y][game->player.x] = '0';
 	game->player.x = new_x;
 	game->player.y = new_y;
+	//collect_collectibles(game);
+//	check_collision_ennemies(game);
+	game->map.map[new_y][new_x] = 'P';
+	//player_win(game);
+	draw_map(game);
+	mlx_put_image_to_window(game->window.mlx, game->window.win,
+		game->assets.player_img, new_x * 64, new_y * 64);
 	collect_collectibles(game);
 	check_collision_ennemies(game);
-	game->map.map[new_y][new_x] = 'P';
 	player_win(game);
-	draw_map(game);
 }
 //Ft pour mes assets score, a retravailler.
 /*void	display_move_count(t_game *game, int x, int y)
