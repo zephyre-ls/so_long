@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 16:03:45 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/27 16:44:04 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/28 02:31:02 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ int	main(int argc, char **argv)
 		exit_free(&game);
 	}
 	else
-		write(2, "Error/ Programme + Nom de fichier valide", 41);
+		write(2, "Error: Programme + Nom de fichier valide attendu .ber\n", 55);
 	return (0);
 }

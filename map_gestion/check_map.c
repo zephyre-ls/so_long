@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 14:34:49 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/27 23:55:59 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/28 02:32:10 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,13 @@ void	check_name(char *name)
 		len++;
 	if (len < 4)
 	{
-		perror("Type de fichier accepte : .ber\n");
+		perror("Erreur/ Type de fichier attendu : .ber\n");
 		exit (EXIT_FAILURE);
 	}
 	compar = ft_strcmp(name + (len - 4), ".ber");
 	if (compar != 0)
 	{
-		perror("Type de fichier accepte : .ber\n");
+		perror("Erreur / Type de fichier attendu : .ber\n");
 		exit (EXIT_FAILURE);
 	}
 }
