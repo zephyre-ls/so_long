@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gestion_map.c                                      :+:      :+:    :+:   */
+/*   gestion_tuile.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduflot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:04:32 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/27 15:29:49 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/27 23:55:18 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	gestion_player(t_game *game, int x, int y)
 
 	if (count_p > 0)
 	{
-		perror("Mode multi non pris en charge");
+		perror("Mode multi non pris en charge, mode zéro joueur non plus");
 		exit_free_failure(game);
 	}
 	game->player.x = x;
@@ -71,7 +71,10 @@ void	gestion_monster(t_game *game, int x, int y)
 		game->monster_count++;
 	}
 	else
+	{
+		perror("Maximum et minimum 4 black_hole.");
 		exit_free_failure(game);
+	}
 }
 
 void	gestion_collectible(t_game *game, int x, int y)
@@ -88,5 +91,8 @@ void	gestion_collectible(t_game *game, int x, int y)
 		game->collectible_count++;
 	}
 	else
+	{
+		perror("Cinq disquettes minimum et maximum.");
 		exit_free_failure(game);
+	}
 }

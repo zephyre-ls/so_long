@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 04:40:03 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/27 22:18:09 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/27 23:56:44 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	check_map_accessibility(t_game *game, int fd)
 	temp_map.map = map_copy(game);
 	if (!temp_map.map)
 	{
-		perror("Erreur lors de la création de la copie de la carte\n");
+		perror("Erreur, lors de la création de la copie de la carte\n");
 		close(fd);
 		exit_free_failure(game);
 	}
@@ -90,7 +90,7 @@ void	check_map_accessibility(t_game *game, int fd)
 	if (flood_fill(&temp_map, game->player.y, game->player.x)
 		!= game->collectible_count + 1)
 	{
-		perror("Erreur, collectible ou exit non accessible par le player\n");
+		perror("Erreur, collectible ou exit non accessible par le player.\n");
 		close(fd);
 		exit_free_failure(game);
 	}

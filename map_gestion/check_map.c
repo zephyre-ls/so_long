@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 14:34:49 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/27 14:22:57 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/27 23:55:59 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	check_chars(char **map, t_game *game)
 			&& map[i][j] != 'C' && map[i][j] != 'T'
 			&& map[i][j] != 'M')
 			{
-				perror("Erreur: caractere inconnu dans la carte.");
+				perror("Erreur: caractere inconnu détecté dans la carte.");
 				exit_free_failure(game);
 			}
 			j++;

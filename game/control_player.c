@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:01:10 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/27 23:41:31 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/28 01:33:20 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,45 +34,20 @@ void	control_player(int keycode, int *new_x, int *new_y, t_game *game)
 
 	x = *new_x;
 	y = *new_y;
-	gestion_mouvement(keycode, new_x, new_y, game);
+	if (game->exit.is_open)
+		gestion_mouvement_e_open(keycode, new_x, new_y, game);
+	else
+		gestion_mouvement_e_close(keycode, new_x, new_y, game);
 	if (keycode == game->control.quit)
 		exit_free(game);
 	if (*new_x != x || *new_y != y)
 	{
 		game->moves_count++;
 		game->score.s_count++;
-		write(1, "Pas : ", 6);
+		write(1, "Score : ", 8);
 		ft_putnbr_fd(game->moves_count, 1);
 		write(1, "\n", 1);
 		display_move_count(game, 10, 780);
-	}
-}
-
-void	gestion_mouvement(int keycode, int *new_x, int *new_y, t_game *game)
-{
-	if (keycode == game->control.up_w || keycode == game->control.up_z
-		|| keycode == game->control.arrow_up)
-	{
-		if (game->map.map[*new_y - 1][*new_x] != '1')
-			(*new_y)--;
-	}
-	else if (keycode == game->control.down
-		|| keycode == game->control.arrow_down)
-	{
-		if (game->map.map[*new_y + 1][*new_x] != '1')
-			(*new_y)++;
-	}
-	else if (keycode == game->control.right
-		|| keycode == game->control.arrow_right)
-	{
-		if (game->map.map[*new_y][*new_x + 1] != '1')
-			(*new_x)++;
-	}
-	else if (keycode == game->control.left_a || keycode == game->control.left_q
-		|| keycode == game->control.arrow_left)
-	{
-		if (game->map.map[*new_y][*new_x - 1] != '1')
-			(*new_x)--;
 	}
 }
 
@@ -84,10 +59,7 @@ int	move_player(int keycode, t_game *game)
 	new_x = game->player.x;
 	new_y = game->player.y;
 	control_player(keycode, &new_x, &new_y, game);
-	if (game->map.map[new_y][new_x] != '1' && game->map.map[new_y][new_x] != 'E'
-		&& game->map.map[new_y][new_x] != 'T')
-		update_player_position(game, new_x, new_y);
-	else if (game->map.map[new_y][new_x] != '1' && game->exit.is_open)
+	if (game->map.map[new_y][new_x] != '1')
 		update_player_position(game, new_x, new_y);
 	move_ennemies(game);
 	check_collision_ennemies(game);

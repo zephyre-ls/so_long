@@ -6,7 +6,7 @@
 #    By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/30 15:34:26 by lduflot           #+#    #+#              #
-#    Updated: 2025/03/27 21:53:23 by lduflot          ###   ########.fr        #
+#    Updated: 2025/03/28 01:31:55 by lduflot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ FILES = main.c \
 				map_gestion/create_map_utils.c \
 				game/control_player.c \
 				game/control_player_utils.c \
+				game/control_key.c \
 				game/ennemies_kill.c \
 				game/collect_collectibles.c \
 				map_gestion/check_map.c \

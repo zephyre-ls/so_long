@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/27 23:35:35 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/28 01:40:56 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,9 @@ int		ft_len(int n);
 void	update_player_position(t_game *game, int new_x, int new_y);
 
 // control
-void	gestion_mouvement(int keycode, int *new_x, int *new_y, t_game *game);
+void	gestion_mouvement_e_close(int keycode, int *nx, int *ny, t_game *game);
+void	gestion_mouvement_e_open(int keycode, int *nx, int *ny, t_game *game);
+int		can_move(int nx, int ny, t_game *game);
 void	control_player(int keycode, int *new_x, int *new_y, t_game *game);
 void	init_controls(t_game *game);
 int		key_hook(int keycode, t_game *game);

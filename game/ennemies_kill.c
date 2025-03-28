@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 10:01:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/27 15:19:17 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/28 00:19:13 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	check_collision_ennemies(t_game *game)
 		if (game->player.x == game->monsters[i].x
 			&& game->player.y == game->monsters[i].y)
 		{
-			write(1, "GAME OVER\n", 10);
+			write(1, "GAME_OVER\n", 10);
 			exit_free(game);
 		}
 		i++;
