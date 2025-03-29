@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:01:10 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/28 02:24:31 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/29 03:30:44 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	control_player(int keycode, int *new_x, int *new_y, t_game *game)
 	x = *new_x;
 	y = *new_y;
 	if (game->exit.is_open)
-		gestion_mouvement_e_open(keycode, new_x, new_y, game);
+		gestion_move_exit_open(keycode, new_x, new_y, game);
 	else
-		gestion_mouvement_e_close(keycode, new_x, new_y, game);
+		gestion_move_exit_close(keycode, new_x, new_y, game);
 	if (keycode == game->control.quit)
 		exit_free(game);
 	if (*new_x != x || *new_y != y)

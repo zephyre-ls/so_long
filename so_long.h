@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/28 01:40:56 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/29 09:52:18 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ typedef struct s_player
 	int		x;
 	int		y;
 	void	*player_img;
+	int	player_count;
 }		t_player;
+
 
 typedef struct s_collectibles
 {
@@ -52,7 +54,7 @@ typedef struct s_collectibles
 	int	is_collected; //(0 = false, 1 = true)
 }		t_collectibles;
 
-//Les ennemies se décrémente. Un collectible pris = 1 ennemie en moins
+
 typedef struct s_monsters
 {
 	int	x;
@@ -64,6 +66,7 @@ typedef struct s_exit
 	int	x;
 	int	y;
 	int	is_open;
+	int	exit_count;
 }		t_exit;
 
 typedef struct s_floodfill
@@ -130,7 +133,7 @@ typedef struct s_game
 
 //Fonctions
 // Map
-void	init_variable_game(t_game *game);
+void	init_variable_game(t_game *game, int fd);
 void	assignation_line(t_game *game, char *line, int y);
 void	gestion_player(t_game *game, int x, int y);
 void	gestion_exit(t_game *game, int x, int y);
@@ -155,6 +158,7 @@ void	check_chars(char **map, t_game *game);
 int		flood_fill(t_map *map, int current_row, int current_col);
 char	**map_copy(t_game *game);
 void	*ft_memcopy(char *dest, char *src, size_t n);
+void	check_map_min(t_game *game);
 
 // PLayers
 int		move_player(int keycode, t_game *game);
@@ -164,10 +168,11 @@ void	ft_putnbr_fd(int n, int fd);
 char	*ft_itoa(int n);
 int		ft_len(int n);
 void	update_player_position(t_game *game, int new_x, int new_y);
+int	count_line(char *filename);
 
 // control
-void	gestion_mouvement_e_close(int keycode, int *nx, int *ny, t_game *game);
-void	gestion_mouvement_e_open(int keycode, int *nx, int *ny, t_game *game);
+void	gestion_move_exit_close(int keycode, int *nx, int *ny, t_game *game);
+void	gestion_move_exit_open(int keycode, int *nx, int *ny, t_game *game);
 int		can_move(int nx, int ny, t_game *game);
 void	control_player(int keycode, int *new_x, int *new_y, t_game *game);
 void	init_controls(t_game *game);

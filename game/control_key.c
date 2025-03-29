@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 01:32:33 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/28 01:33:37 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/29 03:30:19 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	can_move(int nx, int ny, t_game *game)
 	return (game->map.map[ny][nx] != '1' && game->map.map[ny][nx] != 'E');
 }
 
-void	gestion_mouvement_e_close(int keycode, int *nx, int *ny, t_game *game)
+void	gestion_move_exit_close(int keycode, int *nx, int *ny, t_game *game)
 {
 	if ((keycode == game->control.up_w || keycode == game->control.up_z
 			|| keycode == game->control.arrow_up)
@@ -37,7 +37,7 @@ void	gestion_mouvement_e_close(int keycode, int *nx, int *ny, t_game *game)
 		(*nx)--;
 }
 
-void	gestion_mouvement_e_open(int keycode, int *nx, int *ny, t_game *game)
+void	gestion_move_exit_open(int keycode, int *nx, int *ny, t_game *game)
 {
 	if (keycode == game->control.up_w || keycode == game->control.up_z
 		|| keycode == game->control.arrow_up)

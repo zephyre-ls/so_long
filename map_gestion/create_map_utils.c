@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:07:02 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/28 02:01:43 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/29 10:40:57 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,3 +57,29 @@ void	create_asset2(t_assets *assets, t_window *mlx)
 	assets->player_right_img = mlx_xpm_file_to_image(mlx->mlx,
 			"asset/player/player_right.xpm", &img_l, &img_h);
 }
+
+//Fonction gestion_tuiles.
+void	check_map_min(t_game *game)
+{
+	if (game->collectible_count <= 0)
+	{
+		perror("Erreur: Le nombre de collectibles doit être > 0");
+		exit_free_failure(game);
+	}
+	if (game->monster_count > MAX_MONSTERS)
+	{
+		perror("Erreur: Le nombre de monstres dépasse le maximum autorisé");
+		exit_free_failure(game);
+  }
+	if (game->player.player_count != 1)
+	{
+		perror("Erreur: Le nombre de player doit être = 1");
+		exit_free_failure(game);
+	}
+	if (game->exit.exit_count != 1)
+	{
+		perror("Erreur: Le nombre de sortie doit être = 1");
+		exit_free_failure(game);
+	}
+}
+

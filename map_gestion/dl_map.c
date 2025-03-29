@@ -6,24 +6,63 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 04:40:03 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/27 23:56:44 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/29 10:44:58 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	init_variable_game(t_game *game)
+int	count_line(char *filename)
 {
+	int	fd;
+	int	lines;
+	char	*line;
+
+	fd = open(filename, O_RDONLY);
+	if (fd == -1)
+  {
+		perror("Erreur ouverture fichier");
+		exit(EXIT_FAILURE);
+		}
+	lines = 0;
+	while ((line = get_next_line(fd)) != NULL)
+	{
+		lines++;
+		free(line);
+	}
+	close(fd);
+	return (lines);
+}
+
+void	init_variable_game(t_game *game, int fd)
+{
+	int	y;
+
 	game->monster_count = 0;
 	game->collectible_count = 0;
 	game->moves_count = 0;
 	game->score.s_count = 0;
-	game->map.map = malloc(sizeof(char *) * 20);
-	if (!game->map.map)
-	{
-		perror("Erreur allocation"),
+	game->player.player_count = 0;
+	game->exit.exit_count = 0;
+	game->player.x = -1;
+	game->player.y = -1;
+	game->exit.x = -1;
+	game->exit.y = -1;
+  game->map.longeur = count_line(game->map.name);
+  game->map.map = malloc(sizeof(char *) * (game->map.longeur + 1));
+  if (!game->map.map)
+  {
+		perror("Erreur allocation mémoire pour la carte");
+		close(fd);
 		exit_free_failure(game);
+  }
+	y = 0;
+  while (y < game->map.longeur)
+  {
+		game->map.map[y] = NULL;
+		y++;
 	}
+	game->map.map[y] = NULL;
 }
 
 void	read_map_line(t_game *game, int fd)
@@ -56,10 +95,12 @@ void	dl_map(t_game *game)
 		perror("Erreur ouverture fichier");
 		exit_free_failure(game);
 	}
-	init_variable_game(game);
+	init_variable_game(game, fd);
 	read_map_line(game, fd);
 	check_map_validity(game, fd);
+	check_map_min(game);
 	check_map_accessibility(game, fd);
+	//check_map_min(game);
 	close(fd);
 }
 
@@ -69,15 +110,23 @@ void	check_map_validity(t_game *game, int fd)
 	if (!check_map_wall(game))
 	{
 		perror("Erreur, la carte n'est pas entourée de mur\n");
-		close(fd);
+	//	close(fd);
 		exit_free_failure(game);
 	}
+	close (fd);
 }
 
 void	check_map_accessibility(t_game *game, int fd)
 {
 	t_map	temp_map;
 
+	if (game->player.x < 0 || game->player.x >= game->map.largeur 
+		|| game->player.y < 0 || game->player.y >= game->map.longeur)
+	{
+		perror("Erreur: coordonnées du joueur invalides.\n");
+		close(fd);
+		exit_free_failure(game);
+  }
 	temp_map.map = map_copy(game);
 	if (!temp_map.map)
 	{
@@ -91,6 +140,7 @@ void	check_map_accessibility(t_game *game, int fd)
 		!= game->collectible_count + 1)
 	{
 		perror("Erreur, collectible ou exit non accessible par le player.\n");
+		free_map(temp_map.map);
 		close(fd);
 		exit_free_failure(game);
 	}

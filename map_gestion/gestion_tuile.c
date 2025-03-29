@@ -6,7 +6,7 @@
 /*   By: lduflot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:04:32 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/27 23:55:18 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/29 10:21:11 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	gestion_player(t_game *game, int x, int y)
 	game->player.y = y;
 	game->start_position.x = x;
 	game->start_position.y = y;
+	game->player.player_count++;
 	count_p++;
 }
 
@@ -59,22 +60,20 @@ void	gestion_exit(t_game *game, int x, int y)
 	game->exit.x = x;
 	game->exit.y = y;
 	game->exit.is_open = 0;
+	game->exit.exit_count++;
 	count_e++;
 }
 
 void	gestion_monster(t_game *game, int x, int y)
 {
-	if (game->monster_count < MAX_MONSTERS)
+	if (game->monster_count > MAX_MONSTERS)
 	{
-		game->monsters[game->monster_count].x = x;
-		game->monsters[game->monster_count].y = y;
-		game->monster_count++;
-	}
-	else
-	{
-		perror("Maximum et minimum 4 black_hole.");
+		perror("Maximum 4 ennemies");
 		exit_free_failure(game);
 	}
+	game->monsters[game->monster_count].x = x;
+	game->monsters[game->monster_count].y = y;
+	game->monster_count++;
 }
 
 void	gestion_collectible(t_game *game, int x, int y)
@@ -83,7 +82,7 @@ void	gestion_collectible(t_game *game, int x, int y)
 	{
 		game->collectibles[game->collectible_count].x = x;
 		game->collectibles[game->collectible_count].y = y;
-		game->collectibles[game->collectible_count].id
+		game->collectibles[game->collectible_count].id 
 			= game->collectible_count;
 		game->collectibles[game->collectible_count].is_collected
 			= 0;
@@ -92,7 +91,7 @@ void	gestion_collectible(t_game *game, int x, int y)
 	}
 	else
 	{
-		perror("Cinq disquettes minimum et maximum.");
+		perror("Le nombre de collectibles dépasse le maximum autorisé.");
 		exit_free_failure(game);
 	}
 }
