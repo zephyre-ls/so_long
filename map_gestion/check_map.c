@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 14:34:49 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/29 12:16:49 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/29 20:54:53 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,22 +102,19 @@ void	check_name(char *name)
 		exit (EXIT_FAILURE);
 	}
 }
-/*int	check_map_rectangle(t_game *game)
-{
-	int	y = 0;
-	int	x = 0;
-	int	line_size = 0;
 
-	while(game->map.map[0][line_size])
-		line_size++;
-	while(y < game->map.longeur)
+int	check_map_rectangle(t_game *game)
+{
+	int	i = 0;
+
+	while(game->map.map[i])
 	{
-		x = 0;
-		while(game->map.map[y][x])
-			x++;
-	if (x != line_size)
-			return (0);
-	y++;
+		if(ft_strlen(game->map.map[0]) != ft_strlen(game->map.map[i]))
+		{
+		 printf("ta map nest pas rectable");
+			exit_free_failure(game);
+		}
+		i++;
 	}
-	return (1);
-}*/
+	return (0);
+}
