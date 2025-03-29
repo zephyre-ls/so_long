@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/29 09:52:18 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/29 12:32:43 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,8 @@ typedef struct s_player
 	int		x;
 	int		y;
 	void	*player_img;
-	int	player_count;
+	int		player_count;
 }		t_player;
-
 
 typedef struct s_collectibles
 {
@@ -53,7 +52,6 @@ typedef struct s_collectibles
 	int	id; //pour l'ordre de récup des collectibles
 	int	is_collected; //(0 = false, 1 = true)
 }		t_collectibles;
-
 
 typedef struct s_monsters
 {
@@ -134,6 +132,7 @@ typedef struct s_game
 //Fonctions
 // Map
 void	init_variable_game(t_game *game, int fd);
+void	init_game_counters(t_game *game);
 void	assignation_line(t_game *game, char *line, int y);
 void	gestion_player(t_game *game, int x, int y);
 void	gestion_exit(t_game *game, int x, int y);
@@ -168,7 +167,7 @@ void	ft_putnbr_fd(int n, int fd);
 char	*ft_itoa(int n);
 int		ft_len(int n);
 void	update_player_position(t_game *game, int new_x, int new_y);
-int	count_line(char *filename);
+int		count_line(char *filename);
 
 // control
 void	gestion_move_exit_close(int keycode, int *nx, int *ny, t_game *game);

@@ -6,7 +6,7 @@
 /*   By: lduflot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 19:03:49 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/27 22:02:47 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/29 11:28:45 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,16 @@ void	free_exit(t_game *game)
 		free_image2(game);
 		free_image3(game);
 		mlx_destroy_window(game->window.mlx, game->window.win);
+		game->window.win = NULL;
 		mlx_destroy_display(game->window.mlx);
 		free(game->window.mlx);
+		game->window.mlx = NULL;
 	}
 	if (game ->map.map)
+	{
 		free_map(game->map.map);
+		game->map.map = NULL;
+	}
 }
 
 void	free_map(char **map)

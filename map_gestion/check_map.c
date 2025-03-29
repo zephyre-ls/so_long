@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 14:34:49 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/28 02:32:10 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/29 12:16:49 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	check_chars(char **map, t_game *game)
 			&& map[i][j] != 'C' && map[i][j] != 'T'
 			&& map[i][j] != 'M')
 			{
-				perror("Erreur: caractere inconnu détecté dans la carte.");
+				write(2, "Erreur: caractere inconnu détecté\n", 37);
 				exit_free_failure(game);
 			}
 			j++;
@@ -92,13 +92,13 @@ void	check_name(char *name)
 		len++;
 	if (len < 4)
 	{
-		perror("Erreur/ Type de fichier attendu : .ber\n");
+		write(2, "Erreur/ Type de fichier attendu : .ber\n", 40);
 		exit (EXIT_FAILURE);
 	}
 	compar = ft_strcmp(name + (len - 4), ".ber");
 	if (compar != 0)
 	{
-		perror("Erreur / Type de fichier attendu : .ber\n");
+		write(2, "Erreur/ Type de fichier attendu : .ber\n", 40);
 		exit (EXIT_FAILURE);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lduflot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:04:32 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/29 10:21:11 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/29 12:14:04 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	gestion_player(t_game *game, int x, int y)
 
 	if (count_p > 0)
 	{
-		perror("Mode multi non pris en charge, mode zéro joueur non plus");
+		write(2, "Erreur : Mode multi non pris en charge\n", 39);
 		exit_free_failure(game);
 	}
 	game->player.x = x;
@@ -54,7 +54,7 @@ void	gestion_exit(t_game *game, int x, int y)
 
 	if (count_e > 0)
 	{
-		perror("Une seule sortie autorisée");
+		write(2, "Erreur : Une seule sortie autorisée\n", 38);
 		exit_free_failure(game);
 	}
 	game->exit.x = x;
@@ -66,9 +66,9 @@ void	gestion_exit(t_game *game, int x, int y)
 
 void	gestion_monster(t_game *game, int x, int y)
 {
-	if (game->monster_count > MAX_MONSTERS)
+	if (game->monster_count >= MAX_MONSTERS)
 	{
-		perror("Maximum 4 ennemies");
+		write(2, "Erreur: Maximum 4 ennemies\n", 28);
 		exit_free_failure(game);
 	}
 	game->monsters[game->monster_count].x = x;
@@ -82,7 +82,7 @@ void	gestion_collectible(t_game *game, int x, int y)
 	{
 		game->collectibles[game->collectible_count].x = x;
 		game->collectibles[game->collectible_count].y = y;
-		game->collectibles[game->collectible_count].id 
+		game->collectibles[game->collectible_count].id
 			= game->collectible_count;
 		game->collectibles[game->collectible_count].is_collected
 			= 0;
@@ -91,7 +91,7 @@ void	gestion_collectible(t_game *game, int x, int y)
 	}
 	else
 	{
-		perror("Le nombre de collectibles dépasse le maximum autorisé.");
+		write(2, "Erreur: Nbr collectibles autorisé dépasse le maximum\n", 56);
 		exit_free_failure(game);
 	}
 }

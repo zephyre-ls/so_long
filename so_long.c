@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 20:59:25 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/29 09:26:50 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/29 12:18:42 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,8 @@ int	main(int argc, char **argv)
 		check_name(argv[1]);
 		game.window.mlx = mlx_init();
 		if (!game.window.mlx)
-		{
-			perror("Erreur lors de l'initialisation de la mlx");
 			exit(EXIT_FAILURE);
-		}
-		game.window.win = mlx_new_window(game.window.mlx, 1800, 800,
-				"so_long_savoir vs black hole");
+		game.window.win = mlx_new_window(game.window.mlx, 1800, 800, "so_long");
 		create_asset(&game.assets, &game.window);
 		create_asset2(&game.assets, &game.window);
 		init_controls(&game);

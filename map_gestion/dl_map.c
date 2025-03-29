@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 04:40:03 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/29 10:44:58 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/29 12:38:41 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,30 @@
 
 int	count_line(char *filename)
 {
-	int	fd;
-	int	lines;
+	int		fd;
+	int		lines;
 	char	*line;
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-  {
-		perror("Erreur ouverture fichier");
+	{
+		write(2, "Erreur ouverture fichier\n", 26);
 		exit(EXIT_FAILURE);
-		}
+	}
 	lines = 0;
-	while ((line = get_next_line(fd)) != NULL)
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
 		lines++;
 		free(line);
+		line = get_next_line(fd);
 	}
 	close(fd);
 	return (lines);
 }
 
-void	init_variable_game(t_game *game, int fd)
+void	init_game_counters(t_game *game)
 {
-	int	y;
-
 	game->monster_count = 0;
 	game->collectible_count = 0;
 	game->moves_count = 0;
@@ -48,17 +48,23 @@ void	init_variable_game(t_game *game, int fd)
 	game->player.y = -1;
 	game->exit.x = -1;
 	game->exit.y = -1;
-  game->map.longeur = count_line(game->map.name);
-  game->map.map = malloc(sizeof(char *) * (game->map.longeur + 1));
-  if (!game->map.map)
-  {
-		perror("Erreur allocation mémoire pour la carte");
+}
+
+void	init_variable_game(t_game *game, int fd)
+{
+	int	y;
+
+	init_game_counters(game);
+	game->map.longeur = count_line(game->map.name);
+	game->map.map = malloc(sizeof(char *) * (game->map.longeur + 1));
+	if (!game->map.map)
+	{
 		close(fd);
 		exit_free_failure(game);
-  }
+	}
 	y = 0;
-  while (y < game->map.longeur)
-  {
+	while (y < game->map.longeur)
+	{
 		game->map.map[y] = NULL;
 		y++;
 	}
@@ -92,7 +98,7 @@ void	dl_map(t_game *game)
 	fd = open(game->map.name, O_RDONLY);
 	if (fd == -1)
 	{
-		perror("Erreur ouverture fichier");
+		write(2, "Erreur ouverture fichier\n", 26);
 		exit_free_failure(game);
 	}
 	init_variable_game(game, fd);
@@ -100,49 +106,5 @@ void	dl_map(t_game *game)
 	check_map_validity(game, fd);
 	check_map_min(game);
 	check_map_accessibility(game, fd);
-	//check_map_min(game);
 	close(fd);
-}
-
-void	check_map_validity(t_game *game, int fd)
-{
-	check_chars(game->map.map, game);
-	if (!check_map_wall(game))
-	{
-		perror("Erreur, la carte n'est pas entourée de mur\n");
-	//	close(fd);
-		exit_free_failure(game);
-	}
-	close (fd);
-}
-
-void	check_map_accessibility(t_game *game, int fd)
-{
-	t_map	temp_map;
-
-	if (game->player.x < 0 || game->player.x >= game->map.largeur 
-		|| game->player.y < 0 || game->player.y >= game->map.longeur)
-	{
-		perror("Erreur: coordonnées du joueur invalides.\n");
-		close(fd);
-		exit_free_failure(game);
-  }
-	temp_map.map = map_copy(game);
-	if (!temp_map.map)
-	{
-		perror("Erreur, lors de la création de la copie de la carte\n");
-		close(fd);
-		exit_free_failure(game);
-	}
-	temp_map.longeur = game->map.longeur;
-	temp_map.largeur = game->map.largeur;
-	if (flood_fill(&temp_map, game->player.y, game->player.x)
-		!= game->collectible_count + 1)
-	{
-		perror("Erreur, collectible ou exit non accessible par le player.\n");
-		free_map(temp_map.map);
-		close(fd);
-		exit_free_failure(game);
-	}
-	free_map(temp_map.map);
 }

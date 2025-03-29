@@ -6,7 +6,7 @@
 #    By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/30 15:34:26 by lduflot           #+#    #+#              #
-#    Updated: 2025/03/29 09:19:57 by lduflot          ###   ########.fr        #
+#    Updated: 2025/03/29 12:24:22 by lduflot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ GNL_FILES = GNL/get_next_line.c \
   					GNL/get_next_line_utils.c
 FILES = so_long.c \
 				map_gestion/dl_map.c \
+				map_gestion/dl_map_utils.c \
 				map_gestion/create_map.c \
 				map_gestion/create_map_utils.c \
 				game/control_player.c \
