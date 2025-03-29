@@ -6,7 +6,7 @@
 #    By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/30 15:34:26 by lduflot           #+#    #+#              #
-#    Updated: 2025/03/29 12:24:22 by lduflot          ###   ########.fr        #
+#    Updated: 2025/03/29 17:20:06 by lduflot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 ##ARGUMENTS/MACRO
 
 CC = cc
-CFLAGS = -g3 -Wall -Wextra -Werror
+CFLAGS = -g3 -ggdb -Wall -Wextra -Werror
 ##-ggdb, -g3
 NAME = so_long
 

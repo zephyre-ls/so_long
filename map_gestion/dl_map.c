@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 04:40:03 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/29 12:38:41 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/29 19:36:28 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	read_map_line(t_game *game, int fd)
 	}
 	game->map.longeur = y;
 	game->map.map[y] = NULL;
+	//free_map(game->map.map);
 }
 
 void	dl_map(t_game *game)

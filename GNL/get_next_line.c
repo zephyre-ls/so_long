@@ -6,7 +6,7 @@
 /*   By: lduflot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 11:13:25 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/27 23:03:30 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/29 19:41:02 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	stash = ft_readline(stash, fd);
+	if (stash == NULL)
+		return (NULL);
 	line = ft_extract_line(&stash);
 	if (line == NULL && stash != NULL)
 	{

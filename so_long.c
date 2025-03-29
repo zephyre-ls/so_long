@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 20:59:25 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/29 12:18:42 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/29 17:53:09 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	main(int argc, char **argv)
 		game.window.win = mlx_new_window(game.window.mlx, 1800, 800, "so_long");
 		create_asset(&game.assets, &game.window);
 		create_asset2(&game.assets, &game.window);
-		init_controls(&game);
 		dl_map(&game);
+		init_controls(&game);
 		draw_map(&game);
 		mlx_key_hook(game.window.win, key_hook, &game);
 		mlx_hook(game.window.win, 17, 0, close_window, &game);

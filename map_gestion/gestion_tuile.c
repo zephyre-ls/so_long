@@ -6,7 +6,7 @@
 /*   By: lduflot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:04:32 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/29 12:14:04 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/29 19:24:23 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	gestion_player(t_game *game, int x, int y)
 {
 	static int	count_p = 0;
 
-	if (count_p > 0)
+	if (count_p > 1)
 	{
 		write(2, "Erreur : Mode multi non pris en charge\n", 39);
 		exit_free_failure(game);
@@ -52,7 +52,7 @@ void	gestion_exit(t_game *game, int x, int y)
 {
 	static int	count_e = 0;
 
-	if (count_e > 0)
+	if (count_e > 1)
 	{
 		write(2, "Erreur : Une seule sortie autorisée\n", 38);
 		exit_free_failure(game);
@@ -71,14 +71,17 @@ void	gestion_monster(t_game *game, int x, int y)
 		write(2, "Erreur: Maximum 4 ennemies\n", 28);
 		exit_free_failure(game);
 	}
-	game->monsters[game->monster_count].x = x;
-	game->monsters[game->monster_count].y = y;
-	game->monster_count++;
+	else
+	{
+		game->monsters[game->monster_count].x = x;
+		game->monsters[game->monster_count].y = y;
+		game->monster_count++;
+	}
 }
 
 void	gestion_collectible(t_game *game, int x, int y)
 {
-	if (game->collectible_count < MAX_COLLECTIBLES)
+	if (game->collectible_count <= MAX_COLLECTIBLES)
 	{
 		game->collectibles[game->collectible_count].x = x;
 		game->collectibles[game->collectible_count].y = y;

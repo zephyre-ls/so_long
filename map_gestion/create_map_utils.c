@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:07:02 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/29 12:37:12 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/29 17:03:59 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ void	check_map_min(t_game *game)
 		write(2, "Erreur: Le nombre de collectibles doit être > 0\n", 50);
 		exit_free_failure(game);
 	}
-	if (game->monster_count > MAX_MONSTERS)
+	if (game->monster_count < MAX_MONSTERS)
 	{
-		write(2, "Erreur: Nbr monstres dépasse maximum autorisé\n", 49);
+		write(2, "Erreur: Nbr monstres minimum requis = 4\n", 49);
 		exit_free_failure(game);
 	}
 	if (game->player.player_count != 1)
