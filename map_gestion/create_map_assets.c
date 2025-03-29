@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_map_utils.c                                 :+:      :+:    :+:   */
+/*   create_map_assets.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:07:02 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/29 17:03:59 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/30 00:11:28 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,29 +56,4 @@ void	create_asset2(t_assets *assets, t_window *mlx)
 			"asset/player/player_left.xpm", &img_l, &img_h);
 	assets->player_right_img = mlx_xpm_file_to_image(mlx->mlx,
 			"asset/player/player_right.xpm", &img_l, &img_h);
-}
-
-//Fonction gestion_tuiles.
-void	check_map_min(t_game *game)
-{
-	if (game->collectible_count <= 0)
-	{
-		write(2, "Erreur: Le nombre de collectibles doit être > 0\n", 50);
-		exit_free_failure(game);
-	}
-	if (game->monster_count < MAX_MONSTERS)
-	{
-		write(2, "Erreur: Nbr monstres minimum requis = 4\n", 49);
-		exit_free_failure(game);
-	}
-	if (game->player.player_count != 1)
-	{
-		write(2, "Erreur: Le nombre de player doit être = 1\n", 43);
-		exit_free_failure(game);
-	}
-	if (game->exit.exit_count != 1)
-	{
-		write(2, "Erreur: Le nombre de sortie doit être = 1\n", 44);
-		exit_free_failure(game);
-	}
 }

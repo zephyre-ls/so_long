@@ -6,28 +6,13 @@
 /*   By: lduflot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 22:22:32 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/27 23:40:21 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/30 00:11:05 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	*ft_memcopy(char *dest, char *src, size_t n)
-{
-	size_t	i;
-
-	i = 0;
-	if (src == NULL || dest == NULL)
-		return (NULL);
-	while (i < n)
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	return (dest);
-}
-
-//copie la carte du jeu
+//copie la carte du jeu - floodfill
 char	**map_copy(t_game *game)
 {
 	char	**copy;
@@ -55,6 +40,23 @@ char	**map_copy(t_game *game)
 	return (copy);
 }
 
+//copie la carte du jeu - floodfill
+void	*ft_memcopy(char *dest, char *src, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	if (src == NULL || dest == NULL)
+		return (NULL);
+	while (i < n)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	return (dest);
+}
+
+//verif .ber
 int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;

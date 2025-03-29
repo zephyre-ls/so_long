@@ -6,7 +6,7 @@
 /*   By: lduflot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:04:32 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/29 19:24:23 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/30 00:22:19 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	assignation_line(t_game *game, char *line, int y)
 
 void	gestion_player(t_game *game, int x, int y)
 {
-	static int	count_p = 0;
+	int	count_p = 0;
 
 	if (count_p > 1)
 	{
@@ -50,7 +50,7 @@ void	gestion_player(t_game *game, int x, int y)
 
 void	gestion_exit(t_game *game, int x, int y)
 {
-	static int	count_e = 0;
+	int	count_e = 0;
 
 	if (count_e > 1)
 	{

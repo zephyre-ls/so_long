@@ -6,11 +6,53 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:00:06 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/27 23:49:07 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/30 00:05:37 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
+
+void	draw_map(t_game *game)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (game->map.map[y])
+	{
+		x = 0;
+		while (game->map.map[y][x])
+		{
+			draw_other(game, x, y, game->map.map[y][x]);
+			if (game->map.map[y][x] == 'C' || game->map.map[y][x] == 'T')
+				draw_collectibles(game, x, y);
+			x++;
+		}
+		y++;
+	}
+}
+
+void	draw_collectibles(t_game *game, int x, int y)
+{
+	int	i;
+	int	pxl;
+
+	pxl = 64;
+	i = 0;
+	while (i <= MAX_COLLECTIBLES)
+	{
+		if (game->collectibles[i].x == x && game->collectibles[i].y == y
+			&& game->collectibles[i].is_collected == 0)
+		{
+			mlx_put_image_to_window(game->window.mlx, game->window.win,
+				game->assets.collectibles_img[i], x * pxl, y * pxl);
+		}
+		i++;
+	}
+	if (game->map.map[y][x] == 'T')
+		mlx_put_image_to_window(game->window.mlx, game->window.win,
+			game->assets.code_img, x * pxl, y * pxl);
+}
 
 void	draw_other(t_game *game, int x, int y, char other)
 {
@@ -38,48 +80,6 @@ void	draw_other(t_game *game, int x, int y, char other)
 	else if (other == 'M')
 		mlx_put_image_to_window(game->window.mlx, game->window.win,
 			game->assets.monster_img, x * pxl, y * pxl);
-}
-
-void	draw_collectibles(t_game *game, int x, int y)
-{
-	int	i;
-	int	pxl;
-
-	pxl = 64;
-	i = 0;
-	while (i < MAX_COLLECTIBLES)
-	{
-		if (game->collectibles[i].x == x && game->collectibles[i].y == y
-			&& game->collectibles[i].is_collected == 0)
-		{
-			mlx_put_image_to_window(game->window.mlx, game->window.win,
-				game->assets.collectibles_img[i], x * pxl, y * pxl);
-		}
-		i++;
-	}
-	if (game->map.map[y][x] == 'T')
-		mlx_put_image_to_window(game->window.mlx, game->window.win,
-			game->assets.code_img, x * pxl, y * pxl);
-}
-
-void	draw_map(t_game *game)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	while (game->map.map[y])
-	{
-		x = 0;
-		while (game->map.map[y][x])
-		{
-			draw_other(game, x, y, game->map.map[y][x]);
-			if (game->map.map[y][x] == 'C' || game->map.map[y][x] == 'T')
-				draw_collectibles(game, x, y);
-			x++;
-		}
-		y++;
-	}
 }
 //Ft pour asset_score
 /*void	draw_score(t_game *game, int x, int y, int *s_count)
