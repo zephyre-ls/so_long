@@ -6,7 +6,7 @@
 /*   By: lduflot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:04:32 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/30 00:22:19 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/30 08:39:40 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,16 @@ void	gestion_monster(t_game *game, int x, int y)
 
 void	gestion_collectible(t_game *game, int x, int y)
 {
-	if (game->collectible_count <= MAX_COLLECTIBLES)
+	printf("nbr collectible : %d\n", game->collectible_count);
+	if (game->collectible_count > MAX_COLLECTIBLES)
 	{
-		game->collectibles[game->collectible_count].x = x;
+
+		write(2, "Erreur: Nbr collectibles autorisé dépasse le maximum\n", 56);
+		exit_free_failure(game);
+	}
+	else
+	{
+				game->collectibles[game->collectible_count].x = x;
 		game->collectibles[game->collectible_count].y = y;
 		game->collectibles[game->collectible_count].id
 			= game->collectible_count;
@@ -92,9 +99,6 @@ void	gestion_collectible(t_game *game, int x, int y)
 		game->next_collectible = 0;
 		game->collectible_count++;
 	}
-	else
-	{
-		write(2, "Erreur: Nbr collectibles autorisé dépasse le maximum\n", 56);
-		exit_free_failure(game);
-	}
+		printf("nbr collectible : %d\n", game->collectible_count);
+
 }

@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 12:24:28 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/30 03:24:37 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/30 08:18:18 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	check_map_validity(t_game *game, int fd)
 void	check_map_accessibility(t_game *game, int fd)
 {
 	t_map	temp_map;
-
 	if (game->player.x < 0 || game->player.x >= game->map.largeur
 		|| game->player.y < 0 || game->player.y >= game->map.longeur)
 	{

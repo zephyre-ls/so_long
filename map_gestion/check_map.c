@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 14:34:49 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/30 03:23:56 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/30 08:26:49 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	check_map_wall(t_game *game)
 		if (game->map.map[0][x] != '1' 
 			|| game->map.map[game->map.longeur - 1][x] != '1')
 		{
-			write(2, "Erreur : la carte doit être entourée de mur\n", 44);
+			write(2, "Erreur : la carte doit être entourée de mur\n", 47);
 			exit_free_failure(game);
 		}
 		x++;
@@ -76,7 +76,7 @@ int	check_map_wall(t_game *game)
 		if (game->map.map[y][0] != '1'
 			|| game->map.map[y][game->map.largeur - 1] != '1')
 		{
-			write(2, "Erreur : la carte doit être entourée de mur\n", 44);
+			write(2, "Erreur : la carte doit être entourée de mur\n", 47);
 			exit_free_failure(game);
 		}
 		y++;
@@ -138,10 +138,8 @@ int	flood_fill(t_map *map, int current_row, int current_col)
 	int	elem_collected;
 
 	if (current_row < 0 || current_row >= map->longeur || current_col < 0
-		|| current_col >= map->largeur)
-		return (1);
-	if (map->map[current_row][current_col] == '1')
-		return (1);
+		|| current_col >= map->largeur || map->map[current_row][current_col] == '1')
+		return (0);
 	elem_collected = 0;
 	if (map->map[current_row][current_col] == 'C'
 		|| map->map[current_row][current_col] == 'E')
