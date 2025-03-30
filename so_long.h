@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/30 09:55:28 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/30 19:17:40 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ typedef struct s_game
 	int				moves_count;
 	t_collectibles	collectibles[MAX_COLLECTIBLES];
 	int				collectible_count;
-	int				collectible_recup;
 	int				next_collectible;
 	t_monsters		monsters[MAX_MONSTERS];
 	int				monster_count;
@@ -149,7 +148,9 @@ void	gestion_exit(t_game *game, int x, int y);
 void	gestion_monster(t_game *game, int x, int y);
 void	gestion_collectible(t_game *game, int x, int y);
 void	check_chars(char **map, t_game *game);
-int		flood_fill(t_map *map, int current_row, int current_col);
+int		flood_fill(t_map *map, t_game *game, int current_row, int current_col);
+//int	flood_fill_order_collectible(t_map *map, t_game *game, int current_row, int current_col);
+
 //create_map
 void	draw_map(t_game *game);
 void	draw_other(t_game *game, int x, int y, char other);
@@ -161,7 +162,6 @@ void	create_asset2(t_assets *assets, t_window *mlx);
 int		ft_strcmp(char *s1, char *s2);
 char	**map_copy(t_game *game);
 void	*ft_memcopy(char *dest, char *src, size_t n);
-
 
 // PLayers
 int		move_player(int keycode, t_game *game);

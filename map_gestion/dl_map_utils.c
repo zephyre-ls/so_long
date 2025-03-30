@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 12:24:28 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/30 09:17:27 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/30 19:18:02 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	check_map_accessibility(t_game *game, int fd)
 	}
 	temp_map.longeur = game->map.longeur;
 	temp_map.largeur = game->map.largeur;
-	if (flood_fill(&temp_map, game->player.y, game->player.x)
+	if (flood_fill(&temp_map, game, game->player.y, game->player.x)
 		!= game->collectible_count + 1)
 	{
 		write(2, "Erreur, C ou E non accessible par le player.\n", 46);
@@ -53,4 +53,17 @@ void	check_map_accessibility(t_game *game, int fd)
 		exit_free_failure(game);
 	}
 	free_map(temp_map.map);
+	/*temp_map.map = map_copy(game);
+	temp_map.longeur = game->map.longeur;
+	temp_map.largeur = game->map.largeur;
+	if (flood_fill_order_collectible(&temp_map, game, game->player.y, game->player.x)
+		!= game->collectible_count)
+	{
+		printf("collectible_count %d\n", game->collectible_count);
+		write(2, "Erreur, C ou E non accessible par le player.\n", 46);
+		free_map(temp_map.map);
+		close(fd);
+		exit_free_failure(game);
+	}
+	free_map(temp_map.map);*/
 }

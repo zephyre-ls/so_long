@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:00:06 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/30 00:05:37 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/30 14:49:02 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	draw_collectibles(t_game *game, int x, int y)
 		{
 			mlx_put_image_to_window(game->window.mlx, game->window.win,
 				game->assets.collectibles_img[i], x * pxl, y * pxl);
+			game->collectibles[i].is_collected = 0;
 		}
 		i++;
 	}

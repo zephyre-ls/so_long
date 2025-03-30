@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 04:40:03 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/30 12:15:20 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/30 14:36:05 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,3 @@ void	dl_map_check(t_game *game, int fd)
 	check_map_min(game);
 	check_map_accessibility(game, fd);
 }
-
-
