@@ -6,12 +6,35 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 04:40:03 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/30 09:40:36 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/30 12:15:20 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
+//Ouverture du fichier, lecture, compte, pour malloc.
+int	count_line(char *filename)
+{
+	int		fd;
+	int		lines_count;
+	char	*line;
+
+	lines_count = 0;
+	fd = open(filename, O_RDONLY);
+	if (fd == -1)
+		return (-1);
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
+		lines_count++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	close(fd);
+	return (lines_count);
+}
+
+//stocke la map dans map.map
 void	dl_map(t_game *game)
 {
 	int		fd;
@@ -39,6 +62,7 @@ void	dl_map(t_game *game)
 	dl_map_check(game, fd);
 }
 
+//verification de la map
 void	dl_map_check(t_game *game, int fd)
 {
 	int	y;
@@ -55,23 +79,4 @@ void	dl_map_check(t_game *game, int fd)
 	check_map_accessibility(game, fd);
 }
 
-int	count_line(char *filename)
-{
-	int		fd;
-	int		lines_count;
-	char	*line;
 
-	lines_count = 0;
-	fd = open(filename, O_RDONLY);
-	if (fd == -1)
-		return (-1);
-	line = get_next_line(fd);
-	while (line != NULL)
-	{
-		lines_count++;
-		free(line);
-		line = get_next_line(fd);
-	}
-	close(fd);
-	return (lines_count);
-}
