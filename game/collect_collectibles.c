@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 09:48:38 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/28 01:42:24 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/30 08:46:01 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ void	collect_collectibles(t_game *game)
 
 void	error_collectible(t_game *game)
 {
-	write(2, "Mauvaise disquette collect, trouve le code.\n", 44);
+	write(2, "Mauvaise disquette collecté, cherche le code.\n", 46);
 	exit_free(game);
 }

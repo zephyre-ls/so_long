@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 12:24:28 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/30 08:18:18 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/30 09:04:30 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	check_map_validity(t_game *game, int fd)
 	check_map_rectangle(game);
 	check_map_wall(game);
 	check_chars(game->map.map, game);
-	//close (fd);
 }
 
 void	check_map_accessibility(t_game *game, int fd)

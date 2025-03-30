@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 04:40:03 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/30 08:30:24 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/30 08:47:47 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,10 @@ void dl_map(t_game *game)
 int count_line(char *filename)
 {
 	int fd;
-	int lines_count = 0;
+	int lines_count;
 	char *line;
 
+	lines_count = 0;
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
     return (-1);
@@ -69,4 +70,3 @@ int count_line(char *filename)
 	close(fd);
 	return (lines_count);
 }
-
