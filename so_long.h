@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/29 20:52:02 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/30 09:55:28 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,33 +131,37 @@ typedef struct s_game
 
 //Fonctions
 // Map
-void	init_variable_game(t_game *game, int fd);
+void	dl_map(t_game *game);
 void	init_game_counters(t_game *game);
+//check_map
+void	dl_map_check(t_game *game, int fd);
+int		check_map_wall(t_game *game);
+int		check_map_rectangle(t_game *game);
+int		check_way_valid(t_game *game);
+void	check_name(char *name);
+void	check_map_min(t_game *game);
+void	map_wall_error(t_game *game);
+void	check_map_validity(t_game *game, int fd);
+void	check_map_accessibility(t_game *game, int fd);
 void	assignation_line(t_game *game, char *line, int y);
 void	gestion_player(t_game *game, int x, int y);
 void	gestion_exit(t_game *game, int x, int y);
 void	gestion_monster(t_game *game, int x, int y);
 void	gestion_collectible(t_game *game, int x, int y);
-void	read_map_line(t_game *game, int fd);
-void	check_map_validity(t_game *game, int fd);
-void	check_map_accessibility(t_game *game, int fd);
+void	check_chars(char **map, t_game *game);
+int		flood_fill(t_map *map, int current_row, int current_col);
+//create_map
 void	draw_map(t_game *game);
 void	draw_other(t_game *game, int x, int y, char other);
 void	draw_collectibles(t_game *game, int x, int y);
 void	draw_score(t_game *game, int x, int y, int *s_count);
-void	dl_map(t_game *game);
 void	create_asset(t_assets *assets, t_window *mlx);
 void	create_asset2(t_assets *assets, t_window *mlx);
-int		check_map_wall(t_game *game);
-int		check_map_rectangle(t_game *game);
-int		check_way_valid(t_game *game);
-void	check_name(char *name);
+//utils
 int		ft_strcmp(char *s1, char *s2);
-void	check_chars(char **map, t_game *game);
-int		flood_fill(t_map *map, int current_row, int current_col);
 char	**map_copy(t_game *game);
 void	*ft_memcopy(char *dest, char *src, size_t n);
-void	check_map_min(t_game *game);
+
 
 // PLayers
 int		move_player(int keycode, t_game *game);

@@ -6,7 +6,7 @@
 /*   By: lduflot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 19:03:49 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/29 20:04:49 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/30 09:10:44 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,7 @@ void	free_exit(t_game *game)
 		game->window.mlx = NULL;
 	}
 	if (game ->map.map)
-	{
 		free_map(game->map.map);
-		//game->map.map = NULL;
-	}
 }
 
 void	free_map(char **map)

@@ -6,7 +6,7 @@
 #    By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/30 15:34:26 by lduflot           #+#    #+#              #
-#    Updated: 2025/03/30 00:13:15 by lduflot          ###   ########.fr        #
+#    Updated: 2025/03/30 09:49:59 by lduflot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,14 +29,15 @@ FILES = so_long.c \
 				map_gestion/create_map.c \
 				map_gestion/create_map_assets.c \
 				map_gestion/initialisation.c \
+				map_gestion/check_map.c \
+				map_gestion/check_map2.c \
+				map_gestion/gestion_tuile.c \
+				map_gestion/check_map_utils.c \
 				game/control_player.c \
 				game/control_player_utils.c \
 				game/control_key.c \
 				game/ennemies_kill.c \
 				game/collect_collectibles.c \
-				map_gestion/check_map.c \
-				map_gestion/gestion_tuile.c \
-				map_gestion/check_map_utils.c \
 				free/free.c \
 				free/free_2.c \
 				game/win.c
