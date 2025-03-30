@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 14:34:49 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/30 00:34:10 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/30 03:23:56 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ int	check_map_rectangle(t_game *game)
 	int	other_line;
 
 	first_line = ft_strlen(game->map.map[0]);
-	other_line = ft_strlen(game->map.map[i]);
 
-	while(other_line)
+	while(game->map.map[i])
 	{
+		other_line = ft_strlen(game->map.map[i]);
 		if(first_line != other_line)
 		{
-		 printf("ta map nest pas rectable");
+			write(2, "Erreur: La map n'est pas rectangulaire\n", 40);
 			exit_free_failure(game);
 		}
 		i++;
@@ -63,16 +63,22 @@ int	check_map_wall(t_game *game)
 	y = 0;
 	while (x < game->map.largeur)
 	{
-		if (game->map.map[0][x] != '1'
+		if (game->map.map[0][x] != '1' 
 			|| game->map.map[game->map.longeur - 1][x] != '1')
-			return (1);
+		{
+			write(2, "Erreur : la carte doit être entourée de mur\n", 44);
+			exit_free_failure(game);
+		}
 		x++;
 	}
 	while (y < game->map.longeur)
 	{
 		if (game->map.map[y][0] != '1'
 			|| game->map.map[y][game->map.largeur - 1] != '1')
-			return (1);
+		{
+			write(2, "Erreur : la carte doit être entourée de mur\n", 44);
+			exit_free_failure(game);
+		}
 		y++;
 	}
 	return (0);
