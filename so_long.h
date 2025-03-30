@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/30 19:17:40 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/30 21:13:39 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ typedef struct s_game
 // Map
 void	dl_map(t_game *game);
 void	init_game_counters(t_game *game);
+
 //check_map
 void	dl_map_check(t_game *game, int fd);
 int		check_map_wall(t_game *game);
@@ -149,7 +150,7 @@ void	gestion_monster(t_game *game, int x, int y);
 void	gestion_collectible(t_game *game, int x, int y);
 void	check_chars(char **map, t_game *game);
 int		flood_fill(t_map *map, t_game *game, int current_row, int current_col);
-//int	flood_fill_order_collectible(t_map *map, t_game *game, int current_row, int current_col);
+int		check_collect_acces_block(t_game *game);
 
 //create_map
 void	draw_map(t_game *game);
@@ -158,6 +159,7 @@ void	draw_collectibles(t_game *game, int x, int y);
 void	draw_score(t_game *game, int x, int y, int *s_count);
 void	create_asset(t_assets *assets, t_window *mlx);
 void	create_asset2(t_assets *assets, t_window *mlx);
+
 //utils
 int		ft_strcmp(char *s1, char *s2);
 char	**map_copy(t_game *game);
@@ -174,8 +176,7 @@ void	update_player_position(t_game *game, int new_x, int new_y);
 int		count_line(char *filename);
 
 // control
-void	gestion_move_exit_close(int keycode, int *nx, int *ny, t_game *game);
-void	gestion_move_exit_open(int keycode, int *nx, int *ny, t_game *game);
+void	gestion_move(int keycode, int *nx, int *ny, t_game *game);
 int		can_move(int nx, int ny, t_game *game);
 void	control_player(int keycode, int *new_x, int *new_y, t_game *game);
 void	init_controls(t_game *game);

@@ -6,7 +6,7 @@
 /*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:01:10 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/29 03:30:44 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/30 20:49:34 by lduflot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,7 @@ void	control_player(int keycode, int *new_x, int *new_y, t_game *game)
 
 	x = *new_x;
 	y = *new_y;
-	if (game->exit.is_open)
-		gestion_move_exit_open(keycode, new_x, new_y, game);
-	else
-		gestion_move_exit_close(keycode, new_x, new_y, game);
+	gestion_move(keycode, new_x, new_y, game);
 	if (keycode == game->control.quit)
 		exit_free(game);
 	if (*new_x != x || *new_y != y)
@@ -68,7 +65,10 @@ int	move_player(int keycode, t_game *game)
 
 void	update_player_position(t_game *game, int new_x, int new_y)
 {
-	game->map.map[game->player.y][game->player.x] = '0';
+	if (game->exit.x == game->player.x && game->exit.y == game->player.y)
+		game->map.map[game->player.y][game->player.x] = 'E';
+	else
+		game->map.map[game->player.y][game->player.x] = '0';
 	game->player.x = new_x;
 	game->player.y = new_y;
 	game->map.map[new_y][new_x] = 'P';
