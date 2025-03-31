@@ -42,7 +42,8 @@ int	flood_fill(t_map *map, t_game *game, int current_row, int current_col)
 
 	if (current_row < 0 || current_row >= map->longeur || current_col < 0
 		|| current_col >= map->largeur
-		|| map->map[current_row][current_col] == '1')
+		|| map->map[current_row][current_col] == '1' 
+		|| map->map[current_row][current_col] == 'M')
 		return (0);
 	if (map->map[current_row][current_col] == 'C')
 		elem_collected++;
