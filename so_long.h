@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
+/*   By: npederen <npederen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 15:41:58 by lduflot           #+#    #+#             */
-/*   Updated: 2025/03/30 21:13:39 by lduflot          ###   ########.fr       */
+/*   Updated: 2025/03/31 18:38:28 by npederen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ void	gestion_monster(t_game *game, int x, int y);
 void	gestion_collectible(t_game *game, int x, int y);
 void	check_chars(char **map, t_game *game);
 int		flood_fill(t_map *map, t_game *game, int current_row, int current_col);
+int		is_tiles_e(t_map *map, int y, int x, int elem);
 int		check_collect_acces_block(t_game *game);
 
 //create_map
