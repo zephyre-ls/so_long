@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   check_map2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npederen <npederen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lduflot <lduflot@student.42perpignan.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 09:47:54 by lduflot           #+#    #+#             */
 /*   Updated: 2025/03/31 18:38:59 by npederen         ###   ########.fr       */
@@ -36,6 +36,9 @@ void	check_map_min(t_game *game)
 	}
 }
 
+//Modification du flood_fill (grâce à un dev plus experimente);
+//prend en compte:
+//le fait de ramasser les collectibles dans le bon ordre
 int	is_tiles_e(t_map *map, int y, int x, int elem)
 {
 	map->map[y][x] = '1';
